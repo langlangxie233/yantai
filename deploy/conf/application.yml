@@ -1,0 +1,25 @@
+server:
+  port: 10088
+hik:
+  host: www.whhxwlpms.com
+  app-key: 28414877
+  app-secret: 9g0qZVnKf2OQQZyrExv5
+
+silu:
+  url: http://172.168.1.64:6689/api/sync/data
+
+
+datasource:
+  doris:
+    sql-script-encoding: UTF-8
+    jdbc-url: jdbc:mysql://172.168.1.69:29030/hikvision
+    username: root
+    password: i3cqyu_oiCroFKtQk
+    driver-class-name: com.mysql.jdbc.Driver
+  siludoris:
+    sql-script-encoding: UTF-8
+    jdbc-url: jdbc:mysql://172.168.1.69:29030/ythg_ods
+    username: root
+    password: i3cqyu_oiCroFKtQk
+    driver-class-name: com.mysql.jdbc.Driver
+#    driver-class-name: com.mysql.cj.jdbc.Driver

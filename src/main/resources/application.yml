@@ -1,0 +1,47 @@
+server:
+  port: 10088
+hik:
+  host: www.whhxwlpms.com
+  app-key: 28414877
+  app-secret: 9g0qZVnKf2OQQZyrExv5
+
+anjian:
+  url: http://172.168.1.93:30881/wink
+  mobile-phone: 13611111111
+  key: wink
+  secret: winK@2024video
+
+silu:
+  url: http://172.168.1.64:6689/api/sync/data
+
+minio:
+  oss:
+    endpoint: http://10.0.93.53:39000
+    access-key: minioadmin
+    secret-key: 38WYM4973_D6vPXQ
+    bucket: ticket-upload
+#    endpoint: http://172.168.1.69:39000
+#    access-key: minioadmin
+#    secret-key: PsEv_M6U1EZQLMTIm
+#    bucket: ythg-upload
+
+datasource:
+  doris:
+    sql-script-encoding: UTF-8
+    jdbc-url: jdbc:mysql://172.168.1.69:29030/hikvision?useSSL=false
+    username: root
+    password: i3cqyu_oiCroFKtQk
+    driver-class-name: com.mysql.jdbc.Driver
+  siludoris:
+    sql-script-encoding: UTF-8
+    jdbc-url: jdbc:mysql://172.168.1.69:29030/ythg_ods?useSSL=false
+    username: root
+    password: i3cqyu_oiCroFKtQk
+    driver-class-name: com.mysql.jdbc.Driver
+  anjiandoris:
+    sql-script-encoding: UTF-8
+    jdbc-url: jdbc:mysql://172.168.1.69:29030/ythg_ods?useSSL=false
+    username: root
+    password: i3cqyu_oiCroFKtQk
+    driver-class-name: com.mysql.jdbc.Driver
+#    driver-class-name: com.mysql.cj.jdbc.Driver
