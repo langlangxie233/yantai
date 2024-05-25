@@ -884,8 +884,6 @@ public class SiLuJobTicketService {
                     try {
                         Map<String, String> headers = new HashMap<>();
                         headers.put("Content-Type", "application/json");
-                        //headers.put("Accept", "application/json");
-                        //headers.put("Authorization", "Basic " + Base64.encode((list.get(0).getCompanyCode() + ':' + "code").getBytes()));
                         String jsonBody = toJsonBody();
                         String url = httpConfig.getUrl() + path;
                         log.info("url：" + url);
@@ -924,15 +922,17 @@ public class SiLuJobTicketService {
     private String toJsonBody() {
         return JSON.toJSONString(params);
     }
-    /*public String updateSecSpecialTicketFile(String firstFlag) {
+
+    public String updateSecSpecialTicketFile(String firstFlag) {
         List<String> ticketFileNames;
         List<SecSpecialJobTicketFileInfo> ticketInfo = new ArrayList<>();
         Map<String, String> tickets = new HashMap<>();
         if ("1".equals(firstFlag)) {
+            log.info("首次同步作业票附件中......");
             tickets = minioService.getAllObjects();
         } else {
-            tickets.putAll(minioService.getObjects(DateTimeUtil.getYesterdayBeginTime().substring(0, 9)));
-            tickets.putAll(minioService.getObjects(LocalDateTime.now().toString().substring(0, 9)));
+            tickets.putAll(minioService.getObjects(DateTimeUtil.getYesterdayBeginTime().substring(0, 10) + "/"));
+            tickets.putAll(minioService.getObjects(LocalDateTime.now().toString().substring(0, 10) + "/"));
         }
         if (!tickets.isEmpty()) {
             ticketFileNames = new ArrayList<>(tickets.keySet());
@@ -948,6 +948,7 @@ public class SiLuJobTicketService {
                     fileInfo.setTimestamp(Long.valueOf(name.substring(36, 49)));
                     ticketInfo.add(fileInfo);
                 }
+                log.info("id: {} timestamp: {}", fileInfo.getId(), fileInfo.getTimestamp());
             });
             Map<String, SecSpecialJobTicketFileInfo> latestObjects = ticketInfo.stream()
                     .collect(Collectors.toMap(
@@ -960,142 +961,157 @@ public class SiLuJobTicketService {
             latestFileInfo.forEach(info -> {
                 String allSql = "select `id`, ticket_type as `ticketType`, 1 as `timestamp`, 'fileName' as `fileName` " +
                         "from dwd_sec_special_job_ticket where id = '" + info.getId() + "'";
-                SecSpecialJobTicketFileInfo fileInfo = siLuDorisTemplate.queryForObject(allSql, SecSpecialJobTicketFileInfo.class);
-                if (null != fileInfo) {
-                    String tableName = TicketFileTypeEnum.getNameFromType(fileInfo.getTicketType());
-                    String path = "/" + tableName;
-                    String sql;
-                    String datas;
-                    switch (fileInfo.getTicketType()) {
-                        case "01":
-                            sql = "select `id`, `companyCode`, `ticketNo`, `ticketStatus`, `issueTime`, `planStartTime`, `planEndTime`, `startTime`, `endTime`, `ticketPosition`, `workAreaCode`, `ticketContent`, `checkedTime`, `checkedPerson`, `longitude`, `latitude`, `supervisorName`, `workerName`, `workDeptment`, `isContractorWork`, `contractorOrg`, `isAssociation`, `associationTicket`, `riskIdentification`, `disclosePerson`, `acceptPerson`, `tickerResponsName`, `majorPersonMobile`, `isChanged`, `changedCause`, `isCancelled`, `cancelledCause`, `mobileDeviceCode`, `workTicketAtt`, `safeDiscloseAtt`, `countersignImg`, `gasAnalysis`, `commitmentLetter`, `fireLocation`, `fireLevel`, `firePerson`, `fireStyle`, `deleted`, `createDate`, `createBy`, `updateDate`, `updateBy`, `ticket_level` " +
-                                    "from ythg_ods.dwd_" + tableName + " where deleted = '0' and `id` = '" + fileInfo.getId() + "'";
-                            log.info("<=====================sql语句==============================>");
-                            log.info(sql);
-                            SecSpecialJobTicketFireDto secSpecialJobTicketFireDto = siLuDorisTemplate.queryForObject(sql, SecSpecialJobTicketFireDto.class);
-                            secSpecialJobTicketFireDto.setWorkTicketAtt(finalTickets.get(fileInfo.getFileName()));
-                            datas = JSON.toJSONString(Arrays.asList(secSpecialJobTicketFireDto));
-                            sendGetRequest(path, datas);
-                            break;
-                        case "02":
-                            sql = "select `id`, `companyCode`, `ticketNo`, `ticketStatus`, `issueTime`, `planStartTime`, `planEndTime`, `startTime`, `endTime`, `ticketPosition`, `workAreaCode`, `ticketContent`, `checkedTime`, `checkedPerson`, `longitude`, `latitude`, `supervisorName`, `workerName`, `workDeptment`, `isContractorWork`, `contractorOrg`, `isAssociation`, `associationTicket`, `riskIdentification`, `disclosePerson`, `acceptPerson`, `tickerResponsName`, `majorPersonMobile`, `isChanged`, `changedCause`, `isCancelled`, `cancelledCause`, `mobileDeviceCode`, `workTicketAtt`, `safeDiscloseAtt`, `countersignImg`, `gasAnalysis`, `commitmentLetter`, `spaceName`, `spaceMedium`, `deleted`, `createDate`, `createBy`, `updateDate`, `updateBy`, `ticket_level` " +
-                                    "from ythg_ods.dwd_" + tableName + " where deleted = '0' and `id` = '" + fileInfo.getId() + "'";
-                            log.info("<=====================sql语句==============================>");
-                            log.info(sql);
-                            SecSpecialJobTicketFireDto secSpecialJobTicketFireDto = siLuDorisTemplate.queryForObject(sql, SecSpecialJobTicketFireDto.class);
-                            secSpecialJobTicketFireDto.setWorkTicketAtt(finalTickets.get(fileInfo.getFileName()));
-                            datas = JSON.toJSONString(Arrays.asList(secSpecialJobTicketFireDto));
-                            sendGetRequest(path, datas);
-                            break;
-                        case "03":
-                            sql = "select `id`, `companyCode`, `ticketNo`, `ticketStatus`, `issueTime`, `planStartTime`, `planEndTime`, `startTime`, `endTime`, `ticketPosition`, `workAreaCode`, `ticketContent`, `checkedTime`, `checkedPerson`, `longitude`, `latitude`, `supervisorName`, `workerName`, `workDeptment`, `isContractorWork`, `contractorOrg`, `isAssociation`, `associationTicket`, `riskIdentification`, `disclosePerson`, `acceptPerson`, `tickerResponsName`, `majorPersonMobile`, `isChanged`, `changedCause`, `isCancelled`, `cancelledCause`, `mobileDeviceCode`, `workTicketAtt`, `safeDiscloseAtt`, `countersignImg`, `commitmentLetter`, `blindPlateType`, `pipingName`, `pipingMedium`, `pipingTem`, `pipingPressure`, `plateMaterial`, `plateSpecifications`, `plateCode`, `plateImg`, `deleted`, `createDate`, `createBy`, `updateDate`, `updateBy`, `ticket_level` " +
-                                    "from ythg_ods.dwd_" + tableName + " where deleted = '0' and `id` = '" + fileInfo.getId() + "'";
-                            log.info("<=====================sql语句==============================>");
-                            log.info(sql);
-                            SecSpecialJobTicketFireDto secSpecialJobTicketFireDto = siLuDorisTemplate.queryForObject(sql, SecSpecialJobTicketFireDto.class);
-                            secSpecialJobTicketFireDto.setWorkTicketAtt(finalTickets.get(fileInfo.getFileName()));
-                            datas = JSON.toJSONString(Arrays.asList(secSpecialJobTicketFireDto));
-                            sendGetRequest(path, datas);
-                            break;
-                        case "04":
-                            sql = "select `id`, `companyCode`, `ticketNo`, `ticketStatus`, `issueTime`, `planStartTime`, `planEndTime`, `startTime`, `endTime`, `ticketPosition`, `workAreaCode`, `ticketContent`, `checkedTime`, `checkedPerson`, `longitude`, `latitude`, `supervisorName`, `workerName`, `workDeptment`, `isContractorWork`, `contractorOrg`, `isAssociation`, `associationTicket`, `riskIdentification`, `disclosePerson`, `acceptPerson`, `tickerResponsName`, `majorPersonMobile`, `isChanged`, `changedCause`, `isCancelled`, `cancelledCause`, `mobileDeviceCode`, `workTicketAtt`, `safeDiscloseAtt`, `countersignImg`, `commitmentLetter`, `highLevel`, `highHeight`, `deleted`, `createDate`, `createBy`, `updateDate`, `updateBy`, `ticket_level` " +
-                                    "from ythg_ods.dwd_" + tableName + " where deleted = '0' and `id` = '" + fileInfo.getId() + "'";
-                            log.info("<=====================sql语句==============================>");
-                            log.info(sql);
-                            SecSpecialJobTicketFireDto secSpecialJobTicketFireDto = siLuDorisTemplate.queryForObject(sql, SecSpecialJobTicketFireDto.class);
-                            secSpecialJobTicketFireDto.setWorkTicketAtt(finalTickets.get(fileInfo.getFileName()));
-                            datas = JSON.toJSONString(Arrays.asList(secSpecialJobTicketFireDto));
-                            sendGetRequest(path, datas);
-                            break;
-                        case "05":
-                            sql = "select `id`, `companyCode`, `ticketNo`, `ticketStatus`, `issueTime`, `planStartTime`, `planEndTime`, `startTime`, `endTime`, `ticketPosition`, `workAreaCode`, `ticketContent`, `checkedTime`, `checkedPerson`, `longitude`, `latitude`, `supervisorName`, `workerName`, `workDeptment`, `isContractorWork`, `contractorOrg`, `isAssociation`, `associationTicket`, `riskIdentification`, `disclosePerson`, `acceptPerson`, `tickerResponsName`, `majorPersonMobile`, `isChanged`, `changedCause`, `isCancelled`, `cancelledCause`, `mobileDeviceCode`, `workTicketAtt`, `safeDiscloseAtt`, `countersignImg`, `gasAnalysis`, `commitmentLetter`, `fireLocation`, `fireLevel`, `firePerson`, `fireStyle`, `deleted`, `createDate`, `createBy`, `updateDate`, `updateBy`, `ticket_level` " +
-                                    "from ythg_ods.dwd_" + tableName + " where deleted = '0' and `id` = '" + fileInfo.getId() + "'";
-                            log.info("<=====================sql语句==============================>");
-                            log.info(sql);
-                            SecSpecialJobTicketFireDto secSpecialJobTicketFireDto = siLuDorisTemplate.queryForObject(sql, SecSpecialJobTicketFireDto.class);
-                            secSpecialJobTicketFireDto.setWorkTicketAtt(finalTickets.get(fileInfo.getFileName()));
-                            datas = JSON.toJSONString(Arrays.asList(secSpecialJobTicketFireDto));
-                            sendGetRequest(path, datas);
-                            break;
-                        case "06":
-                            sql = "select `id`, `companyCode`, `ticketNo`, `ticketStatus`, `issueTime`, `planStartTime`, `planEndTime`, `startTime`, `endTime`, `ticketPosition`, `workAreaCode`, `ticketContent`, `checkedTime`, `checkedPerson`, `longitude`, `latitude`, `supervisorName`, `workerName`, `workDeptment`, `isContractorWork`, `contractorOrg`, `isAssociation`, `associationTicket`, `riskIdentification`, `disclosePerson`, `acceptPerson`, `tickerResponsName`, `majorPersonMobile`, `isChanged`, `changedCause`, `isCancelled`, `cancelledCause`, `mobileDeviceCode`, `workTicketAtt`, `safeDiscloseAtt`, `countersignImg`, `gasAnalysis`, `commitmentLetter`, `fireLocation`, `fireLevel`, `firePerson`, `fireStyle`, `deleted`, `createDate`, `createBy`, `updateDate`, `updateBy`, `ticket_level` " +
-                                    "from ythg_ods.dwd_" + tableName + " where deleted = '0' and `id` = '" + fileInfo.getId() + "'";
-                            log.info("<=====================sql语句==============================>");
-                            log.info(sql);
-                            SecSpecialJobTicketFireDto secSpecialJobTicketFireDto = siLuDorisTemplate.queryForObject(sql, SecSpecialJobTicketFireDto.class);
-                            secSpecialJobTicketFireDto.setWorkTicketAtt(finalTickets.get(fileInfo.getFileName()));
-                            datas = JSON.toJSONString(Arrays.asList(secSpecialJobTicketFireDto));
-                            sendGetRequest(path, datas);
-                            break;
-                        case "07":
-                            sql = "select `id`, `companyCode`, `ticketNo`, `ticketStatus`, `issueTime`, `planStartTime`, `planEndTime`, `startTime`, `endTime`, `ticketPosition`, `workAreaCode`, `ticketContent`, `checkedTime`, `checkedPerson`, `longitude`, `latitude`, `supervisorName`, `workerName`, `workDeptment`, `isContractorWork`, `contractorOrg`, `isAssociation`, `associationTicket`, `riskIdentification`, `disclosePerson`, `acceptPerson`, `tickerResponsName`, `majorPersonMobile`, `isChanged`, `changedCause`, `isCancelled`, `cancelledCause`, `mobileDeviceCode`, `workTicketAtt`, `safeDiscloseAtt`, `countersignImg`, `gasAnalysis`, `commitmentLetter`, `fireLocation`, `fireLevel`, `firePerson`, `fireStyle`, `deleted`, `createDate`, `createBy`, `updateDate`, `updateBy`, `ticket_level` " +
-                                    "from ythg_ods.dwd_" + tableName + " where deleted = '0' and `id` = '" + fileInfo.getId() + "'";
-                            log.info("<=====================sql语句==============================>");
-                            log.info(sql);
-                            SecSpecialJobTicketFireDto secSpecialJobTicketFireDto = siLuDorisTemplate.queryForObject(sql, SecSpecialJobTicketFireDto.class);
-                            secSpecialJobTicketFireDto.setWorkTicketAtt(finalTickets.get(fileInfo.getFileName()));
-                            datas = JSON.toJSONString(Arrays.asList(secSpecialJobTicketFireDto));
-                            sendGetRequest(path, datas);
-                            break;
-                        case "08":
-                            sql = "select `id`, `companyCode`, `ticketNo`, `ticketStatus`, `issueTime`, `planStartTime`, `planEndTime`, `startTime`, `endTime`, `ticketPosition`, `workAreaCode`, `ticketContent`, `checkedTime`, `checkedPerson`, `longitude`, `latitude`, `supervisorName`, `workerName`, `workDeptment`, `isContractorWork`, `contractorOrg`, `isAssociation`, `associationTicket`, `riskIdentification`, `disclosePerson`, `acceptPerson`, `tickerResponsName`, `majorPersonMobile`, `isChanged`, `changedCause`, `isCancelled`, `cancelledCause`, `mobileDeviceCode`, `workTicketAtt`, `safeDiscloseAtt`, `countersignImg`, `gasAnalysis`, `commitmentLetter`, `fireLocation`, `fireLevel`, `firePerson`, `fireStyle`, `deleted`, `createDate`, `createBy`, `updateDate`, `updateBy`, `ticket_level` " +
-                                    "from ythg_ods.dwd_" + tableName + " where deleted = '0' and `id` = '" + fileInfo.getId() + "'";
-                            log.info("<=====================sql语句==============================>");
-                            log.info(sql);
-                            SecSpecialJobTicketFireDto secSpecialJobTicketFireDto = siLuDorisTemplate.queryForObject(sql, SecSpecialJobTicketFireDto.class);
-                            secSpecialJobTicketFireDto.setWorkTicketAtt(finalTickets.get(fileInfo.getFileName()));
-                            datas = JSON.toJSONString(Arrays.asList(secSpecialJobTicketFireDto));
-                            sendGetRequest(path, datas);
-                            break;
-                        case "09":
-                            sql = "select `id`, `companyCode`, `ticketNo`, `ticketStatus`, `issueTime`, `planStartTime`, `planEndTime`, `startTime`, `endTime`, `ticketPosition`, `workAreaCode`, `ticketContent`, `checkedTime`, `checkedPerson`, `longitude`, `latitude`, `supervisorName`, `workerName`, `workDeptment`, `isContractorWork`, `contractorOrg`, `isAssociation`, `associationTicket`, `riskIdentification`, `disclosePerson`, `acceptPerson`, `tickerResponsName`, `majorPersonMobile`, `isChanged`, `changedCause`, `isCancelled`, `cancelledCause`, `mobileDeviceCode`, `workTicketAtt`, `safeDiscloseAtt`, `countersignImg`, `gasAnalysis`, `commitmentLetter`, `fireLocation`, `fireLevel`, `firePerson`, `fireStyle`, `deleted`, `createDate`, `createBy`, `updateDate`, `updateBy`, `ticket_level` " +
-                                    "from ythg_ods.dwd_" + tableName + " where deleted = '0' and `id` = '" + fileInfo.getId() + "'";
-                            log.info("<=====================sql语句==============================>");
-                            log.info(sql);
-                            SecSpecialJobTicketFireDto secSpecialJobTicketFireDto = siLuDorisTemplate.queryForObject(sql, SecSpecialJobTicketFireDto.class);
-                            secSpecialJobTicketFireDto.setWorkTicketAtt(finalTickets.get(fileInfo.getFileName()));
-                            datas = JSON.toJSONString(Arrays.asList(secSpecialJobTicketFireDto));
-                            sendGetRequest(path, datas);
-                            break;
-                        case "10":
-                            sql = "select `id`, `companyCode`, `ticketNo`, `ticketStatus`, `issueTime`, `planStartTime`, `planEndTime`, `startTime`, `endTime`, `ticketPosition`, `workAreaCode`, `ticketContent`, `checkedTime`, `checkedPerson`, `longitude`, `latitude`, `supervisorName`, `workerName`, `workDeptment`, `isContractorWork`, `contractorOrg`, `isAssociation`, `associationTicket`, `riskIdentification`, `disclosePerson`, `acceptPerson`, `tickerResponsName`, `majorPersonMobile`, `isChanged`, `changedCause`, `isCancelled`, `cancelledCause`, `mobileDeviceCode`, `workTicketAtt`, `safeDiscloseAtt`, `countersignImg`, `gasAnalysis`, `commitmentLetter`, `fireLocation`, `fireLevel`, `firePerson`, `fireStyle`, `deleted`, `createDate`, `createBy`, `updateDate`, `updateBy`, `ticket_level` " +
-                                    "from ythg_ods.dwd_" + tableName + " where deleted = '0' and `id` = '" + fileInfo.getId() + "'";
-                            log.info("<=====================sql语句==============================>");
-                            log.info(sql);
-                            SecSpecialJobTicketFireDto secSpecialJobTicketFireDto = siLuDorisTemplate.queryForObject(sql, SecSpecialJobTicketFireDto.class);
-                            secSpecialJobTicketFireDto.setWorkTicketAtt(finalTickets.get(fileInfo.getFileName()));
-                            datas = JSON.toJSONString(Arrays.asList(secSpecialJobTicketFireDto));
-                            sendGetRequest(path, datas);
-                            break;
-                        case "11":
-                            sql = "select `id`, `companyCode`, `ticketNo`, `ticketStatus`, `issueTime`, `planStartTime`, `planEndTime`, `startTime`, `endTime`, `ticketPosition`, `workAreaCode`, `ticketContent`, `checkedTime`, `checkedPerson`, `longitude`, `latitude`, `supervisorName`, `workerName`, `workDeptment`, `isContractorWork`, `contractorOrg`, `isAssociation`, `associationTicket`, `riskIdentification`, `disclosePerson`, `acceptPerson`, `tickerResponsName`, `majorPersonMobile`, `isChanged`, `changedCause`, `isCancelled`, `cancelledCause`, `mobileDeviceCode`, `workTicketAtt`, `safeDiscloseAtt`, `countersignImg`, `gasAnalysis`, `commitmentLetter`, `fireLocation`, `fireLevel`, `firePerson`, `fireStyle`, `deleted`, `createDate`, `createBy`, `updateDate`, `updateBy`, `ticket_level` " +
-                                    "from ythg_ods.dwd_" + tableName + " where deleted = '0' and `id` = '" + fileInfo.getId() + "'";
-                            log.info("<=====================sql语句==============================>");
-                            log.info(sql);
-                            SecSpecialJobTicketFireDto secSpecialJobTicketFireDto = siLuDorisTemplate.queryForObject(sql, SecSpecialJobTicketFireDto.class);
-                            secSpecialJobTicketFireDto.setWorkTicketAtt(finalTickets.get(fileInfo.getFileName()));
-                            datas = JSON.toJSONString(Arrays.asList(secSpecialJobTicketFireDto));
-                            sendGetRequest(path, datas);
-                            break;
-                        case "12":
-                            sql = "select `id`, `companyCode`, `ticketNo`, `ticketStatus`, `issueTime`, `planStartTime`, `planEndTime`, `startTime`, `endTime`, `ticketPosition`, `workAreaCode`, `ticketContent`, `checkedTime`, `checkedPerson`, `longitude`, `latitude`, `supervisorName`, `workerName`, `workDeptment`, `isContractorWork`, `contractorOrg`, `isAssociation`, `associationTicket`, `riskIdentification`, `disclosePerson`, `acceptPerson`, `tickerResponsName`, `majorPersonMobile`, `isChanged`, `changedCause`, `isCancelled`, `cancelledCause`, `mobileDeviceCode`, `workTicketAtt`, `safeDiscloseAtt`, `countersignImg`, `gasAnalysis`, `commitmentLetter`, `fireLocation`, `fireLevel`, `firePerson`, `fireStyle`, `deleted`, `createDate`, `createBy`, `updateDate`, `updateBy`, `ticket_level` " +
-                                    "from ythg_ods.dwd_" + tableName + " where deleted = '0' and `id` = '" + fileInfo.getId() + "'";
-                            log.info("<=====================sql语句==============================>");
-                            log.info(sql);
-                            SecSpecialJobTicketFireDto secSpecialJobTicketFireDto = siLuDorisTemplate.queryForObject(sql, SecSpecialJobTicketFireDto.class);
-                            secSpecialJobTicketFireDto.setWorkTicketAtt(finalTickets.get(fileInfo.getFileName()));
-                            datas = JSON.toJSONString(Arrays.asList(secSpecialJobTicketFireDto));
-                            sendGetRequest(path, datas);
-                            break;
+                List<SecSpecialJobTicketFileInfo> fileInfoList = siLuDorisTemplate.query(allSql, new BeanPropertyRowMapper<>(SecSpecialJobTicketFileInfo.class));
+                if (!fileInfoList.isEmpty()) {
+                    SecSpecialJobTicketFileInfo fileInfo = fileInfoList.get(0);
+                    if (null != fileInfo) {
+                        String tableName = TicketFileTypeEnum.getNameFromType(fileInfo.getTicketType());
+                        String path = "/" + tableName;
+                        String sql;
+                        String datas;
+                        switch (fileInfo.getTicketType()) {
+                            case "01":
+                                sql = "select `id`, `companyCode`, `ticketNo`, `ticketStatus`, `issueTime`, `planStartTime`, `planEndTime`, `startTime`, `endTime`, `ticketPosition`, `workAreaCode`, `ticketContent`, `checkedTime`, `checkedPerson`, `longitude`, `latitude`, `supervisorName`, `workerName`, `workDeptment`, `isContractorWork`, `contractorOrg`, `isAssociation`, `associationTicket`, `riskIdentification`, `disclosePerson`, `acceptPerson`, `tickerResponsName`, `majorPersonMobile`, `isChanged`, `changedCause`, `isCancelled`, `cancelledCause`, `mobileDeviceCode`, `workTicketAtt`, `safeDiscloseAtt`, `countersignImg`, `gasAnalysis`, `commitmentLetter`, `fireLocation`, `fireLevel`, `firePerson`, `fireStyle`, `deleted`, `createDate`, `createBy`, `updateDate`, `updateBy`, `ticket_level` " +
+                                        "from ythg_ods.dwd_" + tableName + " where deleted = '0' and `id` = '" + fileInfo.getId() + "'";
+                                log.info("<=====================sql语句==============================>");
+                                log.info(sql);
+                                List<SecSpecialJobTicketFireDto> secSpecialJobTicketFireDtos = siLuDorisTemplate.query(sql, new BeanPropertyRowMapper<>(SecSpecialJobTicketFireDto.class));
+                                SecSpecialJobTicketFireDto secSpecialJobTicketFireDto = secSpecialJobTicketFireDtos.get(0);
+                                secSpecialJobTicketFireDto.setWorkTicketAtt(finalTickets.get(fileInfo.getFileName()));
+                                datas = JSON.toJSONString(Collections.singletonList(secSpecialJobTicketFireDto));
+                                sendGetRequest(path, datas);
+                                break;
+                            case "02":
+                                sql = "select `id`, `companyCode`, `ticketNo`, `ticketStatus`, `issueTime`, `planStartTime`, `planEndTime`, `startTime`, `endTime`, `ticketPosition`, `workAreaCode`, `ticketContent`, `checkedTime`, `checkedPerson`, `longitude`, `latitude`, `supervisorName`, `workerName`, `workDeptment`, `isContractorWork`, `contractorOrg`, `isAssociation`, `associationTicket`, `riskIdentification`, `disclosePerson`, `acceptPerson`, `tickerResponsName`, `majorPersonMobile`, `isChanged`, `changedCause`, `isCancelled`, `cancelledCause`, `mobileDeviceCode`, `workTicketAtt`, `safeDiscloseAtt`, `countersignImg`, `gasAnalysis`, `commitmentLetter`, `spaceName`, `spaceMedium`, `deleted`, `createDate`, `createBy`, `updateDate`, `updateBy`, `ticket_level` " +
+                                        "from ythg_ods.dwd_" + tableName + " where deleted = '0' and `id` = '" + fileInfo.getId() + "'";
+                                log.info("<=====================sql语句==============================>");
+                                log.info(sql);
+                                List<SecSpecialJobTicketSpaceDto> secSpecialJobTicketSpaceDtos = siLuDorisTemplate.query(sql, new BeanPropertyRowMapper<>(SecSpecialJobTicketSpaceDto.class));
+                                SecSpecialJobTicketSpaceDto secSpecialJobTicketSpaceDto = secSpecialJobTicketSpaceDtos.get(0);
+                                secSpecialJobTicketSpaceDto.setWorkTicketAtt(finalTickets.get(fileInfo.getFileName()));
+                                datas = JSON.toJSONString(Collections.singletonList(secSpecialJobTicketSpaceDto));
+                                sendGetRequest(path, datas);
+                                break;
+                            case "03":
+                                sql = "select `id`, `companyCode`, `ticketNo`, `ticketStatus`, `issueTime`, `planStartTime`, `planEndTime`, `startTime`, `endTime`, `ticketPosition`, `workAreaCode`, `ticketContent`, `checkedTime`, `checkedPerson`, `longitude`, `latitude`, `supervisorName`, `workerName`, `workDeptment`, `isContractorWork`, `contractorOrg`, `isAssociation`, `associationTicket`, `riskIdentification`, `disclosePerson`, `acceptPerson`, `tickerResponsName`, `majorPersonMobile`, `isChanged`, `changedCause`, `isCancelled`, `cancelledCause`, `mobileDeviceCode`, `workTicketAtt`, `safeDiscloseAtt`, `countersignImg`, `commitmentLetter`, `blindPlateType`, `pipingName`, `pipingMedium`, `pipingTem`, `pipingPressure`, `plateMaterial`, `plateSpecifications`, `plateCode`, `plateImg`, `deleted`, `createDate`, `createBy`, `updateDate`, `updateBy`, `ticket_level` " +
+                                        "from ythg_ods.dwd_" + tableName + " where deleted = '0' and `id` = '" + fileInfo.getId() + "'";
+                                log.info("<=====================sql语句==============================>");
+                                log.info(sql);
+                                List<SecSpecialJobTicketBlindplateDto> secSpecialJobTicketBlindplateDtos = siLuDorisTemplate.query(sql, new BeanPropertyRowMapper<>(SecSpecialJobTicketBlindplateDto.class));
+                                SecSpecialJobTicketBlindplateDto secSpecialJobTicketBlindplateDto = secSpecialJobTicketBlindplateDtos.get(0);
+                                secSpecialJobTicketBlindplateDto.setWorkTicketAtt(finalTickets.get(fileInfo.getFileName()));
+                                datas = JSON.toJSONString(Collections.singletonList(secSpecialJobTicketBlindplateDto));
+                                sendGetRequest(path, datas);
+                                break;
+                            case "04":
+                                sql = "select `id`, `companyCode`, `ticketNo`, `ticketStatus`, `issueTime`, `planStartTime`, `planEndTime`, `startTime`, `endTime`, `ticketPosition`, `workAreaCode`, `ticketContent`, `checkedTime`, `checkedPerson`, `longitude`, `latitude`, `supervisorName`, `workerName`, `workDeptment`, `isContractorWork`, `contractorOrg`, `isAssociation`, `associationTicket`, `riskIdentification`, `disclosePerson`, `acceptPerson`, `tickerResponsName`, `majorPersonMobile`, `isChanged`, `changedCause`, `isCancelled`, `cancelledCause`, `mobileDeviceCode`, `workTicketAtt`, `safeDiscloseAtt`, `countersignImg`, `commitmentLetter`, `highLevel`, `highHeight`, `deleted`, `createDate`, `createBy`, `updateDate`, `updateBy`, `ticket_level` " +
+                                        "from ythg_ods.dwd_" + tableName + " where deleted = '0' and `id` = '" + fileInfo.getId() + "'";
+                                log.info("<=====================sql语句==============================>");
+                                log.info(sql);
+                                List<SecSpecialJobTicketHighDto> secSpecialJobTicketHighDtos = siLuDorisTemplate.query(sql, new BeanPropertyRowMapper<>(SecSpecialJobTicketHighDto.class));
+                                SecSpecialJobTicketHighDto secSpecialJobTicketHighDto = secSpecialJobTicketHighDtos.get(0);
+                                secSpecialJobTicketHighDto.setWorkTicketAtt(finalTickets.get(fileInfo.getFileName()));
+                                datas = JSON.toJSONString(Collections.singletonList(secSpecialJobTicketHighDto));
+                                sendGetRequest(path, datas);
+                                break;
+                            case "05":
+                                sql = "select `id`, `companyCode`, `ticketNo`, `ticketStatus`, `issueTime`, `planStartTime`, `planEndTime`, `startTime`, `endTime`, `ticketPosition`, `workAreaCode`, `ticketContent`, `checkedTime`, `checkedPerson`, `longitude`, `latitude`, `supervisorName`, `workerName`, `workDeptment`, `isContractorWork`, `contractorOrg`, `isAssociation`, `associationTicket`, `riskIdentification`, `disclosePerson`, `acceptPerson`, `tickerResponsName`, `majorPersonMobile`, `isChanged`, `changedCause`, `isCancelled`, `cancelledCause`, `mobileDeviceCode`, `workTicketAtt`, `safeDiscloseAtt`, `countersignImg`, `commitmentLetter`, `hoistingLevel`, `hoistingLocation`, `spreaderName`, `suspendedName`, `sommer`, `commander`, `hoistingWeight`, `deleted`, `createDate`, `createBy`, `updateDate`, `updateBy`, `ticket_level` " +
+                                        "from ythg_ods.dwd_" + tableName + " where deleted = '0' and `id` = '" + fileInfo.getId() + "'";
+                                log.info("<=====================sql语句==============================>");
+                                log.info(sql);
+                                List<SecSpecialJobTicketHoisingDto> secSpecialJobTicketHoisingDtos = siLuDorisTemplate.query(sql, new BeanPropertyRowMapper<>(SecSpecialJobTicketHoisingDto.class));
+                                SecSpecialJobTicketHoisingDto secSpecialJobTicketHoisingDto = secSpecialJobTicketHoisingDtos.get(0);
+                                secSpecialJobTicketHoisingDto.setWorkTicketAtt(finalTickets.get(fileInfo.getFileName()));
+                                datas = JSON.toJSONString(Collections.singletonList(secSpecialJobTicketHoisingDto));
+                                sendGetRequest(path, datas);
+                                break;
+                            case "06":
+                                sql = "select `id`, `companyCode`, `ticketNo`, `ticketStatus`, `issueTime`, `planStartTime`, `planEndTime`, `startTime`, `endTime`, `ticketPosition`, `workAreaCode`, `ticketContent`, `checkedTime`, `checkedPerson`, `longitude`, `latitude`, `supervisorName`, `workerName`, `workDeptment`, `isContractorWork`, `contractorOrg`, `isAssociation`, `associationTicket`, `riskIdentification`, `disclosePerson`, `acceptPerson`, `tickerResponsName`, `majorPersonMobile`, `isChanged`, `changedCause`, `isCancelled`, `cancelledCause`, `mobileDeviceCode`, `workTicketAtt`, `safeDiscloseAtt`, `countersignImg`, `gasAnalysis`, `commitmentLetter`, `powerStrategy`, `workVoltage`, `electricalEquipment`, `headCode`, `personCode`, `deleted`, `createDate`, `createBy`, `updateDate`, `updateBy`, `ticket_level` " +
+                                        "from ythg_ods.dwd_" + tableName + " where deleted = '0' and `id` = '" + fileInfo.getId() + "'";
+                                log.info("<=====================sql语句==============================>");
+                                log.info(sql);
+                                List<SecSpecialJobTicketPowerDto> secSpecialJobTicketPowerDtos = siLuDorisTemplate.query(sql, new BeanPropertyRowMapper<>(SecSpecialJobTicketPowerDto.class));
+                                SecSpecialJobTicketPowerDto secSpecialJobTicketPowerDto = secSpecialJobTicketPowerDtos.get(0);
+                                secSpecialJobTicketPowerDto.setWorkTicketAtt(finalTickets.get(fileInfo.getFileName()));
+                                datas = JSON.toJSONString(Collections.singletonList(secSpecialJobTicketPowerDto));
+                                sendGetRequest(path, datas);
+                                break;
+                            case "07":
+                                sql = "select `id`, `companyCode`, `ticketNo`, `ticketStatus`, `issueTime`, `planStartTime`, `planEndTime`, `startTime`, `endTime`, `ticketPosition`, `workAreaCode`, `ticketContent`, `checkedTime`, `checkedPerson`, `longitude`, `latitude`, `supervisorName`, `workerName`, `workDeptment`, `isContractorWork`, `contractorOrg`, `isAssociation`, `associationTicket`, `riskIdentification`, `disclosePerson`, `acceptPerson`, `tickerResponsName`, `majorPersonMobile`, `isChanged`, `changedCause`, `isCancelled`, `cancelledCause`, `mobileDeviceCode`, `workTicketAtt`, `safeDiscloseAtt`, `countersignImg`, `commitmentLetter`, `workImg`, `deleted`, `createDate`, `createBy`, `updateDate`, `updateBy`, `ticket_level` " +
+                                        "from ythg_ods.dwd_" + tableName + " where deleted = '0' and `id` = '" + fileInfo.getId() + "'";
+                                log.info("<=====================sql语句==============================>");
+                                log.info(sql);
+                                List<SecSpecialJobTicketSoilDto> secSpecialJobTicketSoilDtos = siLuDorisTemplate.query(sql, new BeanPropertyRowMapper<>(SecSpecialJobTicketSoilDto.class));
+                                SecSpecialJobTicketSoilDto secSpecialJobTicketSoilDto = secSpecialJobTicketSoilDtos.get(0);
+                                secSpecialJobTicketSoilDto.setWorkTicketAtt(finalTickets.get(fileInfo.getFileName()));
+                                datas = JSON.toJSONString(Collections.singletonList(secSpecialJobTicketSoilDto));
+                                sendGetRequest(path, datas);
+                                break;
+                            case "08":
+                                sql = "select `id`, `companyCode`, `ticketNo`, `ticketStatus`, `issueTime`, `planStartTime`, `planEndTime`, `startTime`, `endTime`, `ticketPosition`, `workAreaCode`, `ticketContent`, `checkedTime`, `checkedPerson`, `longitude`, `latitude`, `supervisorName`, `workerName`, `workDeptment`, `isContractorWork`, `contractorOrg`, `isAssociation`, `associationTicket`, `riskIdentification`, `disclosePerson`, `acceptPerson`, `tickerResponsName`, `majorPersonMobile`, `isChanged`, `changedCause`, `isCancelled`, `cancelledCause`, `mobileDeviceCode`, `workTicketAtt`, `safeDiscloseAtt`, `countersignImg`, `commitmentLetter`, `breakReason`, `involveUnit`, `breakImg`, `deleted`, `createDate`, `createBy`, `updateDate`, `updateBy`, `ticket_level` " +
+                                        "from ythg_ods.dwd_" + tableName + " where deleted = '0' and `id` = '" + fileInfo.getId() + "'";
+                                log.info("<=====================sql语句==============================>");
+                                log.info(sql);
+                                List<SecSpecialJobTicketBreakDto> secSpecialJobTicketBreakDtos = siLuDorisTemplate.query(sql, new BeanPropertyRowMapper<>(SecSpecialJobTicketBreakDto.class));
+                                SecSpecialJobTicketBreakDto secSpecialJobTicketBreakDto = secSpecialJobTicketBreakDtos.get(0);
+                                secSpecialJobTicketBreakDto.setWorkTicketAtt(finalTickets.get(fileInfo.getFileName()));
+                                datas = JSON.toJSONString(Collections.singletonList(secSpecialJobTicketBreakDto));
+                                sendGetRequest(path, datas);
+                                break;
+                            case "09":
+                                sql = "select `id`, `companyCode`, `ticketNo`, `ticketStatus`, `issueTime`, `planStartTime`, `planEndTime`, `startTime`, `endTime`, `ticketPosition`, `workAreaCode`, `ticketContent`, `checkedTime`, `checkedPerson`, `longitude`, `latitude`, `supervisorName`, `workerName`, `workDeptment`, `isContractorWork`, `contractorOrg`, `isAssociation`, `associationTicket`, `riskIdentification`, `disclosePerson`, `acceptPerson`, `tickerResponsName`, `majorPersonMobile`, `isChanged`, `changedCause`, `isCancelled`, `cancelledCause`, `mobileDeviceCode`, `workTicketAtt`, `safeDiscloseAtt`, `countersignImg`, `gasAnalysis`, `commitmentLetter`, `fireLocation`, `fireLevel`, `firePerson`, `fireStyle`, `deleted`, `createDate`, `createBy`, `updateDate`, `updateBy`, `ticket_level` " +
+                                        "from ythg_ods.dwd_" + tableName + " where deleted = '0' and `id` = '" + fileInfo.getId() + "'";
+                                log.info("<=====================sql语句==============================>");
+                                log.info(sql);
+                                List<SecSpecialJobTicketPourbackDto> secSpecialJobTicketPourbackDtos = siLuDorisTemplate.query(sql, new BeanPropertyRowMapper<>(SecSpecialJobTicketPourbackDto.class));
+                                SecSpecialJobTicketPourbackDto secSpecialJobTicketPourbackDto = secSpecialJobTicketPourbackDtos.get(0);
+                                secSpecialJobTicketPourbackDto.setWorkTicketAtt(finalTickets.get(fileInfo.getFileName()));
+                                datas = JSON.toJSONString(Collections.singletonList(secSpecialJobTicketPourbackDto));
+                                sendGetRequest(path, datas);
+                                break;
+                            case "10":
+                                sql = "select `id`, `companyCode`, `ticketNo`, `ticketStatus`, `issueTime`, `planStartTime`, `planEndTime`, `startTime`, `endTime`, `ticketPosition`, `workAreaCode`, `ticketContent`, `checkedTime`, `checkedPerson`, `longitude`, `latitude`, `supervisorName`, `workerName`, `workDeptment`, `isContractorWork`, `contractorOrg`, `isAssociation`, `associationTicket`, `riskIdentification`, `disclosePerson`, `acceptPerson`, `tickerResponsName`, `majorPersonMobile`, `isChanged`, `changedCause`, `isCancelled`, `cancelledCause`, `mobileDeviceCode`, `workTicketAtt`, `safeDiscloseAtt`, `countersignImg`, `gasAnalysis`, `commitmentLetter`, `fireLocation`, `fireLevel`, `firePerson`, `fireStyle`, `deleted`, `createDate`, `createBy`, `updateDate`, `updateBy`, `ticket_level` " +
+                                        "from ythg_ods.dwd_" + tableName + " where deleted = '0' and `id` = '" + fileInfo.getId() + "'";
+                                log.info("<=====================sql语句==============================>");
+                                log.info(sql);
+                                List<SecSpecialJobTicketPourDto> secSpecialJobTicketPourDtos = siLuDorisTemplate.query(sql, new BeanPropertyRowMapper<>(SecSpecialJobTicketPourDto.class));
+                                SecSpecialJobTicketPourDto secSpecialJobTicketPourDto = secSpecialJobTicketPourDtos.get(0);
+                                secSpecialJobTicketPourDto.setWorkTicketAtt(finalTickets.get(fileInfo.getFileName()));
+                                datas = JSON.toJSONString(Collections.singletonList(secSpecialJobTicketPourDto));
+                                sendGetRequest(path, datas);
+                                break;
+                            case "11":
+                                sql = "select `id`, `companyCode`, `ticketNo`, `ticketStatus`, `issueTime`, `planStartTime`, `planEndTime`, `startTime`, `endTime`, `ticketPosition`, `workAreaCode`, `ticketContent`, `checkedTime`, `checkedPerson`, `longitude`, `latitude`, `supervisorName`, `workerName`, `workDeptment`, `isContractorWork`, `contractorOrg`, `isAssociation`, `associationTicket`, `riskIdentification`, `disclosePerson`, `acceptPerson`, `tickerResponsName`, `majorPersonMobile`, `isChanged`, `changedCause`, `isCancelled`, `cancelledCause`, `mobileDeviceCode`, `workTicketAtt`, `safeDiscloseAtt`, `countersignImg`, `gasAnalysis`, `commitmentLetter`, `fireLocation`, `fireLevel`, `firePerson`, `fireStyle`, `deleted`, `createDate`, `createBy`, `updateDate`, `updateBy`, `ticket_level` " +
+                                        "from ythg_ods.dwd_" + tableName + " where deleted = '0' and `id` = '" + fileInfo.getId() + "'";
+                                log.info("<=====================sql语句==============================>");
+                                log.info(sql);
+                                List<SecSpecialJobTicketWaterDto> secSpecialJobTicketWaterDtos = siLuDorisTemplate.query(sql, new BeanPropertyRowMapper<>(SecSpecialJobTicketWaterDto.class));
+                                SecSpecialJobTicketWaterDto secSpecialJobTicketWaterDto = secSpecialJobTicketWaterDtos.get(0);
+                                secSpecialJobTicketWaterDto.setWorkTicketAtt(finalTickets.get(fileInfo.getFileName()));
+                                datas = JSON.toJSONString(Collections.singletonList(secSpecialJobTicketWaterDto));
+                                sendGetRequest(path, datas);
+                                break;
+                            case "12":
+                                sql = "select `id`, `companyCode`, `ticketNo`, `ticketStatus`, `issueTime`, `planStartTime`, `planEndTime`, `startTime`, `endTime`, `ticketPosition`, `workAreaCode`, `ticketContent`, `checkedTime`, `checkedPerson`, `longitude`, `latitude`, `supervisorName`, `workerName`, `workDeptment`, `isContractorWork`, `contractorOrg`, `isAssociation`, `associationTicket`, `riskIdentification`, `disclosePerson`, `acceptPerson`, `tickerResponsName`, `majorPersonMobile`, `isChanged`, `changedCause`, `isCancelled`, `cancelledCause`, `mobileDeviceCode`, `workTicketAtt`, `safeDiscloseAtt`, `countersignImg`, `gasAnalysis`, `commitmentLetter`, `fireLocation`, `fireLevel`, `firePerson`, `fireStyle`, `deleted`, `createDate`, `createBy`, `updateDate`, `updateBy`, `ticket_level` " +
+                                        "from ythg_ods.dwd_" + tableName + " where deleted = '0' and `id` = '" + fileInfo.getId() + "'";
+                                log.info("<=====================sql语句==============================>");
+                                log.info(sql);
+                                List<SecSpecialJobTicketMaintenanceDto> secSpecialJobTicketMaintenanceDtos = siLuDorisTemplate.query(sql, new BeanPropertyRowMapper<>(SecSpecialJobTicketMaintenanceDto.class));
+                                SecSpecialJobTicketMaintenanceDto secSpecialJobTicketMaintenanceDto = secSpecialJobTicketMaintenanceDtos.get(0);
+                                secSpecialJobTicketMaintenanceDto.setWorkTicketAtt(finalTickets.get(fileInfo.getFileName()));
+                                datas = JSON.toJSONString(Collections.singletonList(secSpecialJobTicketMaintenanceDto));
+                                sendGetRequest(path, datas);
+                                break;
+
+                        }
 
                     }
-
                 }
             });
             return "更新作业票：" + latestFileInfo;
         }
         return "更新作业票：0";
-    }*/
+    }
     private void sendGetRequest(String path, String datas) {
         try{
             //组装请求

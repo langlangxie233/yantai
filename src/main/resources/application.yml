@@ -16,14 +16,14 @@ silu:
 
 minio:
   oss:
-    endpoint: http://10.0.93.53:39000
-    access-key: minioadmin
-    secret-key: 38WYM4973_D6vPXQ
-    bucket: ticket-upload
-#    endpoint: http://172.168.1.69:39000
+#    endpoint: http://10.0.93.53:39000
 #    access-key: minioadmin
-#    secret-key: PsEv_M6U1EZQLMTIm
-#    bucket: ythg-upload
+#    secret-key: 38WYM4973_D6vPXQ
+#    bucket: ticket-upload
+    endpoint: http://172.168.1.69:39000
+    access-key: minioadmin
+    secret-key: PsEv_M6U1EZQLMTIm
+    bucket: ythg-upload
 
 datasource:
   doris:

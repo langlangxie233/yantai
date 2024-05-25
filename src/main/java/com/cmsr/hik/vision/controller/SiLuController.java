@@ -337,7 +337,7 @@ public class SiLuController {
 
     @GetMapping(value = "/silu/sec/speicial/ticket/file", produces = MediaType.APPLICATION_JSON_VALUE)
     public String updateSecSpecialTicketFile(@RequestParam String firstFlag) {
-        return siLuService.updateSecSpecialTicketFile(firstFlag);
+        return siLuJobTicketService.updateSecSpecialTicketFile(firstFlag);
     }
 
 }

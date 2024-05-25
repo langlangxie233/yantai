@@ -27,6 +27,9 @@ public class MinioService {
 
     private void buildClient() {
         log.debug("Building MinIO client with args: END_POINT: {}, AK: {}, SK: {}", this.endpoint, this.accessKey, this.secretKey);
+        if (client != null) {
+            return;
+        }
         client = MinioClient.builder()
                 .endpoint(endpoint)
                 .credentials(accessKey, secretKey)
@@ -37,7 +40,8 @@ public class MinioService {
     private void destroyClient() {
         try {
             if (client != null) {
-                client.close();
+//                client.close();
+                return;
             }
         } catch (Exception e) {
             log.error("<MinIO> client close failed, {}", System.currentTimeMillis());
@@ -59,7 +63,7 @@ public class MinioService {
 
     public Map<String, String> getObjects(String folderName) {
         buildClient();
-
+        folderExists(folderName);
         ListObjectsArgs listObjectsArgs = ListObjectsArgs.builder()
                 .bucket(bucket)
                 .prefix(folderName)
@@ -105,16 +109,16 @@ public class MinioService {
         ListObjectsArgs listObjectsArgs = ListObjectsArgs.builder()
                 .bucket(bucket)
                 .build();
-        List<String> filenameList = new ArrayList<>();
-
+        Map<String, String> fileMap = Maps.newHashMap();
         log.info("<MinIO> accessing bucket: {}", bucket);
         Iterable<Result<Item>> objects = client.listObjects(listObjectsArgs);
 
         for (Result<Item> itemResult : objects) {
             try {
                 Item item = itemResult.get();
-                if (!item.isDir()) {
-                    filenameList.add(item.objectName());
+                if (item.isDir()) {
+                    Map<String, String> folderMap = getObjects(item.objectName());
+                    fileMap.putAll(folderMap);
                 }
             } catch (Exception e) {
                 log.error("<MinIO> Cannot access file");
@@ -123,19 +127,7 @@ public class MinioService {
             }
 
         }
-
-        Map<String, String> fileMap = Maps.newHashMap();
-
-        filenameList.forEach(
-                filepath -> {
-                    String encodedString = this.getFileBase64(filepath);
-                    if (encodedString != null) {
-                        String filename = filepath.substring(10);
-                        fileMap.put(filename, encodedString);
-                        log.info("<MinIO> File: {} encoded success.", filepath);
-                    }
-                }
-        );
+        log.info("fileSize: {}", fileMap.size());
         return fileMap;
     }
 
