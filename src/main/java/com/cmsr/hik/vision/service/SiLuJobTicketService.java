@@ -1108,7 +1108,7 @@ public class SiLuJobTicketService {
                     }
                 }
             });
-            return "更新作业票：" + latestFileInfo;
+            return "更新作业票成功：" + JSON.toJSONString(latestFileInfo);
         }
         return "更新作业票：0";
     }
