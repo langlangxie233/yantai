@@ -50,6 +50,12 @@ public class DateTimeUtil {
         return minutesBefore.withNano(0).toString().replace("T", " ");
     }
 
+    public static String getDaysBefore(Integer days) {
+        LocalDateTime nowTime = LocalDateTime.now();
+        LocalDateTime minutesBefore = nowTime.minus(days, ChronoUnit.DAYS);
+        return minutesBefore.withNano(0).toString().replace("T", " ");
+    }
+
     public static String getHoursBefore(Integer hours) {
         LocalDateTime nowTime = LocalDateTime.now();
         LocalDateTime hoursBefore = nowTime.minus(hours, ChronoUnit.HOURS);

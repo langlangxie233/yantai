@@ -4,6 +4,7 @@ import com.cmsr.hik.vision.service.AnJianService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -25,6 +26,16 @@ public class AnJianController {
     @GetMapping(value = "/video/violation", produces = MediaType.APPLICATION_JSON_VALUE)
     public String updateQueryViolationList() {
         return anJianService.updateQueryViolationList();
+    }
+
+    /**
+     * 查询违规列表
+     *
+     * @return 更新结果
+     */
+    @GetMapping(value = "/video/violation/status", produces = MediaType.APPLICATION_JSON_VALUE)
+    public String updateQueryViolationStatusList() {
+        return anJianService.updateQueryViolationStatusList();
     }
 
     /**

@@ -44,6 +44,9 @@ public class SecHiddenCheckRecordDto {
      * 风险等级:0-重大风险，1-较大风险，2-一般风险，3-低风险
      */
     //private String riskLevel;
+    private String mobileMe;
+    private String isDefend;
+    private String checkStatus;
     /**
      * 删除状态:正常：0；已删除：1
      */
@@ -66,4 +69,5 @@ public class SecHiddenCheckRecordDto {
      * 更新人
      */
     private String updateBy;
+    private String updateByMobile;
 }
