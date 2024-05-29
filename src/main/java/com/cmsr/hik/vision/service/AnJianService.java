@@ -206,13 +206,13 @@ public class AnJianService {
                 headers.put("authorization", token);
                 params.put("current", String.valueOf(pageNo));
                 params.put("size", String.valueOf(pageSize));
-                params.put("status", "[1,2]");
+                params.put("status", "1,2");
                 String jsonBody = toJsonBody();
                 String url = httpConfig.getUrl() + path;
                 log.info("url：" + url);
                 log.info("header：" + headers.toString());
-                log.info("jsonBody：" + jsonBody);
-                String response = HttpClientUtil.sendPostRequest(url, headers, jsonBody);
+                log.info("jsonBody：" + jsonBody.replace("\"1,2\"", "[1,2]"));
+                String response = HttpClientUtil.sendPostRequest(url, headers, jsonBody.replace("\"1,2\"", "[1,2]"));
                 JSONObject res = JSONObject.parseObject(response);
                 Integer pages = res.getJSONObject("data").getJSONObject("data").getInteger("pages");
                 List<ViolationInfo> records = JSONArray.parseArray(res.getJSONObject("data").getJSONObject("data").get("records").toString(), ViolationInfo.class);
