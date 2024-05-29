@@ -52,6 +52,7 @@ public class AnJianService {
     public String updateQueryViolationList() {
         //初始化
         boolean whileFlag = true;
+        params.clear();
         int pageNo = 1;
         int pageSize = 50;
         List<ViolationInfo> inserts = new ArrayList<>();
@@ -76,7 +77,7 @@ public class AnJianService {
                 String url = httpConfig.getUrl() + path;
                 log.info("url：" + url);
                 log.info("header：" + headers.toString());
-                log.info("jsonBody：" + jsonBody);
+                log.info("更新违规列表jsonBody：" + jsonBody);
                 String response = HttpClientUtil.sendPostRequest(url, headers, jsonBody);
                 JSONObject res = JSONObject.parseObject(response);
                 Integer pages = res.getJSONObject("data").getJSONObject("data").getInteger("pages");
@@ -183,13 +184,14 @@ public class AnJianService {
     }
 
     /**
-     * 更新违规列表
+     * 更新违规状态列表
      *
      * @return 更新结果
      */
     public String updateQueryViolationStatusList() {
         //初始化
         boolean whileFlag = true;
+        params.clear();
         int pageNo = 1;
         int pageSize = 50;
         List<ViolationInfo> updates = new ArrayList<>();
@@ -211,7 +213,7 @@ public class AnJianService {
                 String url = httpConfig.getUrl() + path;
                 log.info("url：" + url);
                 log.info("header：" + headers.toString());
-                log.info("jsonBody：" + jsonBody.replace("\"1,2\"", "[1,2]"));
+                log.info("更新违规状态列表jsonBody：" + jsonBody.replace("\"1,2\"", "[1,2]"));
                 String response = HttpClientUtil.sendPostRequest(url, headers, jsonBody.replace("\"1,2\"", "[1,2]"));
                 JSONObject res = JSONObject.parseObject(response);
                 Integer pages = res.getJSONObject("data").getJSONObject("data").getInteger("pages");
@@ -287,6 +289,7 @@ public class AnJianService {
     public String updateQueryCameraList() {
         //初始化
         boolean whileFlag = true;
+        params.clear();
         int pageNo = 1;
         int pageSize = 50;
         List<CameraVo> inserts = new ArrayList<>();

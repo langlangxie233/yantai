@@ -57,6 +57,7 @@ public class SiLuJobTicketService {
      */
     //region
     public String updateSecSpecialJobTicketFire(String firstFlag) {
+        params.clear();
         boolean whileFlag = true;
         ResponseData responseData = new ResponseData();
         responseData.setMsg("更新失败");
@@ -129,6 +130,7 @@ public class SiLuJobTicketService {
     }
 
     public String updateSecSpecialJobTicketSpace(String firstFlag) {
+        params.clear();
         boolean whileFlag = true;
         ResponseData responseData = new ResponseData();
         responseData.setMsg("更新失败");
@@ -201,6 +203,7 @@ public class SiLuJobTicketService {
     }
 
     public String updateSecSpecialJobTicketBlindplate(String firstFlag) {
+        params.clear();
         boolean whileFlag = true;
         ResponseData responseData = new ResponseData();
         responseData.setMsg("更新失败");
@@ -273,6 +276,7 @@ public class SiLuJobTicketService {
     }
 
     public String updateSecSpecialJobTicketHigh(String firstFlag) {
+        params.clear();
         boolean whileFlag = true;
         ResponseData responseData = new ResponseData();
         responseData.setMsg("更新失败");
@@ -345,6 +349,7 @@ public class SiLuJobTicketService {
     }
 
     public String updateSecSpecialJobTicketHoising(String firstFlag) {
+        params.clear();
         boolean whileFlag = true;
         ResponseData responseData = new ResponseData();
         responseData.setMsg("更新失败");
@@ -417,6 +422,7 @@ public class SiLuJobTicketService {
     }
 
     public String updateSecSpecialJobTicketPower(String firstFlag) {
+        params.clear();
         boolean whileFlag = true;
         ResponseData responseData = new ResponseData();
         responseData.setMsg("更新失败");
@@ -489,6 +495,7 @@ public class SiLuJobTicketService {
     }
 
     public String updateSecSpecialJobTicketSoil(String firstFlag) {
+        params.clear();
         boolean whileFlag = true;
         ResponseData responseData = new ResponseData();
         responseData.setMsg("更新失败");
@@ -561,6 +568,7 @@ public class SiLuJobTicketService {
     }
 
     public String updateSecSpecialJobTicketBreak(String firstFlag) {
+        params.clear();
         boolean whileFlag = true;
         ResponseData responseData = new ResponseData();
         responseData.setMsg("更新失败");
@@ -633,6 +641,7 @@ public class SiLuJobTicketService {
     }
 
     public String updateSecSpecialJobTicketPourback(String firstFlag) {
+        params.clear();
         boolean whileFlag = true;
         ResponseData responseData = new ResponseData();
         responseData.setMsg("更新失败");
@@ -705,6 +714,7 @@ public class SiLuJobTicketService {
     }
 
     public String updateSecSpecialJobTicketPour(String firstFlag) {
+        params.clear();
         boolean whileFlag = true;
         ResponseData responseData = new ResponseData();
         responseData.setMsg("更新失败");
@@ -777,6 +787,7 @@ public class SiLuJobTicketService {
     }
 
     public String updateSecSpecialJobTicketWater(String firstFlag) {
+        params.clear();
         boolean whileFlag = true;
         ResponseData responseData = new ResponseData();
         responseData.setMsg("更新失败");
@@ -849,6 +860,7 @@ public class SiLuJobTicketService {
     }
 
     public String updateSecSpecialJobTicketMaintenance(String firstFlag) {
+        params.clear();
         boolean whileFlag = true;
         ResponseData responseData = new ResponseData();
         responseData.setMsg("更新失败");
@@ -1113,6 +1125,7 @@ public class SiLuJobTicketService {
         return "更新作业票：0";
     }
     private void sendGetRequest(String path, String datas) {
+        params.clear();
         try{
             //组装请求
             params.put("datas", AESUtils.encrypt(datas));

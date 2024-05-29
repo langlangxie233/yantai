@@ -61,6 +61,7 @@ public class SiLuService {
      */
     //region
     public String updateSecurityRiskUnit(String firstFlag) {
+        params.clear();
         boolean whileFlag = true;
         ResponseData responseData = new ResponseData();
         responseData.setMsg("更新失败");
@@ -132,6 +133,7 @@ public class SiLuService {
     }
 
     public String updateSecurityRiskEvents(String firstFlag) {
+        params.clear();
         boolean whileFlag = true;
         ResponseData responseData = new ResponseData();
         responseData.setMsg("更新失败");
@@ -207,6 +209,7 @@ public class SiLuService {
     }
 
     public String updateSecurityRiskControlMeasures(String firstFlag) {
+        params.clear();
         boolean whileFlag = true;
         ResponseData responseData = new ResponseData();
         responseData.setMsg("更新失败");
@@ -282,6 +285,7 @@ public class SiLuService {
     }
 
     public String updateHiddenCheckMission(String firstFlag) {
+        params.clear();
         boolean whileFlag = true;
         ResponseData responseData = new ResponseData();
         responseData.setMsg("更新失败");
@@ -359,6 +363,7 @@ public class SiLuService {
     }
 
     public String updateHiddenCheckRecord(String firstFlag) {
+        params.clear();
         boolean whileFlag = true;
         ResponseData responseData = new ResponseData();
         responseData.setMsg("更新失败");
@@ -436,6 +441,7 @@ public class SiLuService {
     }
 
     public String updateHiddenDangerInfo(String firstFlag) {
+        params.clear();
         boolean whileFlag = true;
         ResponseData responseData = new ResponseData();
         responseData.setMsg("更新失败");
@@ -508,6 +514,7 @@ public class SiLuService {
     }
 
     public String updateDeactivatedMaintenanceRecord(String firstFlag) {
+        params.clear();
         boolean whileFlag = true;
         ResponseData responseData = new ResponseData();
         responseData.setMsg("更新失败");
@@ -587,6 +594,7 @@ public class SiLuService {
      */
     //region
     public String updateSecProductionPromise(String firstFlag) {
+        params.clear();
         boolean whileFlag = true;
         ResponseData responseData = new ResponseData();
         responseData.setMsg("更新失败");
@@ -658,6 +666,7 @@ public class SiLuService {
     }
 
     public String updateSecDeviceRunStatus(String firstFlag) {
+        params.clear();
         boolean whileFlag = true;
         ResponseData responseData = new ResponseData();
         responseData.setMsg("更新失败");
@@ -729,6 +738,7 @@ public class SiLuService {
     }
 
     public String updateSecProductionPromiseTicket(String firstFlag) {
+        params.clear();
         boolean whileFlag = true;
         ResponseData responseData = new ResponseData();
         responseData.setMsg("更新失败");
@@ -804,6 +814,7 @@ public class SiLuService {
      */
     //region
     public String updateSecSpecialJobTicketApproval(String firstFlag) {
+        params.clear();
         boolean whileFlag = true;
         ResponseData responseData = new ResponseData();
         responseData.setMsg("更新失败");
@@ -875,6 +886,7 @@ public class SiLuService {
     }
 
     public String updateSecSpecialJobTicketSafetyMeasures(String firstFlag) {
+        params.clear();
         boolean whileFlag = true;
         ResponseData responseData = new ResponseData();
         responseData.setMsg("更新失败");
@@ -946,6 +958,7 @@ public class SiLuService {
     }
 
     public String updateSecSpecialJobTicketGasAnalysis(String firstFlag) {
+        params.clear();
         boolean whileFlag = true;
         ResponseData responseData = new ResponseData();
         responseData.setMsg("更新失败");
@@ -1021,6 +1034,7 @@ public class SiLuService {
      */
     //region
     public String updateSecEmployeeFile(String firstFlag) {
+        params.clear();
         boolean whileFlag = true;
         ResponseData responseData = new ResponseData();
         responseData.setMsg("更新失败");
@@ -1092,6 +1106,7 @@ public class SiLuService {
     }
 
     public String updateSecEmployeeRealLoaction(String firstFlag) {
+        params.clear();
         boolean whileFlag = true;
         ResponseData responseData = new ResponseData();
         responseData.setMsg("更新失败");
@@ -1163,6 +1178,7 @@ public class SiLuService {
     }
 
     public String updateSecEmployeeAlarmData(String firstFlag) {
+        params.clear();
         boolean whileFlag = true;
         ResponseData responseData = new ResponseData();
         responseData.setMsg("更新失败");
