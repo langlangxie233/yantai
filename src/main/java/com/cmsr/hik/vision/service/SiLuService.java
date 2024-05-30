@@ -1040,7 +1040,11 @@ public class SiLuService {
         responseData.setMsg("更新失败");
         ResponseObject responseObject = new ResponseObject();
         responseObject.setData(responseData);
-        String querySql = "select `id`, `employeeName`, `sex`, `imei`, `phone`, `post`, `orgCode`, `enterpriseName` from ythg_ods.dwd_sec_employee_file order by `id` desc ";
+        String querySql = "select employee_file.`id`, employee_file.`employeeName`, employee_file.`sex`, employee_file.`imei`, employee_file.`phone`, employee_file.`post`, employee_file.`orgCode`, company_info.`enterprise_name` as enterpriseName \n" +
+                "from ythg_ods.dwd_sec_employee_file as employee_file \n" +
+                "inner join ythg_ods.dim_company_industry_type as company_info \n" +
+                "on employee_file.`orgCode` = company_info.`org_code`\n" +
+                "order by `id` desc ";
         //String queryLatestDateTimeSql = "select createDate from ythg_ods.dwd_sec_deactivated_maintenance_record order by createDate desc limit 1";
         String path = "/sec_employee_file";
 
