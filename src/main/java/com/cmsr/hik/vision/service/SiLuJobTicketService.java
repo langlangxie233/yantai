@@ -929,6 +929,222 @@ public class SiLuJobTicketService {
         }
         return responseObject.getData().getMsg();
     }
+
+    public String updateSecSpecialJobTicketApproval(String firstFlag) {
+        params.clear();
+        boolean whileFlag = true;
+        ResponseData responseData = new ResponseData();
+        responseData.setMsg("更新失败");
+        ResponseObject responseObject = new ResponseObject();
+        responseObject.setData(responseData);
+        String querySql = "select `id`, `ticketId`, `processNodes`, `processPersonnel`, `processOpinion`, `processTime`, `signalImage`, `deleted`, `createDate`, `createBy`, `updateDate`, `updateBy` from ythg_ods.dwd_sec_special_job_ticket_approval where deleted = '0' ";
+        //String queryLatestDateTimeSql = "select createDate from ythg_ods.dwd_sec_deactivated_maintenance_record order by createDate desc limit 1";
+        String path = "/sec_special_job_ticket_approval";
+
+        int pageNo = 0;
+        int pageSize = 20;
+        if (!"1".equals(firstFlag)) {
+            querySql = querySql + "and `createDate` > '" + DateTimeUtil.getYesterdayBeginTime() + "' ";
+        } else {
+            log.warn("首次更新数据库中······");
+        }
+        querySql = querySql + "order by `createDate` desc limit ";
+        while (whileFlag) {
+            String sql = querySql + pageNo * pageSize + ", " + pageSize;
+            log.info("<=====================sql语句==============================>");
+            log.info(sql);
+            try{
+                List<SecSpecialJobTicketApprovalDto> list = siLuDorisTemplate.query(sql, new BeanPropertyRowMapper<>(SecSpecialJobTicketApprovalDto.class));
+                if (!list.isEmpty()) {
+                    log.info("<====================数据库查到的数据===========================>");
+                    log.info("list.size:" + list.size());
+                    //list.forEach(l -> log.info(l.getRiskUnitId()));
+                    //log.info("list:" + JSON.toJSONString(list));
+                    //组装请求
+                    params.put("datas", AESUtils.encrypt(JSON.toJSONString(list)));
+                    //调用API发送数据
+                    try {
+                        Map<String, String> headers = new HashMap<>();
+                        headers.put("Content-Type", "application/json");
+                        //headers.put("Accept", "application/json");
+                        //headers.put("Authorization", "Basic " + Base64.encode((list.get(0).getCompanyCode() + ':' + "code").getBytes()));
+                        String jsonBody = toJsonBody();
+                        String url = httpConfig.getUrl() + path;
+                        log.info("url：" + url);
+                        //log.info("header：" + headers.toString());
+                        //log.info("jsonBody：" + jsonBody);
+
+                        String response = HttpClientUtil.sendPostRequest(url, headers, jsonBody);
+                        responseObject = JSON.to(ResponseObject.class, response);
+                        log.info(response);
+                        /*if ("500".equals(responseObject.getData().getCode())) {
+                            log.info(response);
+                            whileFlag = false;
+                        }*/
+                    } catch (Exception e) {
+                        log.info("请求错误：" + e);
+                        whileFlag = false;
+                    }
+                    if (list.size() < pageSize) {
+                        whileFlag = false;
+                    } else {
+                        pageNo++;
+                    }
+                } else {
+                    log.info("暂无更新数据");
+                    return "暂无更新数据";
+                }
+            } catch (Exception e) {
+                log.error("更新失败:", e);
+                whileFlag = false;
+            }
+        }
+        return responseObject.getData().getMsg();
+    }
+
+    public String updateSecSpecialJobTicketSafetyMeasures(String firstFlag) {
+        params.clear();
+        boolean whileFlag = true;
+        ResponseData responseData = new ResponseData();
+        responseData.setMsg("更新失败");
+        ResponseObject responseObject = new ResponseObject();
+        responseObject.setData(responseData);
+        String querySql = "select `id`, `ticketId`, `serialNumber`, `measuresContent`, `isInvolve`, `confirmPerson`, `signalImage`, `deleted`, `createDate`, `createBy`, `updateDate`, `updateBy` from ythg_ods.dwd_sec_special_job_ticket_safety_measures where deleted = '0' ";
+        //String queryLatestDateTimeSql = "select createDate from ythg_ods.dwd_sec_deactivated_maintenance_record order by createDate desc limit 1";
+        String path = "/sec_special_job_ticket_safety_measures";
+
+        int pageNo = 0;
+        int pageSize = 20;
+        if (!"1".equals(firstFlag)) {
+            querySql = querySql + "and `createDate` > '" + DateTimeUtil.getYesterdayBeginTime() + "' ";
+        } else {
+            log.warn("首次更新数据库中······");
+        }
+        querySql = querySql + "order by `createDate` desc limit ";
+        while (whileFlag) {
+            String sql = querySql + pageNo * pageSize + ", " + pageSize;
+            log.info("<=====================sql语句==============================>");
+            log.info(sql);
+            try{
+                List<SecSpecialJobTicketSafetyMeasuresDto> list = siLuDorisTemplate.query(sql, new BeanPropertyRowMapper<>(SecSpecialJobTicketSafetyMeasuresDto.class));
+                if (!list.isEmpty()) {
+                    log.info("<====================数据库查到的数据===========================>");
+                    log.info("list.size:" + list.size());
+                    //list.forEach(l -> log.info(l.getRiskUnitId()));
+                    //log.info("list:" + JSON.toJSONString(list));
+                    //组装请求
+                    params.put("datas", AESUtils.encrypt(JSON.toJSONString(list)));
+                    //调用API发送数据
+                    try {
+                        Map<String, String> headers = new HashMap<>();
+                        headers.put("Content-Type", "application/json");
+                        //headers.put("Accept", "application/json");
+                        //headers.put("Authorization", "Basic " + Base64.encode((list.get(0).getCompanyCode() + ':' + "code").getBytes()));
+                        String jsonBody = toJsonBody();
+                        String url = httpConfig.getUrl() + path;
+                        log.info("url：" + url);
+                        //log.info("header：" + headers.toString());
+                        //log.info("jsonBody：" + jsonBody);
+
+                        String response = HttpClientUtil.sendPostRequest(url, headers, jsonBody);
+                        responseObject = JSON.to(ResponseObject.class, response);
+                        log.info(response);
+                        /*if ("500".equals(responseObject.getData().getCode())) {
+                            log.info(response);
+                            whileFlag = false;
+                        }*/
+                    } catch (Exception e) {
+                        log.info("请求错误：" + e);
+                        whileFlag = false;
+                    }
+                    if (list.size() < pageSize) {
+                        whileFlag = false;
+                    } else {
+                        pageNo++;
+                    }
+                } else {
+                    log.info("暂无更新数据");
+                    return "暂无更新数据";
+                }
+            } catch (Exception e) {
+                log.error("更新失败:", e);
+                whileFlag = false;
+            }
+        }
+        return responseObject.getData().getMsg();
+    }
+
+    public String updateSecSpecialJobTicketGasAnalysis(String firstFlag) {
+        params.clear();
+        boolean whileFlag = true;
+        ResponseData responseData = new ResponseData();
+        responseData.setMsg("更新失败");
+        ResponseObject responseObject = new ResponseObject();
+        responseObject.setData(responseData);
+        String querySql = "select `id`, `ticketID`, `ticketType`, `gasType`, `gasName`, `analysisResults`, `resultsUnit`, `analyst`, `analystTime`, `analystPart`, `deleted`, `createDate`, `createBy`, `updateDate`, `updateBy` from ythg_ods.dwd_sec_special_job_ticket_gas_analysis where deleted = '0' ";
+        //String queryLatestDateTimeSql = "select createDate from ythg_ods.dwd_sec_deactivated_maintenance_record order by createDate desc limit 1";
+        String path = "/sec_special_job_ticket_gas_analysis";
+
+        int pageNo = 0;
+        int pageSize = 20;
+        if (!"1".equals(firstFlag)) {
+            querySql = querySql + "and `createDate` > '" + DateTimeUtil.getYesterdayBeginTime() + "' ";
+        } else {
+            log.warn("首次更新数据库中······");
+        }
+        querySql = querySql + "order by `createDate` desc limit ";
+        while (whileFlag) {
+            String sql = querySql + pageNo * pageSize + ", " + pageSize;
+            log.info("<=====================sql语句==============================>");
+            log.info(sql);
+            try{
+                List<SecSpecialJobTicketGasAnalysisDto> list = siLuDorisTemplate.query(sql, new BeanPropertyRowMapper<>(SecSpecialJobTicketGasAnalysisDto.class));
+                if (!list.isEmpty()) {
+                    log.info("<====================数据库查到的数据===========================>");
+                    log.info("list.size:" + list.size());
+                    //list.forEach(l -> log.info(l.getRiskUnitId()));
+                    //log.info("list:" + JSON.toJSONString(list));
+                    //组装请求
+                    params.put("datas", AESUtils.encrypt(JSON.toJSONString(list)));
+                    //调用API发送数据
+                    try {
+                        Map<String, String> headers = new HashMap<>();
+                        headers.put("Content-Type", "application/json");
+                        //headers.put("Accept", "application/json");
+                        //headers.put("Authorization", "Basic " + Base64.encode((list.get(0).getCompanyCode() + ':' + "code").getBytes()));
+                        String jsonBody = toJsonBody();
+                        String url = httpConfig.getUrl() + path;
+                        log.info("url：" + url);
+                        //log.info("header：" + headers.toString());
+                        //log.info("jsonBody：" + jsonBody);
+
+                        String response = HttpClientUtil.sendPostRequest(url, headers, jsonBody);
+                        responseObject = JSON.to(ResponseObject.class, response);
+                        log.info(response);
+                        /*if ("500".equals(responseObject.getData().getCode())) {
+                            log.info(response);
+                            whileFlag = false;
+                        }*/
+                    } catch (Exception e) {
+                        log.info("请求错误：" + e);
+                        whileFlag = false;
+                    }
+                    if (list.size() < pageSize) {
+                        whileFlag = false;
+                    } else {
+                        pageNo++;
+                    }
+                } else {
+                    log.info("暂无更新数据");
+                    return "暂无更新数据";
+                }
+            } catch (Exception e) {
+                log.error("更新失败:", e);
+                whileFlag = false;
+            }
+        }
+        return responseObject.getData().getMsg();
+    }
     //endregion
 
     private String toJsonBody() {
@@ -1124,6 +1340,7 @@ public class SiLuJobTicketService {
         }
         return "更新作业票：0";
     }
+
     private void sendGetRequest(String path, String datas) {
         params.clear();
         try{

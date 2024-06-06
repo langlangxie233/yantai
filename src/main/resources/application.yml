@@ -13,6 +13,12 @@ anjian:
 
 silu:
   url: http://172.168.1.64:6689/api/sync/data
+  kafka:
+    serverUrl: http://172.168.1.69:29030
+    groupId: employee
+    autoOffsetReset: earliest
+    enableAutoCommit: true
+    enable: true
 
 minio:
   oss:

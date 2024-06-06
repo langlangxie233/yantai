@@ -144,7 +144,7 @@ public class SiLuController {
      */
     @GetMapping(value = "/silu/sec/special/job/ticket/approval", produces = MediaType.APPLICATION_JSON_VALUE)
     public String updateSecSpecialJobTicketApproval(@RequestParam String firstFlag) {
-        return siLuService.updateSecSpecialJobTicketApproval(firstFlag);
+        return siLuJobTicketService.updateSecSpecialJobTicketApproval(firstFlag);
     }
 
     /**
@@ -189,7 +189,7 @@ public class SiLuController {
      */
     @GetMapping(value = "/silu/sec/special/job/ticket/gas/analysis", produces = MediaType.APPLICATION_JSON_VALUE)
     public String updateSecSpecialJobTicketGasAnalysis(@RequestParam String firstFlag) {
-        return siLuService.updateSecSpecialJobTicketGasAnalysis(firstFlag);
+        return siLuJobTicketService.updateSecSpecialJobTicketGasAnalysis(firstFlag);
     }
 
     /**
@@ -266,7 +266,7 @@ public class SiLuController {
      */
     @GetMapping(value = "/silu/sec/special/job/ticket/safety/measures", produces = MediaType.APPLICATION_JSON_VALUE)
     public String updateSecSpecialJobTicketSafetyMeasures(@RequestParam String firstFlag) {
-        return siLuService.updateSecSpecialJobTicketSafetyMeasures(firstFlag);
+        return siLuJobTicketService.updateSecSpecialJobTicketSafetyMeasures(firstFlag);
     }
 
     /**
@@ -303,7 +303,15 @@ public class SiLuController {
     }
 
     /**
-     * 上报承诺作业票详情表
+     * 更新特殊作业票文件
+     */
+    @GetMapping(value = "/silu/sec/speicial/ticket/file", produces = MediaType.APPLICATION_JSON_VALUE)
+    public String updateSecSpecialTicketFile(@RequestParam String firstFlag) {
+        return siLuJobTicketService.updateSecSpecialTicketFile(firstFlag);
+    }
+    //region
+    /**
+     * 人员信息
      *
      * @param firstFlag 是否第一次更新数据：1-是，0-否
      * @return 更新结果
@@ -314,7 +322,7 @@ public class SiLuController {
     }
 
     /**
-     * 上报承诺作业票详情表
+     * 人员定位
      *
      * @param firstFlag 是否第一次更新数据：1-是，0-否
      * @return 更新结果
@@ -323,9 +331,8 @@ public class SiLuController {
     public String updateSecEmployeeRealLoaction(@RequestParam String firstFlag) {
         return siLuService.updateSecEmployeeRealLoaction(firstFlag);
     }
-
     /**
-     * 上报承诺作业票详情表
+     * 人员告警
      *
      * @param firstFlag 是否第一次更新数据：1-是，0-否
      * @return 更新结果
@@ -334,10 +341,6 @@ public class SiLuController {
     public String updateSecEmployeeAlarmData(@RequestParam String firstFlag) {
         return siLuService.updateSecEmployeeAlarmData(firstFlag);
     }
-
-    @GetMapping(value = "/silu/sec/speicial/ticket/file", produces = MediaType.APPLICATION_JSON_VALUE)
-    public String updateSecSpecialTicketFile(@RequestParam String firstFlag) {
-        return siLuJobTicketService.updateSecSpecialTicketFile(firstFlag);
-    }
+    //endregion
 
 }
