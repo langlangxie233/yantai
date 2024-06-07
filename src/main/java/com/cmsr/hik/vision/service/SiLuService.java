@@ -2,17 +2,15 @@ package com.cmsr.hik.vision.service;
 
 import com.alibaba.fastjson2.JSON;
 import com.cmsr.hik.vision.config.silu.SiLuHttpConfig;
-import com.cmsr.hik.vision.enums.TicketFileTypeEnum;
 import com.cmsr.hik.vision.model.silu.dualprevention.*;
 import com.cmsr.hik.vision.model.silu.personnelpositioning.SecEmployeeAlarmDataDto;
 import com.cmsr.hik.vision.model.silu.personnelpositioning.SecEmployeeFileDto;
-import com.cmsr.hik.vision.model.silu.personnelpositioning.SecEmployeeRealLoactionDto;
+import com.cmsr.hik.vision.model.silu.personnelpositioning.SecEmployeeRealLocationDto;
 import com.cmsr.hik.vision.model.silu.result.ResponseData;
 import com.cmsr.hik.vision.model.silu.result.ResponseObject;
 import com.cmsr.hik.vision.model.silu.securitycommitment.SecDeviceRunStatusDto;
 import com.cmsr.hik.vision.model.silu.securitycommitment.SecProductionPromiseDto;
 import com.cmsr.hik.vision.model.silu.securitycommitment.SecProductionPromiseTicketDto;
-import com.cmsr.hik.vision.model.silu.specialassignments.*;
 import com.cmsr.hik.vision.utils.AESUtils;
 import com.cmsr.hik.vision.utils.DateTimeUtil;
 import com.cmsr.hik.vision.utils.HttpClientUtil;
@@ -22,14 +20,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.*;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 /**
  * 数据上报
@@ -921,7 +914,7 @@ public class SiLuService {
             log.info("<=====================sql语句==============================>");
             log.info(sql);
             try{
-                List<SecEmployeeRealLoactionDto> list = siLuDorisTemplate.query(sql, new BeanPropertyRowMapper<>(SecEmployeeRealLoactionDto.class));
+                List<SecEmployeeRealLocationDto> list = siLuDorisTemplate.query(sql, new BeanPropertyRowMapper<>(SecEmployeeRealLocationDto.class));
                 if (!list.isEmpty()) {
                     log.info("<====================数据库查到的数据===========================>");
                     log.info("list.size:" + list.size());
@@ -1041,7 +1034,7 @@ public class SiLuService {
         return responseObject.getData().getMsg();
     }
 
-    public String updateSecEmployeeRealLocationInstance(String msg) {
+    /*public String updateSecEmployeeRealLocationInstance(String msg) {
         log.info("人员实时定位kafkaMsg:" + msg);
         return null;
     }
@@ -1049,6 +1042,6 @@ public class SiLuService {
     public String updateSecEmployeeAlarmDataInstance(String msg) {
         log.info("人员告警kafkaMsg:" + msg);
         return null;
-    }
+    }*/
     //endregion
 }

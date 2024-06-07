@@ -3,6 +3,8 @@ package com.cmsr.hik.vision.model.silu.personnelpositioning;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 /**
  * 上报动火作业票
  *
@@ -11,10 +13,9 @@ import lombok.Setter;
  */
 @Setter
 @Getter
-public class SecEmployeeRealLoactionDto {
-    private String lon;
-    private String lat;
-    private String imei;
-    private String time;
-
+public class SecEmployeeAlarmDataRecord {
+    private String dataId;
+    private String systemName;
+    private String areaCode;
+    private List<SecEmployeeAlarmDataRecordData> data;
 }
