@@ -305,7 +305,7 @@ public class SiLuController {
     /**
      * 更新特殊作业票文件
      */
-    @GetMapping(value = "/silu/sec/speicial/ticket/file", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/silu/sec/special/ticket/file", produces = MediaType.APPLICATION_JSON_VALUE)
     public String updateSecSpecialTicketFile(@RequestParam String firstFlag) {
         return siLuJobTicketService.updateSecSpecialTicketFile(firstFlag);
     }

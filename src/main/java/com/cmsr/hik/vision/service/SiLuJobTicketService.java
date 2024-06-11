@@ -1197,10 +1197,12 @@ public class SiLuJobTicketService {
                                 log.info("<=====================sql语句==============================>");
                                 log.info(sql);
                                 List<SecSpecialJobTicketFireDto> secSpecialJobTicketFireDtos = siLuDorisTemplate.query(sql, new BeanPropertyRowMapper<>(SecSpecialJobTicketFireDto.class));
-                                SecSpecialJobTicketFireDto secSpecialJobTicketFireDto = secSpecialJobTicketFireDtos.get(0);
-                                secSpecialJobTicketFireDto.setWorkTicketAtt(finalTickets.get(fileInfo.getFileName()));
-                                datas = JSON.toJSONString(Collections.singletonList(secSpecialJobTicketFireDto));
-                                sendGetRequest(path, datas);
+                                if (!secSpecialJobTicketFireDtos.isEmpty()) {
+                                    SecSpecialJobTicketFireDto secSpecialJobTicketFireDto = secSpecialJobTicketFireDtos.get(0);
+                                    secSpecialJobTicketFireDto.setWorkTicketAtt(finalTickets.get(fileInfo.getFileName()));
+                                    datas = JSON.toJSONString(Collections.singletonList(secSpecialJobTicketFireDto));
+                                    sendGetRequest(path, datas);
+                                }
                                 break;
                             case "02":
                                 sql = "select `id`, `companyCode`, `ticketNo`, `ticketStatus`, `issueTime`, `planStartTime`, `planEndTime`, `startTime`, `endTime`, `ticketPosition`, `workAreaCode`, `ticketContent`, `checkedTime`, `checkedPerson`, `longitude`, `latitude`, `supervisorName`, `workerName`, `workDeptment`, `isContractorWork`, `contractorOrg`, `isAssociation`, `associationTicket`, `riskIdentification`, `disclosePerson`, `acceptPerson`, `tickerResponsName`, `majorPersonMobile`, `isChanged`, `changedCause`, `isCancelled`, `cancelledCause`, `mobileDeviceCode`, `workTicketAtt`, `safeDiscloseAtt`, `countersignImg`, `gasAnalysis`, `commitmentLetter`, `spaceName`, `spaceMedium`, `deleted`, `createDate`, `createBy`, `updateDate`, `updateBy`, `ticket_level` " +
@@ -1208,10 +1210,12 @@ public class SiLuJobTicketService {
                                 log.info("<=====================sql语句==============================>");
                                 log.info(sql);
                                 List<SecSpecialJobTicketSpaceDto> secSpecialJobTicketSpaceDtos = siLuDorisTemplate.query(sql, new BeanPropertyRowMapper<>(SecSpecialJobTicketSpaceDto.class));
-                                SecSpecialJobTicketSpaceDto secSpecialJobTicketSpaceDto = secSpecialJobTicketSpaceDtos.get(0);
-                                secSpecialJobTicketSpaceDto.setWorkTicketAtt(finalTickets.get(fileInfo.getFileName()));
-                                datas = JSON.toJSONString(Collections.singletonList(secSpecialJobTicketSpaceDto));
-                                sendGetRequest(path, datas);
+                                if (!secSpecialJobTicketSpaceDtos.isEmpty()) {
+                                    SecSpecialJobTicketSpaceDto secSpecialJobTicketSpaceDto = secSpecialJobTicketSpaceDtos.get(0);
+                                    secSpecialJobTicketSpaceDto.setWorkTicketAtt(finalTickets.get(fileInfo.getFileName()));
+                                    datas = JSON.toJSONString(Collections.singletonList(secSpecialJobTicketSpaceDto));
+                                    sendGetRequest(path, datas);
+                                }
                                 break;
                             case "03":
                                 sql = "select `id`, `companyCode`, `ticketNo`, `ticketStatus`, `issueTime`, `planStartTime`, `planEndTime`, `startTime`, `endTime`, `ticketPosition`, `workAreaCode`, `ticketContent`, `checkedTime`, `checkedPerson`, `longitude`, `latitude`, `supervisorName`, `workerName`, `workDeptment`, `isContractorWork`, `contractorOrg`, `isAssociation`, `associationTicket`, `riskIdentification`, `disclosePerson`, `acceptPerson`, `tickerResponsName`, `majorPersonMobile`, `isChanged`, `changedCause`, `isCancelled`, `cancelledCause`, `mobileDeviceCode`, `workTicketAtt`, `safeDiscloseAtt`, `countersignImg`, `commitmentLetter`, `blindPlateType`, `pipingName`, `pipingMedium`, `pipingTem`, `pipingPressure`, `plateMaterial`, `plateSpecifications`, `plateCode`, `plateImg`, `deleted`, `createDate`, `createBy`, `updateDate`, `updateBy`, `ticket_level` " +
@@ -1219,10 +1223,12 @@ public class SiLuJobTicketService {
                                 log.info("<=====================sql语句==============================>");
                                 log.info(sql);
                                 List<SecSpecialJobTicketBlindplateDto> secSpecialJobTicketBlindplateDtos = siLuDorisTemplate.query(sql, new BeanPropertyRowMapper<>(SecSpecialJobTicketBlindplateDto.class));
-                                SecSpecialJobTicketBlindplateDto secSpecialJobTicketBlindplateDto = secSpecialJobTicketBlindplateDtos.get(0);
-                                secSpecialJobTicketBlindplateDto.setWorkTicketAtt(finalTickets.get(fileInfo.getFileName()));
-                                datas = JSON.toJSONString(Collections.singletonList(secSpecialJobTicketBlindplateDto));
-                                sendGetRequest(path, datas);
+                                if (!secSpecialJobTicketBlindplateDtos.isEmpty()) {
+                                    SecSpecialJobTicketBlindplateDto secSpecialJobTicketBlindplateDto = secSpecialJobTicketBlindplateDtos.get(0);
+                                    secSpecialJobTicketBlindplateDto.setWorkTicketAtt(finalTickets.get(fileInfo.getFileName()));
+                                    datas = JSON.toJSONString(Collections.singletonList(secSpecialJobTicketBlindplateDto));
+                                    sendGetRequest(path, datas);
+                                }
                                 break;
                             case "04":
                                 sql = "select `id`, `companyCode`, `ticketNo`, `ticketStatus`, `issueTime`, `planStartTime`, `planEndTime`, `startTime`, `endTime`, `ticketPosition`, `workAreaCode`, `ticketContent`, `checkedTime`, `checkedPerson`, `longitude`, `latitude`, `supervisorName`, `workerName`, `workDeptment`, `isContractorWork`, `contractorOrg`, `isAssociation`, `associationTicket`, `riskIdentification`, `disclosePerson`, `acceptPerson`, `tickerResponsName`, `majorPersonMobile`, `isChanged`, `changedCause`, `isCancelled`, `cancelledCause`, `mobileDeviceCode`, `workTicketAtt`, `safeDiscloseAtt`, `countersignImg`, `commitmentLetter`, `highLevel`, `highHeight`, `deleted`, `createDate`, `createBy`, `updateDate`, `updateBy`, `ticket_level` " +
@@ -1230,10 +1236,12 @@ public class SiLuJobTicketService {
                                 log.info("<=====================sql语句==============================>");
                                 log.info(sql);
                                 List<SecSpecialJobTicketHighDto> secSpecialJobTicketHighDtos = siLuDorisTemplate.query(sql, new BeanPropertyRowMapper<>(SecSpecialJobTicketHighDto.class));
-                                SecSpecialJobTicketHighDto secSpecialJobTicketHighDto = secSpecialJobTicketHighDtos.get(0);
-                                secSpecialJobTicketHighDto.setWorkTicketAtt(finalTickets.get(fileInfo.getFileName()));
-                                datas = JSON.toJSONString(Collections.singletonList(secSpecialJobTicketHighDto));
-                                sendGetRequest(path, datas);
+                                if (!secSpecialJobTicketHighDtos.isEmpty()) {
+                                    SecSpecialJobTicketHighDto secSpecialJobTicketHighDto = secSpecialJobTicketHighDtos.get(0);
+                                    secSpecialJobTicketHighDto.setWorkTicketAtt(finalTickets.get(fileInfo.getFileName()));
+                                    datas = JSON.toJSONString(Collections.singletonList(secSpecialJobTicketHighDto));
+                                    sendGetRequest(path, datas);
+                                }
                                 break;
                             case "05":
                                 sql = "select `id`, `companyCode`, `ticketNo`, `ticketStatus`, `issueTime`, `planStartTime`, `planEndTime`, `startTime`, `endTime`, `ticketPosition`, `workAreaCode`, `ticketContent`, `checkedTime`, `checkedPerson`, `longitude`, `latitude`, `supervisorName`, `workerName`, `workDeptment`, `isContractorWork`, `contractorOrg`, `isAssociation`, `associationTicket`, `riskIdentification`, `disclosePerson`, `acceptPerson`, `tickerResponsName`, `majorPersonMobile`, `isChanged`, `changedCause`, `isCancelled`, `cancelledCause`, `mobileDeviceCode`, `workTicketAtt`, `safeDiscloseAtt`, `countersignImg`, `commitmentLetter`, `hoistingLevel`, `hoistingLocation`, `spreaderName`, `suspendedName`, `sommer`, `commander`, `hoistingWeight`, `deleted`, `createDate`, `createBy`, `updateDate`, `updateBy`, `ticket_level` " +
@@ -1241,10 +1249,12 @@ public class SiLuJobTicketService {
                                 log.info("<=====================sql语句==============================>");
                                 log.info(sql);
                                 List<SecSpecialJobTicketHoisingDto> secSpecialJobTicketHoisingDtos = siLuDorisTemplate.query(sql, new BeanPropertyRowMapper<>(SecSpecialJobTicketHoisingDto.class));
-                                SecSpecialJobTicketHoisingDto secSpecialJobTicketHoisingDto = secSpecialJobTicketHoisingDtos.get(0);
-                                secSpecialJobTicketHoisingDto.setWorkTicketAtt(finalTickets.get(fileInfo.getFileName()));
-                                datas = JSON.toJSONString(Collections.singletonList(secSpecialJobTicketHoisingDto));
-                                sendGetRequest(path, datas);
+                                if (!secSpecialJobTicketHoisingDtos.isEmpty()) {
+                                    SecSpecialJobTicketHoisingDto secSpecialJobTicketHoisingDto = secSpecialJobTicketHoisingDtos.get(0);
+                                    secSpecialJobTicketHoisingDto.setWorkTicketAtt(finalTickets.get(fileInfo.getFileName()));
+                                    datas = JSON.toJSONString(Collections.singletonList(secSpecialJobTicketHoisingDto));
+                                    sendGetRequest(path, datas);
+                                }
                                 break;
                             case "06":
                                 sql = "select `id`, `companyCode`, `ticketNo`, `ticketStatus`, `issueTime`, `planStartTime`, `planEndTime`, `startTime`, `endTime`, `ticketPosition`, `workAreaCode`, `ticketContent`, `checkedTime`, `checkedPerson`, `longitude`, `latitude`, `supervisorName`, `workerName`, `workDeptment`, `isContractorWork`, `contractorOrg`, `isAssociation`, `associationTicket`, `riskIdentification`, `disclosePerson`, `acceptPerson`, `tickerResponsName`, `majorPersonMobile`, `isChanged`, `changedCause`, `isCancelled`, `cancelledCause`, `mobileDeviceCode`, `workTicketAtt`, `safeDiscloseAtt`, `countersignImg`, `gasAnalysis`, `commitmentLetter`, `powerStrategy`, `workVoltage`, `electricalEquipment`, `headCode`, `personCode`, `deleted`, `createDate`, `createBy`, `updateDate`, `updateBy`, `ticket_level` " +
@@ -1252,10 +1262,12 @@ public class SiLuJobTicketService {
                                 log.info("<=====================sql语句==============================>");
                                 log.info(sql);
                                 List<SecSpecialJobTicketPowerDto> secSpecialJobTicketPowerDtos = siLuDorisTemplate.query(sql, new BeanPropertyRowMapper<>(SecSpecialJobTicketPowerDto.class));
-                                SecSpecialJobTicketPowerDto secSpecialJobTicketPowerDto = secSpecialJobTicketPowerDtos.get(0);
-                                secSpecialJobTicketPowerDto.setWorkTicketAtt(finalTickets.get(fileInfo.getFileName()));
-                                datas = JSON.toJSONString(Collections.singletonList(secSpecialJobTicketPowerDto));
-                                sendGetRequest(path, datas);
+                                if (!secSpecialJobTicketPowerDtos.isEmpty()) {
+                                    SecSpecialJobTicketPowerDto secSpecialJobTicketPowerDto = secSpecialJobTicketPowerDtos.get(0);
+                                    secSpecialJobTicketPowerDto.setWorkTicketAtt(finalTickets.get(fileInfo.getFileName()));
+                                    datas = JSON.toJSONString(Collections.singletonList(secSpecialJobTicketPowerDto));
+                                    sendGetRequest(path, datas);
+                                }
                                 break;
                             case "07":
                                 sql = "select `id`, `companyCode`, `ticketNo`, `ticketStatus`, `issueTime`, `planStartTime`, `planEndTime`, `startTime`, `endTime`, `ticketPosition`, `workAreaCode`, `ticketContent`, `checkedTime`, `checkedPerson`, `longitude`, `latitude`, `supervisorName`, `workerName`, `workDeptment`, `isContractorWork`, `contractorOrg`, `isAssociation`, `associationTicket`, `riskIdentification`, `disclosePerson`, `acceptPerson`, `tickerResponsName`, `majorPersonMobile`, `isChanged`, `changedCause`, `isCancelled`, `cancelledCause`, `mobileDeviceCode`, `workTicketAtt`, `safeDiscloseAtt`, `countersignImg`, `commitmentLetter`, `workImg`, `deleted`, `createDate`, `createBy`, `updateDate`, `updateBy`, `ticket_level` " +
@@ -1263,10 +1275,12 @@ public class SiLuJobTicketService {
                                 log.info("<=====================sql语句==============================>");
                                 log.info(sql);
                                 List<SecSpecialJobTicketSoilDto> secSpecialJobTicketSoilDtos = siLuDorisTemplate.query(sql, new BeanPropertyRowMapper<>(SecSpecialJobTicketSoilDto.class));
-                                SecSpecialJobTicketSoilDto secSpecialJobTicketSoilDto = secSpecialJobTicketSoilDtos.get(0);
-                                secSpecialJobTicketSoilDto.setWorkTicketAtt(finalTickets.get(fileInfo.getFileName()));
-                                datas = JSON.toJSONString(Collections.singletonList(secSpecialJobTicketSoilDto));
-                                sendGetRequest(path, datas);
+                                if (!secSpecialJobTicketSoilDtos.isEmpty()) {
+                                    SecSpecialJobTicketSoilDto secSpecialJobTicketSoilDto = secSpecialJobTicketSoilDtos.get(0);
+                                    secSpecialJobTicketSoilDto.setWorkTicketAtt(finalTickets.get(fileInfo.getFileName()));
+                                    datas = JSON.toJSONString(Collections.singletonList(secSpecialJobTicketSoilDto));
+                                    sendGetRequest(path, datas);
+                                }
                                 break;
                             case "08":
                                 sql = "select `id`, `companyCode`, `ticketNo`, `ticketStatus`, `issueTime`, `planStartTime`, `planEndTime`, `startTime`, `endTime`, `ticketPosition`, `workAreaCode`, `ticketContent`, `checkedTime`, `checkedPerson`, `longitude`, `latitude`, `supervisorName`, `workerName`, `workDeptment`, `isContractorWork`, `contractorOrg`, `isAssociation`, `associationTicket`, `riskIdentification`, `disclosePerson`, `acceptPerson`, `tickerResponsName`, `majorPersonMobile`, `isChanged`, `changedCause`, `isCancelled`, `cancelledCause`, `mobileDeviceCode`, `workTicketAtt`, `safeDiscloseAtt`, `countersignImg`, `commitmentLetter`, `breakReason`, `involveUnit`, `breakImg`, `deleted`, `createDate`, `createBy`, `updateDate`, `updateBy`, `ticket_level` " +
@@ -1274,10 +1288,12 @@ public class SiLuJobTicketService {
                                 log.info("<=====================sql语句==============================>");
                                 log.info(sql);
                                 List<SecSpecialJobTicketBreakDto> secSpecialJobTicketBreakDtos = siLuDorisTemplate.query(sql, new BeanPropertyRowMapper<>(SecSpecialJobTicketBreakDto.class));
-                                SecSpecialJobTicketBreakDto secSpecialJobTicketBreakDto = secSpecialJobTicketBreakDtos.get(0);
-                                secSpecialJobTicketBreakDto.setWorkTicketAtt(finalTickets.get(fileInfo.getFileName()));
-                                datas = JSON.toJSONString(Collections.singletonList(secSpecialJobTicketBreakDto));
-                                sendGetRequest(path, datas);
+                                if (!secSpecialJobTicketBreakDtos.isEmpty()) {
+                                    SecSpecialJobTicketBreakDto secSpecialJobTicketBreakDto = secSpecialJobTicketBreakDtos.get(0);
+                                    secSpecialJobTicketBreakDto.setWorkTicketAtt(finalTickets.get(fileInfo.getFileName()));
+                                    datas = JSON.toJSONString(Collections.singletonList(secSpecialJobTicketBreakDto));
+                                    sendGetRequest(path, datas);
+                                }
                                 break;
                             case "09":
                                 sql = "select `id`, `companyCode`, `ticketNo`, `ticketStatus`, `issueTime`, `planStartTime`, `planEndTime`, `startTime`, `endTime`, `ticketPosition`, `workAreaCode`, `ticketContent`, `checkedTime`, `checkedPerson`, `longitude`, `latitude`, `supervisorName`, `workerName`, `workDeptment`, `isContractorWork`, `contractorOrg`, `isAssociation`, `associationTicket`, `riskIdentification`, `disclosePerson`, `acceptPerson`, `tickerResponsName`, `majorPersonMobile`, `isChanged`, `changedCause`, `isCancelled`, `cancelledCause`, `mobileDeviceCode`, `workTicketAtt`, `safeDiscloseAtt`, `countersignImg`, `gasAnalysis`, `commitmentLetter`, `fireLocation`, `fireLevel`, `firePerson`, `fireStyle`, `deleted`, `createDate`, `createBy`, `updateDate`, `updateBy`, `ticket_level` " +
@@ -1285,10 +1301,12 @@ public class SiLuJobTicketService {
                                 log.info("<=====================sql语句==============================>");
                                 log.info(sql);
                                 List<SecSpecialJobTicketPourbackDto> secSpecialJobTicketPourbackDtos = siLuDorisTemplate.query(sql, new BeanPropertyRowMapper<>(SecSpecialJobTicketPourbackDto.class));
-                                SecSpecialJobTicketPourbackDto secSpecialJobTicketPourbackDto = secSpecialJobTicketPourbackDtos.get(0);
-                                secSpecialJobTicketPourbackDto.setWorkTicketAtt(finalTickets.get(fileInfo.getFileName()));
-                                datas = JSON.toJSONString(Collections.singletonList(secSpecialJobTicketPourbackDto));
-                                sendGetRequest(path, datas);
+                                if (!secSpecialJobTicketPourbackDtos.isEmpty()) {
+                                    SecSpecialJobTicketPourbackDto secSpecialJobTicketPourbackDto = secSpecialJobTicketPourbackDtos.get(0);
+                                    secSpecialJobTicketPourbackDto.setWorkTicketAtt(finalTickets.get(fileInfo.getFileName()));
+                                    datas = JSON.toJSONString(Collections.singletonList(secSpecialJobTicketPourbackDto));
+                                    sendGetRequest(path, datas);
+                                }
                                 break;
                             case "10":
                                 sql = "select `id`, `companyCode`, `ticketNo`, `ticketStatus`, `issueTime`, `planStartTime`, `planEndTime`, `startTime`, `endTime`, `ticketPosition`, `workAreaCode`, `ticketContent`, `checkedTime`, `checkedPerson`, `longitude`, `latitude`, `supervisorName`, `workerName`, `workDeptment`, `isContractorWork`, `contractorOrg`, `isAssociation`, `associationTicket`, `riskIdentification`, `disclosePerson`, `acceptPerson`, `tickerResponsName`, `majorPersonMobile`, `isChanged`, `changedCause`, `isCancelled`, `cancelledCause`, `mobileDeviceCode`, `workTicketAtt`, `safeDiscloseAtt`, `countersignImg`, `gasAnalysis`, `commitmentLetter`, `fireLocation`, `fireLevel`, `firePerson`, `fireStyle`, `deleted`, `createDate`, `createBy`, `updateDate`, `updateBy`, `ticket_level` " +
@@ -1296,10 +1314,12 @@ public class SiLuJobTicketService {
                                 log.info("<=====================sql语句==============================>");
                                 log.info(sql);
                                 List<SecSpecialJobTicketPourDto> secSpecialJobTicketPourDtos = siLuDorisTemplate.query(sql, new BeanPropertyRowMapper<>(SecSpecialJobTicketPourDto.class));
-                                SecSpecialJobTicketPourDto secSpecialJobTicketPourDto = secSpecialJobTicketPourDtos.get(0);
-                                secSpecialJobTicketPourDto.setWorkTicketAtt(finalTickets.get(fileInfo.getFileName()));
-                                datas = JSON.toJSONString(Collections.singletonList(secSpecialJobTicketPourDto));
-                                sendGetRequest(path, datas);
+                                if (!secSpecialJobTicketPourDtos.isEmpty()) {
+                                    SecSpecialJobTicketPourDto secSpecialJobTicketPourDto = secSpecialJobTicketPourDtos.get(0);
+                                    secSpecialJobTicketPourDto.setWorkTicketAtt(finalTickets.get(fileInfo.getFileName()));
+                                    datas = JSON.toJSONString(Collections.singletonList(secSpecialJobTicketPourDto));
+                                    sendGetRequest(path, datas);
+                                }
                                 break;
                             case "11":
                                 sql = "select `id`, `companyCode`, `ticketNo`, `ticketStatus`, `issueTime`, `planStartTime`, `planEndTime`, `startTime`, `endTime`, `ticketPosition`, `workAreaCode`, `ticketContent`, `checkedTime`, `checkedPerson`, `longitude`, `latitude`, `supervisorName`, `workerName`, `workDeptment`, `isContractorWork`, `contractorOrg`, `isAssociation`, `associationTicket`, `riskIdentification`, `disclosePerson`, `acceptPerson`, `tickerResponsName`, `majorPersonMobile`, `isChanged`, `changedCause`, `isCancelled`, `cancelledCause`, `mobileDeviceCode`, `workTicketAtt`, `safeDiscloseAtt`, `countersignImg`, `gasAnalysis`, `commitmentLetter`, `fireLocation`, `fireLevel`, `firePerson`, `fireStyle`, `deleted`, `createDate`, `createBy`, `updateDate`, `updateBy`, `ticket_level` " +
@@ -1307,10 +1327,12 @@ public class SiLuJobTicketService {
                                 log.info("<=====================sql语句==============================>");
                                 log.info(sql);
                                 List<SecSpecialJobTicketWaterDto> secSpecialJobTicketWaterDtos = siLuDorisTemplate.query(sql, new BeanPropertyRowMapper<>(SecSpecialJobTicketWaterDto.class));
-                                SecSpecialJobTicketWaterDto secSpecialJobTicketWaterDto = secSpecialJobTicketWaterDtos.get(0);
-                                secSpecialJobTicketWaterDto.setWorkTicketAtt(finalTickets.get(fileInfo.getFileName()));
-                                datas = JSON.toJSONString(Collections.singletonList(secSpecialJobTicketWaterDto));
-                                sendGetRequest(path, datas);
+                                if (!secSpecialJobTicketWaterDtos.isEmpty()) {
+                                    SecSpecialJobTicketWaterDto secSpecialJobTicketWaterDto = secSpecialJobTicketWaterDtos.get(0);
+                                    secSpecialJobTicketWaterDto.setWorkTicketAtt(finalTickets.get(fileInfo.getFileName()));
+                                    datas = JSON.toJSONString(Collections.singletonList(secSpecialJobTicketWaterDto));
+                                    sendGetRequest(path, datas);
+                                }
                                 break;
                             case "12":
                                 sql = "select `id`, `companyCode`, `ticketNo`, `ticketStatus`, `issueTime`, `planStartTime`, `planEndTime`, `startTime`, `endTime`, `ticketPosition`, `workAreaCode`, `ticketContent`, `checkedTime`, `checkedPerson`, `longitude`, `latitude`, `supervisorName`, `workerName`, `workDeptment`, `isContractorWork`, `contractorOrg`, `isAssociation`, `associationTicket`, `riskIdentification`, `disclosePerson`, `acceptPerson`, `tickerResponsName`, `majorPersonMobile`, `isChanged`, `changedCause`, `isCancelled`, `cancelledCause`, `mobileDeviceCode`, `workTicketAtt`, `safeDiscloseAtt`, `countersignImg`, `gasAnalysis`, `commitmentLetter`, `fireLocation`, `fireLevel`, `firePerson`, `fireStyle`, `deleted`, `createDate`, `createBy`, `updateDate`, `updateBy`, `ticket_level` " +
@@ -1318,10 +1340,12 @@ public class SiLuJobTicketService {
                                 log.info("<=====================sql语句==============================>");
                                 log.info(sql);
                                 List<SecSpecialJobTicketMaintenanceDto> secSpecialJobTicketMaintenanceDtos = siLuDorisTemplate.query(sql, new BeanPropertyRowMapper<>(SecSpecialJobTicketMaintenanceDto.class));
-                                SecSpecialJobTicketMaintenanceDto secSpecialJobTicketMaintenanceDto = secSpecialJobTicketMaintenanceDtos.get(0);
-                                secSpecialJobTicketMaintenanceDto.setWorkTicketAtt(finalTickets.get(fileInfo.getFileName()));
-                                datas = JSON.toJSONString(Collections.singletonList(secSpecialJobTicketMaintenanceDto));
-                                sendGetRequest(path, datas);
+                                if (!secSpecialJobTicketMaintenanceDtos.isEmpty()) {
+                                    SecSpecialJobTicketMaintenanceDto secSpecialJobTicketMaintenanceDto = secSpecialJobTicketMaintenanceDtos.get(0);
+                                    secSpecialJobTicketMaintenanceDto.setWorkTicketAtt(finalTickets.get(fileInfo.getFileName()));
+                                    datas = JSON.toJSONString(Collections.singletonList(secSpecialJobTicketMaintenanceDto));
+                                    sendGetRequest(path, datas);
+                                }
                                 break;
 
                         }
