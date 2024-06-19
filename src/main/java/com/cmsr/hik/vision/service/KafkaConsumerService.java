@@ -117,8 +117,8 @@ public class KafkaConsumerService {
         String path = "/sec_employee_real_loaction";
         try{
             if (!list.isEmpty()) {
-                log.info("<====================数据库查到的数据===========================>");
-                log.info("list.size:" + list.size());
+                //log.info("<====================数据库查到的数据===========================>");
+                //log.info("list.size:" + list.size());
                 //组装请求
                 params.put("datas", AESUtils.encrypt(JSON.toJSONString(list)));
                 //调用API发送数据

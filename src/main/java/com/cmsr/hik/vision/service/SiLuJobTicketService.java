@@ -1199,7 +1199,9 @@ public class SiLuJobTicketService {
                                 List<SecSpecialJobTicketFireDto> secSpecialJobTicketFireDtos = siLuDorisTemplate.query(sql, new BeanPropertyRowMapper<>(SecSpecialJobTicketFireDto.class));
                                 if (!secSpecialJobTicketFireDtos.isEmpty()) {
                                     SecSpecialJobTicketFireDto secSpecialJobTicketFireDto = secSpecialJobTicketFireDtos.get(0);
-                                    secSpecialJobTicketFireDto.setWorkTicketAtt(finalTickets.get(fileInfo.getFileName()));
+                                    secSpecialJobTicketFireDto.setWorkTicketAtt(finalTickets.get(info.getFileName()));
+                                    log.info("<=====================特殊作业票文件信息==============================>\nfileId:{}\n",
+                                            secSpecialJobTicketFireDto.getId());
                                     datas = JSON.toJSONString(Collections.singletonList(secSpecialJobTicketFireDto));
                                     sendGetRequest(path, datas);
                                 }
@@ -1212,7 +1214,9 @@ public class SiLuJobTicketService {
                                 List<SecSpecialJobTicketSpaceDto> secSpecialJobTicketSpaceDtos = siLuDorisTemplate.query(sql, new BeanPropertyRowMapper<>(SecSpecialJobTicketSpaceDto.class));
                                 if (!secSpecialJobTicketSpaceDtos.isEmpty()) {
                                     SecSpecialJobTicketSpaceDto secSpecialJobTicketSpaceDto = secSpecialJobTicketSpaceDtos.get(0);
-                                    secSpecialJobTicketSpaceDto.setWorkTicketAtt(finalTickets.get(fileInfo.getFileName()));
+                                    secSpecialJobTicketSpaceDto.setWorkTicketAtt(finalTickets.get(info.getFileName()));
+                                    log.info("<=====================特殊作业票文件信息==============================>\nfileId:{}\n",
+                                            secSpecialJobTicketSpaceDto.getId());
                                     datas = JSON.toJSONString(Collections.singletonList(secSpecialJobTicketSpaceDto));
                                     sendGetRequest(path, datas);
                                 }
@@ -1225,7 +1229,9 @@ public class SiLuJobTicketService {
                                 List<SecSpecialJobTicketBlindplateDto> secSpecialJobTicketBlindplateDtos = siLuDorisTemplate.query(sql, new BeanPropertyRowMapper<>(SecSpecialJobTicketBlindplateDto.class));
                                 if (!secSpecialJobTicketBlindplateDtos.isEmpty()) {
                                     SecSpecialJobTicketBlindplateDto secSpecialJobTicketBlindplateDto = secSpecialJobTicketBlindplateDtos.get(0);
-                                    secSpecialJobTicketBlindplateDto.setWorkTicketAtt(finalTickets.get(fileInfo.getFileName()));
+                                    secSpecialJobTicketBlindplateDto.setWorkTicketAtt(finalTickets.get(info.getFileName()));
+                                    log.info("<=====================特殊作业票文件信息==============================>\nfileId:{}\n",
+                                            secSpecialJobTicketBlindplateDto.getId());
                                     datas = JSON.toJSONString(Collections.singletonList(secSpecialJobTicketBlindplateDto));
                                     sendGetRequest(path, datas);
                                 }
@@ -1238,7 +1244,9 @@ public class SiLuJobTicketService {
                                 List<SecSpecialJobTicketHighDto> secSpecialJobTicketHighDtos = siLuDorisTemplate.query(sql, new BeanPropertyRowMapper<>(SecSpecialJobTicketHighDto.class));
                                 if (!secSpecialJobTicketHighDtos.isEmpty()) {
                                     SecSpecialJobTicketHighDto secSpecialJobTicketHighDto = secSpecialJobTicketHighDtos.get(0);
-                                    secSpecialJobTicketHighDto.setWorkTicketAtt(finalTickets.get(fileInfo.getFileName()));
+                                    secSpecialJobTicketHighDto.setWorkTicketAtt(finalTickets.get(info.getFileName()));
+                                    log.info("<=====================特殊作业票文件信息==============================>\nfileId:{}\n",
+                                            secSpecialJobTicketHighDto.getId());
                                     datas = JSON.toJSONString(Collections.singletonList(secSpecialJobTicketHighDto));
                                     sendGetRequest(path, datas);
                                 }
@@ -1251,7 +1259,9 @@ public class SiLuJobTicketService {
                                 List<SecSpecialJobTicketHoisingDto> secSpecialJobTicketHoisingDtos = siLuDorisTemplate.query(sql, new BeanPropertyRowMapper<>(SecSpecialJobTicketHoisingDto.class));
                                 if (!secSpecialJobTicketHoisingDtos.isEmpty()) {
                                     SecSpecialJobTicketHoisingDto secSpecialJobTicketHoisingDto = secSpecialJobTicketHoisingDtos.get(0);
-                                    secSpecialJobTicketHoisingDto.setWorkTicketAtt(finalTickets.get(fileInfo.getFileName()));
+                                    secSpecialJobTicketHoisingDto.setWorkTicketAtt(finalTickets.get(info.getFileName()));
+                                    log.info("<=====================特殊作业票文件信息==============================>\nfileId:{}\n",
+                                            secSpecialJobTicketHoisingDto.getId());
                                     datas = JSON.toJSONString(Collections.singletonList(secSpecialJobTicketHoisingDto));
                                     sendGetRequest(path, datas);
                                 }
@@ -1264,7 +1274,9 @@ public class SiLuJobTicketService {
                                 List<SecSpecialJobTicketPowerDto> secSpecialJobTicketPowerDtos = siLuDorisTemplate.query(sql, new BeanPropertyRowMapper<>(SecSpecialJobTicketPowerDto.class));
                                 if (!secSpecialJobTicketPowerDtos.isEmpty()) {
                                     SecSpecialJobTicketPowerDto secSpecialJobTicketPowerDto = secSpecialJobTicketPowerDtos.get(0);
-                                    secSpecialJobTicketPowerDto.setWorkTicketAtt(finalTickets.get(fileInfo.getFileName()));
+                                    secSpecialJobTicketPowerDto.setWorkTicketAtt(finalTickets.get(info.getFileName()));
+                                    log.info("<=====================特殊作业票文件信息==============================>\nfileId:{}\n",
+                                            secSpecialJobTicketPowerDto.getId());
                                     datas = JSON.toJSONString(Collections.singletonList(secSpecialJobTicketPowerDto));
                                     sendGetRequest(path, datas);
                                 }
@@ -1277,7 +1289,9 @@ public class SiLuJobTicketService {
                                 List<SecSpecialJobTicketSoilDto> secSpecialJobTicketSoilDtos = siLuDorisTemplate.query(sql, new BeanPropertyRowMapper<>(SecSpecialJobTicketSoilDto.class));
                                 if (!secSpecialJobTicketSoilDtos.isEmpty()) {
                                     SecSpecialJobTicketSoilDto secSpecialJobTicketSoilDto = secSpecialJobTicketSoilDtos.get(0);
-                                    secSpecialJobTicketSoilDto.setWorkTicketAtt(finalTickets.get(fileInfo.getFileName()));
+                                    secSpecialJobTicketSoilDto.setWorkTicketAtt(finalTickets.get(info.getFileName()));
+                                    log.info("<=====================特殊作业票文件信息==============================>\nfileId:{}\n",
+                                            secSpecialJobTicketSoilDto.getId());
                                     datas = JSON.toJSONString(Collections.singletonList(secSpecialJobTicketSoilDto));
                                     sendGetRequest(path, datas);
                                 }
@@ -1290,7 +1304,9 @@ public class SiLuJobTicketService {
                                 List<SecSpecialJobTicketBreakDto> secSpecialJobTicketBreakDtos = siLuDorisTemplate.query(sql, new BeanPropertyRowMapper<>(SecSpecialJobTicketBreakDto.class));
                                 if (!secSpecialJobTicketBreakDtos.isEmpty()) {
                                     SecSpecialJobTicketBreakDto secSpecialJobTicketBreakDto = secSpecialJobTicketBreakDtos.get(0);
-                                    secSpecialJobTicketBreakDto.setWorkTicketAtt(finalTickets.get(fileInfo.getFileName()));
+                                    secSpecialJobTicketBreakDto.setWorkTicketAtt(finalTickets.get(info.getFileName()));
+                                    log.info("<=====================特殊作业票文件信息==============================>\nfileId:{}\n",
+                                            secSpecialJobTicketBreakDto.getId());
                                     datas = JSON.toJSONString(Collections.singletonList(secSpecialJobTicketBreakDto));
                                     sendGetRequest(path, datas);
                                 }
@@ -1303,7 +1319,9 @@ public class SiLuJobTicketService {
                                 List<SecSpecialJobTicketPourbackDto> secSpecialJobTicketPourbackDtos = siLuDorisTemplate.query(sql, new BeanPropertyRowMapper<>(SecSpecialJobTicketPourbackDto.class));
                                 if (!secSpecialJobTicketPourbackDtos.isEmpty()) {
                                     SecSpecialJobTicketPourbackDto secSpecialJobTicketPourbackDto = secSpecialJobTicketPourbackDtos.get(0);
-                                    secSpecialJobTicketPourbackDto.setWorkTicketAtt(finalTickets.get(fileInfo.getFileName()));
+                                    secSpecialJobTicketPourbackDto.setWorkTicketAtt(finalTickets.get(info.getFileName()));
+                                    log.info("<=====================特殊作业票文件信息==============================>\nfileId:{}\n",
+                                            secSpecialJobTicketPourbackDto.getId());
                                     datas = JSON.toJSONString(Collections.singletonList(secSpecialJobTicketPourbackDto));
                                     sendGetRequest(path, datas);
                                 }
@@ -1316,7 +1334,9 @@ public class SiLuJobTicketService {
                                 List<SecSpecialJobTicketPourDto> secSpecialJobTicketPourDtos = siLuDorisTemplate.query(sql, new BeanPropertyRowMapper<>(SecSpecialJobTicketPourDto.class));
                                 if (!secSpecialJobTicketPourDtos.isEmpty()) {
                                     SecSpecialJobTicketPourDto secSpecialJobTicketPourDto = secSpecialJobTicketPourDtos.get(0);
-                                    secSpecialJobTicketPourDto.setWorkTicketAtt(finalTickets.get(fileInfo.getFileName()));
+                                    secSpecialJobTicketPourDto.setWorkTicketAtt(finalTickets.get(info.getFileName()));
+                                    log.info("<=====================特殊作业票文件信息==============================>\nfileId:{}\n",
+                                            secSpecialJobTicketPourDto.getId());
                                     datas = JSON.toJSONString(Collections.singletonList(secSpecialJobTicketPourDto));
                                     sendGetRequest(path, datas);
                                 }
@@ -1329,7 +1349,9 @@ public class SiLuJobTicketService {
                                 List<SecSpecialJobTicketWaterDto> secSpecialJobTicketWaterDtos = siLuDorisTemplate.query(sql, new BeanPropertyRowMapper<>(SecSpecialJobTicketWaterDto.class));
                                 if (!secSpecialJobTicketWaterDtos.isEmpty()) {
                                     SecSpecialJobTicketWaterDto secSpecialJobTicketWaterDto = secSpecialJobTicketWaterDtos.get(0);
-                                    secSpecialJobTicketWaterDto.setWorkTicketAtt(finalTickets.get(fileInfo.getFileName()));
+                                    secSpecialJobTicketWaterDto.setWorkTicketAtt(finalTickets.get(info.getFileName()));
+                                    log.info("<=====================特殊作业票文件信息==============================>\nfileId:{}\n",
+                                            secSpecialJobTicketWaterDto.getId());
                                     datas = JSON.toJSONString(Collections.singletonList(secSpecialJobTicketWaterDto));
                                     sendGetRequest(path, datas);
                                 }
@@ -1342,7 +1364,9 @@ public class SiLuJobTicketService {
                                 List<SecSpecialJobTicketMaintenanceDto> secSpecialJobTicketMaintenanceDtos = siLuDorisTemplate.query(sql, new BeanPropertyRowMapper<>(SecSpecialJobTicketMaintenanceDto.class));
                                 if (!secSpecialJobTicketMaintenanceDtos.isEmpty()) {
                                     SecSpecialJobTicketMaintenanceDto secSpecialJobTicketMaintenanceDto = secSpecialJobTicketMaintenanceDtos.get(0);
-                                    secSpecialJobTicketMaintenanceDto.setWorkTicketAtt(finalTickets.get(fileInfo.getFileName()));
+                                    secSpecialJobTicketMaintenanceDto.setWorkTicketAtt(finalTickets.get(info.getFileName()));
+                                    log.info("<=====================特殊作业票文件信息==============================>\nfileId:{}\n",
+                                            secSpecialJobTicketMaintenanceDto.getId());
                                     datas = JSON.toJSONString(Collections.singletonList(secSpecialJobTicketMaintenanceDto));
                                     sendGetRequest(path, datas);
                                 }

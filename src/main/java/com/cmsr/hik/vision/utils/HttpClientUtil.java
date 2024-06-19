@@ -35,7 +35,7 @@ public class HttpClientUtil {
         String responseString = null;
         if (responseEntity != null) {
             responseString = EntityUtils.toString(responseEntity, StandardCharsets.UTF_8);
-            System.out.println("<==========================Response==============================>" + responseString);
+            //System.out.println("<==========================Response==============================>" + responseString);
         }
         return responseString;
     }
