@@ -62,18 +62,17 @@ public class SiLuService {
         ResponseObject responseObject = new ResponseObject();
         responseObject.setData(responseData);
         String querySql = "SELECT `id`, `companyCode`, `hazardCode`, `hazardDep`, `hazardLiablePerson`, `riskUnitName`, `deleted`, `createDate`, `createBy`, `updateDate`, `updateBy` \n" +
-                "FROM ythg_ods.dwd_sec_security_risk_unit AS unit\n" +
-                "WHERE deleted = '0' ";
+                "FROM ythg_ods.dwd_sec_security_risk_unit AS unit ";
         //String queryLatestDateTimeSql = "select createDate from ythg_ods.dwd_sec_security_risk_unit order by createDate desc limit 1";
         String path = "/sec_security_risk_unit";
         int pageNo = 0;
         int pageSize = 20;
         if (!"1".equals(firstFlag)) {
-            querySql = querySql + "and `createDate` > '" + DateTimeUtil.getHoursBefore(3) + "' ";
+            querySql = querySql + "WHERE date_format(`updateDate`,'%Y-%m-%d %H-%i-%s') > '" + DateTimeUtil.getHoursBefore(2) + "' ";
         } else {
             log.warn("首次更新数据库中······");
         }
-        querySql = querySql + "order by `createDate` desc limit ";
+        querySql = querySql + "order by `updateDate` desc limit ";
         while (whileFlag) {
             String sql = querySql + pageNo * pageSize + ", " + pageSize;
             log.info("<=====================sql语句==============================>");
@@ -135,19 +134,18 @@ public class SiLuService {
         responseObject.setData(responseData);
         String querySql = "SELECT events.`id`, events.`companyCode`, events.`riskUnitId`, events.`riskEventName`, events.`deleted`, events.`createDate`, events.`createBy`, events.`updateDate`, events.`updateBy` \n" +
                 "FROM ythg_ods.dwd_sec_security_risk_events AS events \n" +
-                "INNER JOIN ythg_ods.dwd_sec_security_risk_unit AS unit on events.riskUnitId = unit.`id` \n" +
-                "WHERE unit.deleted = '0' AND events.deleted = '0' ";
+                "INNER JOIN ythg_ods.dwd_sec_security_risk_unit AS unit on events.riskUnitId = unit.`id` ";
         //String queryLatestDateTimeSql = "select createDate from ythg_ods.dwd_sec_security_risk_events order by createDate desc limit 1";
         String path = "/sec_security_risk_events";
 
         int pageNo = 0;
         int pageSize = 20;
         if (!"1".equals(firstFlag)) {
-            querySql = querySql + "and `events`.`createDate` > '" + DateTimeUtil.getHoursBefore(3) + "' ";
+            querySql = querySql + "WHERE date_format(`events`.`updateDate`,'%Y-%m-%d %H-%i-%s') > '" + DateTimeUtil.getHoursBefore(2) + "' ";
         } else {
             log.warn("首次更新数据库中······");
         }
-        querySql = querySql + "order by `events`.`createDate` desc limit ";
+        querySql = querySql + "order by `events`.`updateDate` desc limit ";
         while (whileFlag) {
             String sql = querySql + pageNo * pageSize + ", " + pageSize;
             log.info("<=====================sql语句==============================>");
@@ -212,19 +210,18 @@ public class SiLuService {
         String querySql = "SELECT control_measure.`id`,control_measure.`companyCode`,control_measure.`riskEventId`,control_measure.`dataSrc`,control_measure.`riskMeasureDesc`,control_measure.`classify1`,control_measure.`classify2`,control_measure.`classify3`,control_measure.`troubleshootContent`,control_measure.`deleted`,control_measure.`createDate`,control_measure.`createBy`,control_measure.`updateDate`,control_measure.`updateBy` \n" +
                 "FROM ythg_ods.dwd_sec_security_risk_control_measures AS control_measure \n" +
                 "INNER JOIN ythg_ods.dwd_sec_security_risk_events events on control_measure.riskEventId = events.`id`\n" +
-                "INNER JOIN ythg_ods.dwd_sec_security_risk_unit AS unit on events.riskUnitId = unit.`id` \n" +
-                "where control_measure.deleted = '0' and events.deleted = '0' AND unit.deleted = '0' ";
+                "INNER JOIN ythg_ods.dwd_sec_security_risk_unit AS unit on events.riskUnitId = unit.`id` ";
         //String queryLatestDateTimeSql = "select createDate from ythg_ods.dwd_sec_security_risk_control_measures order by createDate desc limit 1";
         String path = "/sec_security_risk_control_measures";
 
         int pageNo = 0;
         int pageSize = 20;
         if (!"1".equals(firstFlag)) {
-            querySql = querySql + "and `control_measure`.`createDate` > '" + DateTimeUtil.getHoursBefore(3) + "' ";
+            querySql = querySql + "where date_format(`control_measure`.`updateDate`,'%Y-%m-%d %H-%i-%s') > '" + DateTimeUtil.getHoursBefore(2) + "' ";
         } else {
             log.warn("首次更新数据库中······");
         }
-        querySql = querySql + "order by `control_measure`.`createDate` desc limit ";
+        querySql = querySql + "order by `control_measure`.`updateDate` desc limit ";
         while (whileFlag) {
             String sql = querySql + pageNo * pageSize + ", " + pageSize;
             log.info("<=====================sql语句==============================>");
@@ -289,19 +286,18 @@ public class SiLuService {
                 "from ythg_ods.dwd_sec_hidden_check_mission AS check_mission\n" +
                 "INNER JOIN ythg_ods.dwd_sec_security_risk_control_measures AS control_measure on check_mission.riskMeasureId = control_measure.`id` \n" +
                 "INNER JOIN ythg_ods.dwd_sec_security_risk_events events on control_measure.riskEventId = events.`id`\n" +
-                "INNER JOIN ythg_ods.dwd_sec_security_risk_unit AS unit on events.riskUnitId = unit.`id` \n" +
-                "WHERE check_mission.deleted = '0' AND control_measure.deleted = '0' and events.deleted = '0' AND unit.deleted = '0' ";
+                "INNER JOIN ythg_ods.dwd_sec_security_risk_unit AS unit on events.riskUnitId = unit.`id` ";
         //String queryLatestDateTimeSql = "select createDate from ythg_ods.dwd_sec_hidden_check_mission order by createDate desc limit 1";
         String path = "/sec_hidden_check_mission";
 
         int pageNo = 0;
         int pageSize = 20;
         if (!"1".equals(firstFlag)) {
-            querySql = querySql + "and `check_mission`.`createDate` > '" + DateTimeUtil.getHoursBefore(3) + "' ";
+            querySql = querySql + "WHERE date_format(`check_mission`.`updateDate`,'%Y-%m-%d %H-%i-%s') > '" + DateTimeUtil.getHoursBefore(2) + "' ";
         } else {
             log.warn("首次更新数据库中······");
         }
-        querySql = querySql + "order by `check_mission`.`createDate` desc limit ";
+        querySql = querySql + "order by `check_mission`.`updateDate` desc limit ";
         while (whileFlag) {
             String sql = querySql + pageNo * pageSize + ", " + pageSize;
             log.info("<=====================sql语句==============================>");
@@ -368,19 +364,18 @@ public class SiLuService {
                 "INNER JOIN ythg_ods.dwd_sec_hidden_check_mission AS check_mission ON check_record.checkTaskId = check_mission.`id` \n" +
                 "INNER JOIN ythg_ods.dwd_sec_security_risk_control_measures AS control_measure ON check_mission.riskMeasureId = control_measure.`id` \n" +
                 "INNER JOIN ythg_ods.dwd_sec_security_risk_events events ON control_measure.riskEventId = events.`id`\n" +
-                "INNER JOIN ythg_ods.dwd_sec_security_risk_unit AS unit ON events.riskUnitId = unit.`id` \n" +
-                "WHERE check_record.deleted = '0' AND check_mission.deleted = '0' AND control_measure.deleted = '0' AND events.deleted = '0' AND unit.deleted = '0' ";
+                "INNER JOIN ythg_ods.dwd_sec_security_risk_unit AS unit ON events.riskUnitId = unit.`id` ";
         //String queryLatestDateTimeSql = "select createDate from ythg_ods.dwd_sec_hidden_check_record order by createDate desc limit 1";
         String path = "/sec_hidden_check_record";
 
         int pageNo = 0;
         int pageSize = 20;
         if (!"1".equals(firstFlag)) {
-            querySql = querySql + "and `check_record`.`createDate` > '" + DateTimeUtil.getHoursBefore(3) + "' ";
+            querySql = querySql + "WHERE date_format(`check_record`.`updateDate`,'%Y-%m-%d %H-%i-%s') > '" + DateTimeUtil.getHoursBefore(2) + "' ";
         } else {
             log.warn("首次更新数据库中······");
         }
-        querySql = querySql + "order by `check_record`.`createDate` desc limit ";
+        querySql = querySql + "order by `check_record`.`updateDate` desc limit ";
         while (whileFlag) {
             String sql = querySql + pageNo * pageSize + ", " + pageSize;
             log.info("<=====================sql语句==============================>");
@@ -447,19 +442,18 @@ public class SiLuService {
                 "INNER JOIN ythg_ods.dwd_sec_hidden_check_mission AS check_mission ON check_record.checkTaskId = check_mission.`id` \n" +
                 "INNER JOIN ythg_ods.dwd_sec_security_risk_control_measures AS control_measure ON check_mission.riskMeasureId = control_measure.`id` \n" +
                 "INNER JOIN ythg_ods.dwd_sec_security_risk_events events ON control_measure.riskEventId = events.`id`\n" +
-                "INNER JOIN ythg_ods.dwd_sec_security_risk_unit AS unit ON events.riskUnitId = unit.`id`  \n" +
-                "where danger_info.deleted = '0' and check_record.deleted = '0' AND check_mission.deleted = '0' AND control_measure.deleted = '0' AND events.deleted = '0' AND unit.deleted = '0' ";
+                "INNER JOIN ythg_ods.dwd_sec_security_risk_unit AS unit ON events.riskUnitId = unit.`id` ";
         //String queryLatestDateTimeSql = "select createDate from ythg_ods.dwd_sec_hidden_danger_info order by createDate desc limit 1";
         String path = "/sec_hidden_danger_info";
 
         int pageNo = 0;
         int pageSize = 20;
         if (!"1".equals(firstFlag)) {
-            querySql = querySql + "and `danger_info`.`createDate` > '" + DateTimeUtil.getHoursBefore(3) + "' ";
+            querySql = querySql + "where date_format(`danger_info`.`updateDate`,'%Y-%m-%d %H-%i-%s') > '" + DateTimeUtil.getHoursBefore(2) + "' ";
         } else {
             log.warn("首次更新数据库中······");
         }
-        querySql = querySql + "order by `danger_info`.`createDate` desc limit ";
+        querySql = querySql + "order by `danger_info`.`updateDate` desc limit ";
         while (whileFlag) {
             String sql = querySql + pageNo * pageSize + ", " + pageSize;
             log.info("<=====================sql语句==============================>");
@@ -514,18 +508,21 @@ public class SiLuService {
         responseData.setMsg("更新失败");
         ResponseObject responseObject = new ResponseObject();
         responseObject.setData(responseData);
-        String querySql = "select `maintenance_record`.`id`, `maintenance_record`.`companyCode`, `maintenance_record`.`hazardCode`, `maintenance_record`.`riskUnitId`, `maintenance_record`.`stopStartTime`, `maintenance_record`.`stopEndTime`, `maintenance_record`.`stopReason`, `maintenance_record`.`deleted`, `maintenance_record`.`createDate`, `maintenance_record`.`createBy`, `maintenance_record`.`updateDate`, `maintenance_record`.`updateBy` from ythg_ods.dwd_sec_deactivated_maintenance_record maintenance_record inner join ythg_ods.dwd_sec_security_risk_unit unit on maintenance_record.riskUnitId = unit.`id` where maintenance_record.deleted = '0' and unit.deleted = '0' ";
+        String querySql = "select `maintenance_record`.`id`, `maintenance_record`.`companyCode`, `maintenance_record`.`hazardCode`, `maintenance_record`.`riskUnitId`, `maintenance_record`.`stopStartTime`, `maintenance_record`.`stopEndTime`, `maintenance_record`.`stopReason`, `maintenance_record`.`deleted`, `maintenance_record`.`createDate`, `maintenance_record`.`createBy`, `maintenance_record`.`updateDate`, `maintenance_record`.`updateBy` " +
+                "from ythg_ods.dwd_sec_deactivated_maintenance_record maintenance_record " +
+                "inner join ythg_ods.dwd_sec_security_risk_unit unit " +
+                "on maintenance_record.riskUnitId = unit.`id` ";
         //String queryLatestDateTimeSql = "select createDate from ythg_ods.dwd_sec_deactivated_maintenance_record order by createDate desc limit 1";
         String path = "/sec_deactivated_maintenance_record";
 
         int pageNo = 0;
         int pageSize = 20;
         if (!"1".equals(firstFlag)) {
-            querySql = querySql + "and `maintenance_record`.`createDate` > '" + DateTimeUtil.getHoursBefore(3) + "' ";
+            querySql = querySql + "where date_format(`maintenance_record`.`updateDate`,'%Y-%m-%d %H-%i-%s') > '" + DateTimeUtil.getHoursBefore(2) + "' ";
         } else {
             log.warn("首次更新数据库中······");
         }
-        querySql = querySql + "order by `maintenance_record`.`createDate` desc limit ";
+        querySql = querySql + "order by `maintenance_record`.`updateDate` desc limit ";
         while (whileFlag) {
             String sql = querySql + pageNo * pageSize + ", " + pageSize;
             log.info("<=====================sql语句==============================>");
