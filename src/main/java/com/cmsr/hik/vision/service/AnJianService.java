@@ -67,7 +67,7 @@ public class AnJianService {
                 String path = "/video/v1.0.0/violation";
                 Map<String, String> headers = new HashMap<>();
                 String token = getToken();
-                log.info("token:" + token);
+                //log.info("token:" + token);
                 headers.put("Content-Type", "application/json");
                 headers.put("User-Agent", "google");
                 headers.put("authorization", token);
@@ -76,8 +76,8 @@ public class AnJianService {
                 String jsonBody = toJsonBody();
                 String url = httpConfig.getUrl() + path;
                 log.info("url：" + url);
-                log.info("header：" + headers.toString());
-                log.info("更新违规列表jsonBody：" + jsonBody);
+                //log.info("header：" + headers.toString());
+                //log.info("更新违规列表jsonBody：" + jsonBody);
                 String response = HttpClientUtil.sendPostRequest(url, headers, jsonBody);
                 JSONObject res = JSONObject.parseObject(response);
                 Integer pages = res.getJSONObject("data").getJSONObject("data").getInteger("pages");
@@ -93,8 +93,8 @@ public class AnJianService {
                     });
                     //入库
                     if (!inserts.isEmpty()) {
-                        log.info("inserts:" + inserts.size());
-                        log.info("inserts:" + inserts.get(0).toString());
+                        //log.info("inserts:" + inserts.size());
+                        //log.info("inserts:" + inserts.get(0).toString());
                         String sql="insert into anjian.violation_info " +
                                 "(`id`,`metadata`,`superUserId`,`message`,`userName`,`handleUserId`,`recordFps`,`picPath`,`cameraId`,`violationName`,`addressName`,`recognitionName`,`recordPath`,`cameraName`,`status`,`updatedAt`,`createdAt`,`recordDuration`) VALUES " +
                                 "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -129,7 +129,7 @@ public class AnJianService {
                         inserts.clear();
                     }
                     if (!updates.isEmpty()) {
-                        log.info("updates:" + updates.size());
+                        //log.info("updates:" + updates.size());
                         String sql="update anjian.violation_info " +
                                 "set `metadata`=?,`superUserId`=?,`message`=?,`userName`=?,`handleUserId`=?,`recordFps`=?,`picPath`=?,`cameraId`=?,`violationName`=?,`addressName`=?,`recognitionName`=?,`recordPath`=?,`cameraName`=?,`status`=?,`updatedAt`=?,`createdAt`=?,`recordDuration`=? " +
                                 "where `id`=?";
@@ -202,7 +202,7 @@ public class AnJianService {
                 String path = "/video/v1.0.0/violation";
                 Map<String, String> headers = new HashMap<>();
                 String token = getToken();
-                log.info("token:" + token);
+                //log.info("token:" + token);
                 headers.put("Content-Type", "application/json");
                 headers.put("User-Agent", "google");
                 headers.put("authorization", token);
@@ -212,8 +212,8 @@ public class AnJianService {
                 String jsonBody = toJsonBody();
                 String url = httpConfig.getUrl() + path;
                 log.info("url：" + url);
-                log.info("header：" + headers.toString());
-                log.info("更新违规状态列表jsonBody：" + jsonBody.replace("\"1,2\"", "[1,2]"));
+                //log.info("header：" + headers.toString());
+                //log.info("更新违规状态列表jsonBody：" + jsonBody.replace("\"1,2\"", "[1,2]"));
                 String response = HttpClientUtil.sendPostRequest(url, headers, jsonBody.replace("\"1,2\"", "[1,2]"));
                 JSONObject res = JSONObject.parseObject(response);
                 Integer pages = res.getJSONObject("data").getJSONObject("data").getInteger("pages");
@@ -227,7 +227,7 @@ public class AnJianService {
                     });
                     //入库
                     if (!updates.isEmpty()) {
-                        log.info("updates:" + updates.size());
+                        //log.info("updates:" + updates.size());
                         String sql="update anjian.violation_info " +
                                 "set `metadata`=?,`superUserId`=?,`message`=?,`userName`=?,`handleUserId`=?,`recordFps`=?,`picPath`=?,`cameraId`=?,`violationName`=?,`addressName`=?,`recognitionName`=?,`recordPath`=?,`cameraName`=?,`status`=?,`updatedAt`=?,`createdAt`=?,`recordDuration`=? " +
                                 "where `id`=?";
@@ -300,7 +300,7 @@ public class AnJianService {
                 String path = "/video/v1.0.0/camera/page";
                 Map<String, String> headers = new HashMap<>();
                 String token = getToken();
-                log.info("token:" + token);
+                //log.info("token:" + token);
                 headers.put("Content-Type", "application/json");
                 headers.put("User-Agent", "google");
                 headers.put("authorization", token);
@@ -311,8 +311,8 @@ public class AnJianService {
                 String jsonBody = toJsonBody();
                 String url = httpConfig.getUrl() + path;
                 log.info("url：" + url);
-                log.info("header：" + headers.toString());
-                log.info("jsonBody：" + jsonBody);
+                //log.info("header：" + headers.toString());
+                //log.info("jsonBody：" + jsonBody);
                 String response = HttpClientUtil.sendPostRequest(url, headers, jsonBody);
                 JSONObject res = JSONObject.parseObject(response);
                 Integer pages = res.getJSONObject("data").getJSONObject("data").getInteger("pages");
@@ -328,7 +328,7 @@ public class AnJianService {
                     });
                     //入库
                     if (!inserts.isEmpty()) {
-                        log.info("inserts:" + inserts.size());
+                        //log.info("inserts:" + inserts.size());
                         String sql="insert into anjian.camera_info " +
                                 "(`id`,`picturePath`,`deviceIp`,`isCanControl`,`groupsId`,`devicePwd`,`deviceChannelList`,`englishName`,`groupsName`,`urlDirect`,`recognitions`,`type`,`roi`,`deviceId`,`deviceUser`,`flv`,`hls`,`addressId`,`catalogId`,`thirdDeviceId`,`thirdChannelId`,`rtspPort`,`name`,`updatedTime`,`createdTime`,`addressName`,`tenantId`,`devicePort`,`fence`,`status`) VALUES " +
                                 "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -375,7 +375,7 @@ public class AnJianService {
                         inserts.clear();
                     }
                     if (!updates.isEmpty()) {
-                        log.info("updates:" + updates.size());
+                        //log.info("updates:" + updates.size());
                         String sql="update anjian.camera_info " +
                                 "set `status`=?,`picturePath`=?,`deviceIp`=?,`isCanControl`=?,`groupsId`=?,`devicePwd`=?,`deviceChannelList`=?,`englishName`=?,`groupsName`=?,`urlDirect`=?,`recognitions`=?,`type`=?,`roi`=?,`deviceId`=?,`deviceUser`=?,`flv`=?,`hls`=?,`addressId`=?,`catalogId`=?,`thirdDeviceId`=?,`thirdChannelId`=?,`rtspPort`=?,`name`=?,`updatedTime`=?,`createdTime`=?,`addressName`=?,`tenantId`=?,`devicePort`=?,`fence`=? " +
                                 "where `id`=?";

@@ -77,9 +77,9 @@ public class HikVisionService {
 
     private String doPost(String path) {
         try {
-            log.info("config:" + config.toString());
-            log.info("path:" + path);
-            log.info("body:" + toJsonBody());
+            //log.info("config:" + config.toString());
+            //log.info("path:" + path);
+            //log.info("body:" + toJsonBody());
             String response = ArtemisHttpUtil.doPostStringArtemis(
                     config.getConfig(),
                     toPathMap(path),
@@ -88,7 +88,7 @@ public class HikVisionService {
                     null,
                     MediaType.APPLICATION_JSON_VALUE
             );
-            log.info("Get Response: {}", response);
+            //log.info("Get Response: {}", response);
             return response;
         } catch (Exception e) {
             log.error("Error occurred, while requesting hik-vision: {}" + e.getMessage() + "CausedBy://n" + e.getCause());
@@ -143,7 +143,7 @@ public class HikVisionService {
         //List<String> dateTimeList = new ArrayList<>();
         dateTimeList.add("2024-01-01 00:00:00");
         if (!dateTimeList.isEmpty()) {
-            log.info("数据库中最近更新时间：" + dateTimeList.get(0));
+            //log.info("数据库中最近更新时间：" + dateTimeList.get(0));
             queryParams.put("startTime", DateTimeUtil.dateFormat(dateTimeList.get(0)));
         } else {
             queryParams.put("startTime", "2024-01-01T00:00:00+08:00");

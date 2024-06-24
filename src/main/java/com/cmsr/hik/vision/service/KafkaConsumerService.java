@@ -50,7 +50,7 @@ public class KafkaConsumerService {
             try {
                 List<SecEmployeeRealLocationDto> result = new ArrayList<>();
                 SecEmployeeRealLocationRecord realLocationRecord = objectMapper.readValue(record.toString().replace("[{", "{").replace("}]", "}"), SecEmployeeRealLocationRecord.class);
-                log.error("解析Kafka成功");
+                //log.info("解析Kafka成功");
                 realLocationRecord.getData().forEach(datas -> {
                     SecEmployeeRealLocationDto dto = new SecEmployeeRealLocationDto();
                     dto.setImei(datas.getCard_no());
@@ -83,7 +83,7 @@ public class KafkaConsumerService {
             try {
                 List<SecEmployeeAlarmDataDto> result = new ArrayList<>();
                 SecEmployeeAlarmDataRecord alarmDataRecord = objectMapper.readValue(record.toString().replace("[{", "{").replace("}]", "}"), SecEmployeeAlarmDataRecord.class);
-                log.error("解析Kafka成功");
+                //log.info("解析Kafka成功");
                 alarmDataRecord.getData().forEach(datas -> {
                     SecEmployeeAlarmDataDto dto = new SecEmployeeAlarmDataDto();
                     dto.setThirdId(datas.getId());
@@ -127,10 +127,10 @@ public class KafkaConsumerService {
                     headers.put("Content-Type", "application/json");
                     String jsonBody = toJsonBody();
                     String url = httpConfig.getUrl() + path;
-                    log.info("url：" + url);
+                    //log.info("url：" + url);
                     String response = HttpClientUtil.sendPostRequest(url, headers, jsonBody);
                     responseObject = JSON.to(ResponseObject.class, response);
-                    log.info(response);
+                    ////log.info(response);
                 } catch (Exception e) {
                     log.info("请求错误：" + e);
                 }
@@ -153,8 +153,8 @@ public class KafkaConsumerService {
         String path = "/sec_employee_alarm_data";
         try{
             if (!list.isEmpty()) {
-                log.info("<====================数据库查到的数据===========================>");
-                log.info("list.size:" + list.size());
+                //log.info("<====================数据库查到的数据===========================>");
+                //log.info("list.size:" + list.size());
                 //组装请求
                 params.put("datas", AESUtils.encrypt(JSON.toJSONString(list)));
                 //调用API发送数据
@@ -167,7 +167,7 @@ public class KafkaConsumerService {
 
                     String response = HttpClientUtil.sendPostRequest(url, headers, jsonBody);
                     responseObject = JSON.to(ResponseObject.class, response);
-                    log.info(response);
+                    ////log.info(response);
                 } catch (Exception e) {
                     log.info("请求错误：" + e);
                 }

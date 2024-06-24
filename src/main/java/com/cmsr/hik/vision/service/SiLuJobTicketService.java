@@ -71,14 +71,14 @@ public class SiLuJobTicketService {
         querySql = querySql + "order by `createDate` desc limit ";
         while (whileFlag) {
             String sql = querySql + pageNo * pageSize + ", " + pageSize;
-            log.info("<=====================sql语句==============================>");
-            log.info(sql);
+            ////log.info("<=====================sql语句==============================>");
+            ////log.info(sql);
             try{
                 List<SecSpecialJobTicketFireDto> list = siLuDorisTemplate.query(sql, new BeanPropertyRowMapper<>(SecSpecialJobTicketFireDto.class));
                 if (!list.isEmpty()) {
-                    log.info("<====================数据库查到的数据===========================>");
-                    log.info("list.size:" + list.size());
-                    list.forEach(l -> log.info(l.getId()));
+                    //log.info("<====================数据库查到的数据===========================>");
+                    //log.info("list.size:" + list.size());
+                    //list.forEach(l -> log.info(l.getId()));
                     //log.info("list:" + JSON.toJSONString(list));
                     //组装请求
                     params.put("datas", AESUtils.encrypt(JSON.toJSONString(list)));
@@ -96,9 +96,9 @@ public class SiLuJobTicketService {
 
                         String response = HttpClientUtil.sendPostRequest(url, headers, jsonBody);
                         responseObject = JSON.to(ResponseObject.class, response);
-                        log.info(response);
+                        ////log.info(response);
                         /*if ("500".equals(responseObject.getData().getCode())) {
-                            log.info(response);
+                            //log.info(response);
                             whileFlag = false;
                         }*/
                     } catch (Exception e) {
@@ -144,14 +144,14 @@ public class SiLuJobTicketService {
         querySql = querySql + "order by `createDate` desc limit ";
         while (whileFlag) {
             String sql = querySql + pageNo * pageSize + ", " + pageSize;
-            log.info("<=====================sql语句==============================>");
-            log.info(sql);
+            ////log.info("<=====================sql语句==============================>");
+            ////log.info(sql);
             try{
                 List<SecSpecialJobTicketSpaceDto> list = siLuDorisTemplate.query(sql, new BeanPropertyRowMapper<>(SecSpecialJobTicketSpaceDto.class));
                 if (!list.isEmpty()) {
-                    log.info("<====================数据库查到的数据===========================>");
-                    log.info("list.size:" + list.size());
-                    list.forEach(l -> log.info(l.getId()));
+                    //log.info("<====================数据库查到的数据===========================>");
+                    //log.info("list.size:" + list.size());
+                    //list.forEach(l -> log.info(l.getId()));
                     //log.info("list:" + JSON.toJSONString(list));
                     //组装请求
                     params.put("datas", AESUtils.encrypt(JSON.toJSONString(list)));
@@ -169,9 +169,9 @@ public class SiLuJobTicketService {
 
                         String response = HttpClientUtil.sendPostRequest(url, headers, jsonBody);
                         responseObject = JSON.to(ResponseObject.class, response);
-                        log.info(response);
+                        ////log.info(response);
                         /*if ("500".equals(responseObject.getData().getCode())) {
-                            log.info(response);
+                            //log.info(response);
                             whileFlag = false;
                         }*/
                     } catch (Exception e) {
@@ -217,14 +217,14 @@ public class SiLuJobTicketService {
         querySql = querySql + "order by `createDate` desc limit ";
         while (whileFlag) {
             String sql = querySql + pageNo * pageSize + ", " + pageSize;
-            log.info("<=====================sql语句==============================>");
-            log.info(sql);
+            ////log.info("<=====================sql语句==============================>");
+            ////log.info(sql);
             try{
                 List<SecSpecialJobTicketBlindplateDto> list = siLuDorisTemplate.query(sql, new BeanPropertyRowMapper<>(SecSpecialJobTicketBlindplateDto.class));
                 if (!list.isEmpty()) {
-                    log.info("<====================数据库查到的数据===========================>");
-                    log.info("list.size:" + list.size());
-                    list.forEach(l -> log.info(l.getId()));
+                    //log.info("<====================数据库查到的数据===========================>");
+                    //log.info("list.size:" + list.size());
+                    //list.forEach(l -> log.info(l.getId()));
                     //log.info("list:" + JSON.toJSONString(list));
                     //组装请求
                     params.put("datas", AESUtils.encrypt(JSON.toJSONString(list)));
@@ -242,9 +242,9 @@ public class SiLuJobTicketService {
 
                         String response = HttpClientUtil.sendPostRequest(url, headers, jsonBody);
                         responseObject = JSON.to(ResponseObject.class, response);
-                        log.info(response);
+                        //log.info(response);
                         /*if ("500".equals(responseObject.getData().getCode())) {
-                            log.info(response);
+                            //log.info(response);
                             whileFlag = false;
                         }*/
                     } catch (Exception e) {
@@ -290,14 +290,14 @@ public class SiLuJobTicketService {
         querySql = querySql + "order by `createDate` desc limit ";
         while (whileFlag) {
             String sql = querySql + pageNo * pageSize + ", " + pageSize;
-            log.info("<=====================sql语句==============================>");
-            log.info(sql);
+            //log.info("<=====================sql语句==============================>");
+            //log.info(sql);
             try{
                 List<SecSpecialJobTicketHighDto> list = siLuDorisTemplate.query(sql, new BeanPropertyRowMapper<>(SecSpecialJobTicketHighDto.class));
                 if (!list.isEmpty()) {
-                    log.info("<====================数据库查到的数据===========================>");
-                    log.info("list.size:" + list.size());
-                    list.forEach(l -> log.info(l.getId()));
+                    //log.info("<====================数据库查到的数据===========================>");
+                    //log.info("list.size:" + list.size());
+                    //list.forEach(l -> log.info(l.getId()));
                     //log.info("list:" + JSON.toJSONString(list));
                     //组装请求
                     params.put("datas", AESUtils.encrypt(JSON.toJSONString(list)));
@@ -315,9 +315,9 @@ public class SiLuJobTicketService {
 
                         String response = HttpClientUtil.sendPostRequest(url, headers, jsonBody);
                         responseObject = JSON.to(ResponseObject.class, response);
-                        log.info(response);
+                        //log.info(response);
                         /*if ("500".equals(responseObject.getData().getCode())) {
-                            log.info(response);
+                            //log.info(response);
                             whileFlag = false;
                         }*/
                     } catch (Exception e) {
@@ -363,8 +363,8 @@ public class SiLuJobTicketService {
         querySql = querySql + "order by `createDate` desc limit ";
         while (whileFlag) {
             String sql = querySql + pageNo * pageSize + ", " + pageSize;
-            log.info("<=====================sql语句==============================>");
-            log.info(sql);
+            //log.info("<=====================sql语句==============================>");
+            //log.info(sql);
             try{
                 List<SecSpecialJobTicketHoisingDto> list = siLuDorisTemplate.query(sql, new BeanPropertyRowMapper<>(SecSpecialJobTicketHoisingDto.class));
                 if (!list.isEmpty()) {
@@ -388,9 +388,9 @@ public class SiLuJobTicketService {
 
                         String response = HttpClientUtil.sendPostRequest(url, headers, jsonBody);
                         responseObject = JSON.to(ResponseObject.class, response);
-                        log.info(response);
+                        //log.info(response);
                         /*if ("500".equals(responseObject.getData().getCode())) {
-                            log.info(response);
+                            //log.info(response);
                             whileFlag = false;
                         }*/
                     } catch (Exception e) {
@@ -436,14 +436,14 @@ public class SiLuJobTicketService {
         querySql = querySql + "order by `createDate` desc limit ";
         while (whileFlag) {
             String sql = querySql + pageNo * pageSize + ", " + pageSize;
-            log.info("<=====================sql语句==============================>");
-            log.info(sql);
+            //log.info("<=====================sql语句==============================>");
+            //log.info(sql);
             try{
                 List<SecSpecialJobTicketPowerDto> list = siLuDorisTemplate.query(sql, new BeanPropertyRowMapper<>(SecSpecialJobTicketPowerDto.class));
                 if (!list.isEmpty()) {
-                    log.info("<====================数据库查到的数据===========================>");
-                    log.info("list.size:" + list.size());
-                    list.forEach(l -> log.info(l.getId()));
+                    //log.info("<====================数据库查到的数据===========================>");
+                    //log.info("list.size:" + list.size());
+                    //list.forEach(l -> log.info(l.getId()));
                     //log.info("list:" + JSON.toJSONString(list));
                     //组装请求
                     params.put("datas", AESUtils.encrypt(JSON.toJSONString(list)));
@@ -461,9 +461,9 @@ public class SiLuJobTicketService {
 
                         String response = HttpClientUtil.sendPostRequest(url, headers, jsonBody);
                         responseObject = JSON.to(ResponseObject.class, response);
-                        log.info(response);
+                        //log.info(response);
                         /*if ("500".equals(responseObject.getData().getCode())) {
-                            log.info(response);
+                            //log.info(response);
                             whileFlag = false;
                         }*/
                     } catch (Exception e) {
@@ -509,8 +509,8 @@ public class SiLuJobTicketService {
         querySql = querySql + "order by `createDate` desc limit ";
         while (whileFlag) {
             String sql = querySql + pageNo * pageSize + ", " + pageSize;
-            log.info("<=====================sql语句==============================>");
-            log.info(sql);
+            //log.info("<=====================sql语句==============================>");
+            //log.info(sql);
             try{
                 List<SecSpecialJobTicketSoilDto> list = siLuDorisTemplate.query(sql, new BeanPropertyRowMapper<>(SecSpecialJobTicketSoilDto.class));
                 if (!list.isEmpty()) {
@@ -534,9 +534,9 @@ public class SiLuJobTicketService {
 
                         String response = HttpClientUtil.sendPostRequest(url, headers, jsonBody);
                         responseObject = JSON.to(ResponseObject.class, response);
-                        log.info(response);
+                        //log.info(response);
                         /*if ("500".equals(responseObject.getData().getCode())) {
-                            log.info(response);
+                            //log.info(response);
                             whileFlag = false;
                         }*/
                     } catch (Exception e) {
@@ -582,8 +582,8 @@ public class SiLuJobTicketService {
         querySql = querySql + "order by `createDate` desc limit ";
         while (whileFlag) {
             String sql = querySql + pageNo * pageSize + ", " + pageSize;
-            log.info("<=====================sql语句==============================>");
-            log.info(sql);
+            //log.info("<=====================sql语句==============================>");
+            //log.info(sql);
             try{
                 List<SecSpecialJobTicketApprovalDto> list = siLuDorisTemplate.query(sql, new BeanPropertyRowMapper<>(SecSpecialJobTicketApprovalDto.class));
                 if (!list.isEmpty()) {
@@ -607,9 +607,9 @@ public class SiLuJobTicketService {
 
                         String response = HttpClientUtil.sendPostRequest(url, headers, jsonBody);
                         responseObject = JSON.to(ResponseObject.class, response);
-                        log.info(response);
+                        //log.info(response);
                         /*if ("500".equals(responseObject.getData().getCode())) {
-                            log.info(response);
+                            //log.info(response);
                             whileFlag = false;
                         }*/
                     } catch (Exception e) {
@@ -655,8 +655,8 @@ public class SiLuJobTicketService {
         querySql = querySql + "order by `createDate` desc limit ";
         while (whileFlag) {
             String sql = querySql + pageNo * pageSize + ", " + pageSize;
-            log.info("<=====================sql语句==============================>");
-            log.info(sql);
+            //log.info("<=====================sql语句==============================>");
+            //log.info(sql);
             try{
                 List<SecSpecialJobTicketPourbackDto> list = siLuDorisTemplate.query(sql, new BeanPropertyRowMapper<>(SecSpecialJobTicketPourbackDto.class));
                 if (!list.isEmpty()) {
@@ -680,9 +680,9 @@ public class SiLuJobTicketService {
 
                         String response = HttpClientUtil.sendPostRequest(url, headers, jsonBody);
                         responseObject = JSON.to(ResponseObject.class, response);
-                        log.info(response);
+                        //log.info(response);
                         /*if ("500".equals(responseObject.getData().getCode())) {
-                            log.info(response);
+                            //log.info(response);
                             whileFlag = false;
                         }*/
                     } catch (Exception e) {
@@ -728,8 +728,8 @@ public class SiLuJobTicketService {
         querySql = querySql + "order by `createDate` desc limit ";
         while (whileFlag) {
             String sql = querySql + pageNo * pageSize + ", " + pageSize;
-            log.info("<=====================sql语句==============================>");
-            log.info(sql);
+            //log.info("<=====================sql语句==============================>");
+            //log.info(sql);
             try{
                 List<SecSpecialJobTicketPourDto> list = siLuDorisTemplate.query(sql, new BeanPropertyRowMapper<>(SecSpecialJobTicketPourDto.class));
                 if (!list.isEmpty()) {
@@ -753,9 +753,9 @@ public class SiLuJobTicketService {
 
                         String response = HttpClientUtil.sendPostRequest(url, headers, jsonBody);
                         responseObject = JSON.to(ResponseObject.class, response);
-                        log.info(response);
+                        //log.info(response);
                         /*if ("500".equals(responseObject.getData().getCode())) {
-                            log.info(response);
+                            //log.info(response);
                             whileFlag = false;
                         }*/
                     } catch (Exception e) {
@@ -801,8 +801,8 @@ public class SiLuJobTicketService {
         querySql = querySql + "order by `createDate` desc limit ";
         while (whileFlag) {
             String sql = querySql + pageNo * pageSize + ", " + pageSize;
-            log.info("<=====================sql语句==============================>");
-            log.info(sql);
+            //log.info("<=====================sql语句==============================>");
+            //log.info(sql);
             try{
                 List<SecSpecialJobTicketWaterDto> list = siLuDorisTemplate.query(sql, new BeanPropertyRowMapper<>(SecSpecialJobTicketWaterDto.class));
                 if (!list.isEmpty()) {
@@ -826,9 +826,9 @@ public class SiLuJobTicketService {
 
                         String response = HttpClientUtil.sendPostRequest(url, headers, jsonBody);
                         responseObject = JSON.to(ResponseObject.class, response);
-                        log.info(response);
+                        //log.info(response);
                         /*if ("500".equals(responseObject.getData().getCode())) {
-                            log.info(response);
+                            //log.info(response);
                             whileFlag = false;
                         }*/
                     } catch (Exception e) {
@@ -874,8 +874,8 @@ public class SiLuJobTicketService {
         querySql = querySql + "order by `createDate` desc limit ";
         while (whileFlag) {
             String sql = querySql + pageNo * pageSize + ", " + pageSize;
-            log.info("<=====================sql语句==============================>");
-            log.info(sql);
+            //log.info("<=====================sql语句==============================>");
+            //log.info(sql);
             try{
                 List<SecSpecialJobTicketMaintenanceDto> list = siLuDorisTemplate.query(sql, new BeanPropertyRowMapper<>(SecSpecialJobTicketMaintenanceDto.class));
                 if (!list.isEmpty()) {
@@ -897,9 +897,9 @@ public class SiLuJobTicketService {
 
                         String response = HttpClientUtil.sendPostRequest(url, headers, jsonBody);
                         responseObject = JSON.to(ResponseObject.class, response);
-                        log.info(response);
+                        //log.info(response);
                         /*if ("500".equals(responseObject.getData().getCode())) {
-                            log.info(response);
+                            //log.info(response);
                             whileFlag = false;
                         }*/
                     } catch (Exception e) {
@@ -944,8 +944,8 @@ public class SiLuJobTicketService {
         querySql = querySql + "order by `createDate` desc limit ";
         while (whileFlag) {
             String sql = querySql + pageNo * pageSize + ", " + pageSize;
-            log.info("<=====================sql语句==============================>");
-            log.info(sql);
+            //log.info("<=====================sql语句==============================>");
+            //log.info(sql);
             try{
                 List<SecSpecialJobTicketApprovalDto> list = siLuDorisTemplate.query(sql, new BeanPropertyRowMapper<>(SecSpecialJobTicketApprovalDto.class));
                 if (!list.isEmpty()) {
@@ -969,9 +969,9 @@ public class SiLuJobTicketService {
 
                         String response = HttpClientUtil.sendPostRequest(url, headers, jsonBody);
                         responseObject = JSON.to(ResponseObject.class, response);
-                        log.info(response);
+                        //log.info(response);
                         /*if ("500".equals(responseObject.getData().getCode())) {
-                            log.info(response);
+                            //log.info(response);
                             whileFlag = false;
                         }*/
                     } catch (Exception e) {
@@ -1016,8 +1016,8 @@ public class SiLuJobTicketService {
         querySql = querySql + "order by `createDate` desc limit ";
         while (whileFlag) {
             String sql = querySql + pageNo * pageSize + ", " + pageSize;
-            log.info("<=====================sql语句==============================>");
-            log.info(sql);
+            //log.info("<=====================sql语句==============================>");
+            //log.info(sql);
             try{
                 List<SecSpecialJobTicketSafetyMeasuresDto> list = siLuDorisTemplate.query(sql, new BeanPropertyRowMapper<>(SecSpecialJobTicketSafetyMeasuresDto.class));
                 if (!list.isEmpty()) {
@@ -1041,9 +1041,9 @@ public class SiLuJobTicketService {
 
                         String response = HttpClientUtil.sendPostRequest(url, headers, jsonBody);
                         responseObject = JSON.to(ResponseObject.class, response);
-                        log.info(response);
+                        //log.info(response);
                         /*if ("500".equals(responseObject.getData().getCode())) {
-                            log.info(response);
+                            //log.info(response);
                             whileFlag = false;
                         }*/
                     } catch (Exception e) {
@@ -1088,8 +1088,8 @@ public class SiLuJobTicketService {
         querySql = querySql + "order by `createDate` desc limit ";
         while (whileFlag) {
             String sql = querySql + pageNo * pageSize + ", " + pageSize;
-            log.info("<=====================sql语句==============================>");
-            log.info(sql);
+            //log.info("<=====================sql语句==============================>");
+            //log.info(sql);
             try{
                 List<SecSpecialJobTicketGasAnalysisDto> list = siLuDorisTemplate.query(sql, new BeanPropertyRowMapper<>(SecSpecialJobTicketGasAnalysisDto.class));
                 if (!list.isEmpty()) {
@@ -1113,9 +1113,9 @@ public class SiLuJobTicketService {
 
                         String response = HttpClientUtil.sendPostRequest(url, headers, jsonBody);
                         responseObject = JSON.to(ResponseObject.class, response);
-                        log.info(response);
+                        //log.info(response);
                         /*if ("500".equals(responseObject.getData().getCode())) {
-                            log.info(response);
+                            //log.info(response);
                             whileFlag = false;
                         }*/
                     } catch (Exception e) {
@@ -1194,8 +1194,8 @@ public class SiLuJobTicketService {
                             case "01":
                                 sql = "select `id`, `companyCode`, `ticketNo`, `ticketStatus`, `issueTime`, `planStartTime`, `planEndTime`, `startTime`, `endTime`, `ticketPosition`, `workAreaCode`, `ticketContent`, `checkedTime`, `checkedPerson`, `longitude`, `latitude`, `supervisorName`, `workerName`, `workDeptment`, `isContractorWork`, `contractorOrg`, `isAssociation`, `associationTicket`, `riskIdentification`, `disclosePerson`, `acceptPerson`, `tickerResponsName`, `majorPersonMobile`, `isChanged`, `changedCause`, `isCancelled`, `cancelledCause`, `mobileDeviceCode`, `workTicketAtt`, `safeDiscloseAtt`, `countersignImg`, `gasAnalysis`, `commitmentLetter`, `fireLocation`, `fireLevel`, `firePerson`, `fireStyle`, `deleted`, `createDate`, `createBy`, `updateDate`, `updateBy`, `ticket_level` " +
                                         "from ythg_ods.dwd_" + tableName + " where deleted = '0' and `id` = '" + fileInfo.getId() + "'";
-                                log.info("<=====================sql语句==============================>");
-                                log.info(sql);
+                                //log.info("<=====================sql语句==============================>");
+                                //log.info(sql);
                                 List<SecSpecialJobTicketFireDto> secSpecialJobTicketFireDtos = siLuDorisTemplate.query(sql, new BeanPropertyRowMapper<>(SecSpecialJobTicketFireDto.class));
                                 if (!secSpecialJobTicketFireDtos.isEmpty()) {
                                     SecSpecialJobTicketFireDto secSpecialJobTicketFireDto = secSpecialJobTicketFireDtos.get(0);
@@ -1209,8 +1209,8 @@ public class SiLuJobTicketService {
                             case "02":
                                 sql = "select `id`, `companyCode`, `ticketNo`, `ticketStatus`, `issueTime`, `planStartTime`, `planEndTime`, `startTime`, `endTime`, `ticketPosition`, `workAreaCode`, `ticketContent`, `checkedTime`, `checkedPerson`, `longitude`, `latitude`, `supervisorName`, `workerName`, `workDeptment`, `isContractorWork`, `contractorOrg`, `isAssociation`, `associationTicket`, `riskIdentification`, `disclosePerson`, `acceptPerson`, `tickerResponsName`, `majorPersonMobile`, `isChanged`, `changedCause`, `isCancelled`, `cancelledCause`, `mobileDeviceCode`, `workTicketAtt`, `safeDiscloseAtt`, `countersignImg`, `gasAnalysis`, `commitmentLetter`, `spaceName`, `spaceMedium`, `deleted`, `createDate`, `createBy`, `updateDate`, `updateBy`, `ticket_level` " +
                                         "from ythg_ods.dwd_" + tableName + " where deleted = '0' and `id` = '" + fileInfo.getId() + "'";
-                                log.info("<=====================sql语句==============================>");
-                                log.info(sql);
+                                //log.info("<=====================sql语句==============================>");
+                                //log.info(sql);
                                 List<SecSpecialJobTicketSpaceDto> secSpecialJobTicketSpaceDtos = siLuDorisTemplate.query(sql, new BeanPropertyRowMapper<>(SecSpecialJobTicketSpaceDto.class));
                                 if (!secSpecialJobTicketSpaceDtos.isEmpty()) {
                                     SecSpecialJobTicketSpaceDto secSpecialJobTicketSpaceDto = secSpecialJobTicketSpaceDtos.get(0);
@@ -1224,8 +1224,8 @@ public class SiLuJobTicketService {
                             case "03":
                                 sql = "select `id`, `companyCode`, `ticketNo`, `ticketStatus`, `issueTime`, `planStartTime`, `planEndTime`, `startTime`, `endTime`, `ticketPosition`, `workAreaCode`, `ticketContent`, `checkedTime`, `checkedPerson`, `longitude`, `latitude`, `supervisorName`, `workerName`, `workDeptment`, `isContractorWork`, `contractorOrg`, `isAssociation`, `associationTicket`, `riskIdentification`, `disclosePerson`, `acceptPerson`, `tickerResponsName`, `majorPersonMobile`, `isChanged`, `changedCause`, `isCancelled`, `cancelledCause`, `mobileDeviceCode`, `workTicketAtt`, `safeDiscloseAtt`, `countersignImg`, `commitmentLetter`, `blindPlateType`, `pipingName`, `pipingMedium`, `pipingTem`, `pipingPressure`, `plateMaterial`, `plateSpecifications`, `plateCode`, `plateImg`, `deleted`, `createDate`, `createBy`, `updateDate`, `updateBy`, `ticket_level` " +
                                         "from ythg_ods.dwd_" + tableName + " where deleted = '0' and `id` = '" + fileInfo.getId() + "'";
-                                log.info("<=====================sql语句==============================>");
-                                log.info(sql);
+                                //log.info("<=====================sql语句==============================>");
+                                //log.info(sql);
                                 List<SecSpecialJobTicketBlindplateDto> secSpecialJobTicketBlindplateDtos = siLuDorisTemplate.query(sql, new BeanPropertyRowMapper<>(SecSpecialJobTicketBlindplateDto.class));
                                 if (!secSpecialJobTicketBlindplateDtos.isEmpty()) {
                                     SecSpecialJobTicketBlindplateDto secSpecialJobTicketBlindplateDto = secSpecialJobTicketBlindplateDtos.get(0);
@@ -1239,8 +1239,8 @@ public class SiLuJobTicketService {
                             case "04":
                                 sql = "select `id`, `companyCode`, `ticketNo`, `ticketStatus`, `issueTime`, `planStartTime`, `planEndTime`, `startTime`, `endTime`, `ticketPosition`, `workAreaCode`, `ticketContent`, `checkedTime`, `checkedPerson`, `longitude`, `latitude`, `supervisorName`, `workerName`, `workDeptment`, `isContractorWork`, `contractorOrg`, `isAssociation`, `associationTicket`, `riskIdentification`, `disclosePerson`, `acceptPerson`, `tickerResponsName`, `majorPersonMobile`, `isChanged`, `changedCause`, `isCancelled`, `cancelledCause`, `mobileDeviceCode`, `workTicketAtt`, `safeDiscloseAtt`, `countersignImg`, `commitmentLetter`, `highLevel`, `highHeight`, `deleted`, `createDate`, `createBy`, `updateDate`, `updateBy`, `ticket_level` " +
                                         "from ythg_ods.dwd_" + tableName + " where deleted = '0' and `id` = '" + fileInfo.getId() + "'";
-                                log.info("<=====================sql语句==============================>");
-                                log.info(sql);
+                                //log.info("<=====================sql语句==============================>");
+                                //log.info(sql);
                                 List<SecSpecialJobTicketHighDto> secSpecialJobTicketHighDtos = siLuDorisTemplate.query(sql, new BeanPropertyRowMapper<>(SecSpecialJobTicketHighDto.class));
                                 if (!secSpecialJobTicketHighDtos.isEmpty()) {
                                     SecSpecialJobTicketHighDto secSpecialJobTicketHighDto = secSpecialJobTicketHighDtos.get(0);
@@ -1254,8 +1254,8 @@ public class SiLuJobTicketService {
                             case "05":
                                 sql = "select `id`, `companyCode`, `ticketNo`, `ticketStatus`, `issueTime`, `planStartTime`, `planEndTime`, `startTime`, `endTime`, `ticketPosition`, `workAreaCode`, `ticketContent`, `checkedTime`, `checkedPerson`, `longitude`, `latitude`, `supervisorName`, `workerName`, `workDeptment`, `isContractorWork`, `contractorOrg`, `isAssociation`, `associationTicket`, `riskIdentification`, `disclosePerson`, `acceptPerson`, `tickerResponsName`, `majorPersonMobile`, `isChanged`, `changedCause`, `isCancelled`, `cancelledCause`, `mobileDeviceCode`, `workTicketAtt`, `safeDiscloseAtt`, `countersignImg`, `commitmentLetter`, `hoistingLevel`, `hoistingLocation`, `spreaderName`, `suspendedName`, `sommer`, `commander`, `hoistingWeight`, `deleted`, `createDate`, `createBy`, `updateDate`, `updateBy`, `ticket_level` " +
                                         "from ythg_ods.dwd_" + tableName + " where deleted = '0' and `id` = '" + fileInfo.getId() + "'";
-                                log.info("<=====================sql语句==============================>");
-                                log.info(sql);
+                                //log.info("<=====================sql语句==============================>");
+                                //log.info(sql);
                                 List<SecSpecialJobTicketHoisingDto> secSpecialJobTicketHoisingDtos = siLuDorisTemplate.query(sql, new BeanPropertyRowMapper<>(SecSpecialJobTicketHoisingDto.class));
                                 if (!secSpecialJobTicketHoisingDtos.isEmpty()) {
                                     SecSpecialJobTicketHoisingDto secSpecialJobTicketHoisingDto = secSpecialJobTicketHoisingDtos.get(0);
@@ -1269,8 +1269,8 @@ public class SiLuJobTicketService {
                             case "06":
                                 sql = "select `id`, `companyCode`, `ticketNo`, `ticketStatus`, `issueTime`, `planStartTime`, `planEndTime`, `startTime`, `endTime`, `ticketPosition`, `workAreaCode`, `ticketContent`, `checkedTime`, `checkedPerson`, `longitude`, `latitude`, `supervisorName`, `workerName`, `workDeptment`, `isContractorWork`, `contractorOrg`, `isAssociation`, `associationTicket`, `riskIdentification`, `disclosePerson`, `acceptPerson`, `tickerResponsName`, `majorPersonMobile`, `isChanged`, `changedCause`, `isCancelled`, `cancelledCause`, `mobileDeviceCode`, `workTicketAtt`, `safeDiscloseAtt`, `countersignImg`, `gasAnalysis`, `commitmentLetter`, `powerStrategy`, `workVoltage`, `electricalEquipment`, `headCode`, `personCode`, `deleted`, `createDate`, `createBy`, `updateDate`, `updateBy`, `ticket_level` " +
                                         "from ythg_ods.dwd_" + tableName + " where deleted = '0' and `id` = '" + fileInfo.getId() + "'";
-                                log.info("<=====================sql语句==============================>");
-                                log.info(sql);
+                                //log.info("<=====================sql语句==============================>");
+                                //log.info(sql);
                                 List<SecSpecialJobTicketPowerDto> secSpecialJobTicketPowerDtos = siLuDorisTemplate.query(sql, new BeanPropertyRowMapper<>(SecSpecialJobTicketPowerDto.class));
                                 if (!secSpecialJobTicketPowerDtos.isEmpty()) {
                                     SecSpecialJobTicketPowerDto secSpecialJobTicketPowerDto = secSpecialJobTicketPowerDtos.get(0);
@@ -1284,8 +1284,8 @@ public class SiLuJobTicketService {
                             case "07":
                                 sql = "select `id`, `companyCode`, `ticketNo`, `ticketStatus`, `issueTime`, `planStartTime`, `planEndTime`, `startTime`, `endTime`, `ticketPosition`, `workAreaCode`, `ticketContent`, `checkedTime`, `checkedPerson`, `longitude`, `latitude`, `supervisorName`, `workerName`, `workDeptment`, `isContractorWork`, `contractorOrg`, `isAssociation`, `associationTicket`, `riskIdentification`, `disclosePerson`, `acceptPerson`, `tickerResponsName`, `majorPersonMobile`, `isChanged`, `changedCause`, `isCancelled`, `cancelledCause`, `mobileDeviceCode`, `workTicketAtt`, `safeDiscloseAtt`, `countersignImg`, `commitmentLetter`, `workImg`, `deleted`, `createDate`, `createBy`, `updateDate`, `updateBy`, `ticket_level` " +
                                         "from ythg_ods.dwd_" + tableName + " where deleted = '0' and `id` = '" + fileInfo.getId() + "'";
-                                log.info("<=====================sql语句==============================>");
-                                log.info(sql);
+                                //log.info("<=====================sql语句==============================>");
+                                //log.info(sql);
                                 List<SecSpecialJobTicketSoilDto> secSpecialJobTicketSoilDtos = siLuDorisTemplate.query(sql, new BeanPropertyRowMapper<>(SecSpecialJobTicketSoilDto.class));
                                 if (!secSpecialJobTicketSoilDtos.isEmpty()) {
                                     SecSpecialJobTicketSoilDto secSpecialJobTicketSoilDto = secSpecialJobTicketSoilDtos.get(0);
@@ -1299,8 +1299,8 @@ public class SiLuJobTicketService {
                             case "08":
                                 sql = "select `id`, `companyCode`, `ticketNo`, `ticketStatus`, `issueTime`, `planStartTime`, `planEndTime`, `startTime`, `endTime`, `ticketPosition`, `workAreaCode`, `ticketContent`, `checkedTime`, `checkedPerson`, `longitude`, `latitude`, `supervisorName`, `workerName`, `workDeptment`, `isContractorWork`, `contractorOrg`, `isAssociation`, `associationTicket`, `riskIdentification`, `disclosePerson`, `acceptPerson`, `tickerResponsName`, `majorPersonMobile`, `isChanged`, `changedCause`, `isCancelled`, `cancelledCause`, `mobileDeviceCode`, `workTicketAtt`, `safeDiscloseAtt`, `countersignImg`, `commitmentLetter`, `breakReason`, `involveUnit`, `breakImg`, `deleted`, `createDate`, `createBy`, `updateDate`, `updateBy`, `ticket_level` " +
                                         "from ythg_ods.dwd_" + tableName + " where deleted = '0' and `id` = '" + fileInfo.getId() + "'";
-                                log.info("<=====================sql语句==============================>");
-                                log.info(sql);
+                                //log.info("<=====================sql语句==============================>");
+                                //log.info(sql);
                                 List<SecSpecialJobTicketBreakDto> secSpecialJobTicketBreakDtos = siLuDorisTemplate.query(sql, new BeanPropertyRowMapper<>(SecSpecialJobTicketBreakDto.class));
                                 if (!secSpecialJobTicketBreakDtos.isEmpty()) {
                                     SecSpecialJobTicketBreakDto secSpecialJobTicketBreakDto = secSpecialJobTicketBreakDtos.get(0);
@@ -1314,8 +1314,8 @@ public class SiLuJobTicketService {
                             case "09":
                                 sql = "select `id`, `companyCode`, `ticketNo`, `ticketStatus`, `issueTime`, `planStartTime`, `planEndTime`, `startTime`, `endTime`, `ticketPosition`, `workAreaCode`, `ticketContent`, `checkedTime`, `checkedPerson`, `longitude`, `latitude`, `supervisorName`, `workerName`, `workDeptment`, `isContractorWork`, `contractorOrg`, `isAssociation`, `associationTicket`, `riskIdentification`, `disclosePerson`, `acceptPerson`, `tickerResponsName`, `majorPersonMobile`, `isChanged`, `changedCause`, `isCancelled`, `cancelledCause`, `mobileDeviceCode`, `workTicketAtt`, `safeDiscloseAtt`, `countersignImg`, `gasAnalysis`, `commitmentLetter`, `fireLocation`, `fireLevel`, `firePerson`, `fireStyle`, `deleted`, `createDate`, `createBy`, `updateDate`, `updateBy`, `ticket_level` " +
                                         "from ythg_ods.dwd_" + tableName + " where deleted = '0' and `id` = '" + fileInfo.getId() + "'";
-                                log.info("<=====================sql语句==============================>");
-                                log.info(sql);
+                                //log.info("<=====================sql语句==============================>");
+                                //log.info(sql);
                                 List<SecSpecialJobTicketPourbackDto> secSpecialJobTicketPourbackDtos = siLuDorisTemplate.query(sql, new BeanPropertyRowMapper<>(SecSpecialJobTicketPourbackDto.class));
                                 if (!secSpecialJobTicketPourbackDtos.isEmpty()) {
                                     SecSpecialJobTicketPourbackDto secSpecialJobTicketPourbackDto = secSpecialJobTicketPourbackDtos.get(0);
@@ -1329,8 +1329,8 @@ public class SiLuJobTicketService {
                             case "10":
                                 sql = "select `id`, `companyCode`, `ticketNo`, `ticketStatus`, `issueTime`, `planStartTime`, `planEndTime`, `startTime`, `endTime`, `ticketPosition`, `workAreaCode`, `ticketContent`, `checkedTime`, `checkedPerson`, `longitude`, `latitude`, `supervisorName`, `workerName`, `workDeptment`, `isContractorWork`, `contractorOrg`, `isAssociation`, `associationTicket`, `riskIdentification`, `disclosePerson`, `acceptPerson`, `tickerResponsName`, `majorPersonMobile`, `isChanged`, `changedCause`, `isCancelled`, `cancelledCause`, `mobileDeviceCode`, `workTicketAtt`, `safeDiscloseAtt`, `countersignImg`, `gasAnalysis`, `commitmentLetter`, `fireLocation`, `fireLevel`, `firePerson`, `fireStyle`, `deleted`, `createDate`, `createBy`, `updateDate`, `updateBy`, `ticket_level` " +
                                         "from ythg_ods.dwd_" + tableName + " where deleted = '0' and `id` = '" + fileInfo.getId() + "'";
-                                log.info("<=====================sql语句==============================>");
-                                log.info(sql);
+                                //log.info("<=====================sql语句==============================>");
+                                //log.info(sql);
                                 List<SecSpecialJobTicketPourDto> secSpecialJobTicketPourDtos = siLuDorisTemplate.query(sql, new BeanPropertyRowMapper<>(SecSpecialJobTicketPourDto.class));
                                 if (!secSpecialJobTicketPourDtos.isEmpty()) {
                                     SecSpecialJobTicketPourDto secSpecialJobTicketPourDto = secSpecialJobTicketPourDtos.get(0);
@@ -1344,8 +1344,8 @@ public class SiLuJobTicketService {
                             case "11":
                                 sql = "select `id`, `companyCode`, `ticketNo`, `ticketStatus`, `issueTime`, `planStartTime`, `planEndTime`, `startTime`, `endTime`, `ticketPosition`, `workAreaCode`, `ticketContent`, `checkedTime`, `checkedPerson`, `longitude`, `latitude`, `supervisorName`, `workerName`, `workDeptment`, `isContractorWork`, `contractorOrg`, `isAssociation`, `associationTicket`, `riskIdentification`, `disclosePerson`, `acceptPerson`, `tickerResponsName`, `majorPersonMobile`, `isChanged`, `changedCause`, `isCancelled`, `cancelledCause`, `mobileDeviceCode`, `workTicketAtt`, `safeDiscloseAtt`, `countersignImg`, `gasAnalysis`, `commitmentLetter`, `fireLocation`, `fireLevel`, `firePerson`, `fireStyle`, `deleted`, `createDate`, `createBy`, `updateDate`, `updateBy`, `ticket_level` " +
                                         "from ythg_ods.dwd_" + tableName + " where deleted = '0' and `id` = '" + fileInfo.getId() + "'";
-                                log.info("<=====================sql语句==============================>");
-                                log.info(sql);
+                                //log.info("<=====================sql语句==============================>");
+                                //log.info(sql);
                                 List<SecSpecialJobTicketWaterDto> secSpecialJobTicketWaterDtos = siLuDorisTemplate.query(sql, new BeanPropertyRowMapper<>(SecSpecialJobTicketWaterDto.class));
                                 if (!secSpecialJobTicketWaterDtos.isEmpty()) {
                                     SecSpecialJobTicketWaterDto secSpecialJobTicketWaterDto = secSpecialJobTicketWaterDtos.get(0);
@@ -1359,8 +1359,8 @@ public class SiLuJobTicketService {
                             case "12":
                                 sql = "select `id`, `companyCode`, `ticketNo`, `ticketStatus`, `issueTime`, `planStartTime`, `planEndTime`, `startTime`, `endTime`, `ticketPosition`, `workAreaCode`, `ticketContent`, `checkedTime`, `checkedPerson`, `longitude`, `latitude`, `supervisorName`, `workerName`, `workDeptment`, `isContractorWork`, `contractorOrg`, `isAssociation`, `associationTicket`, `riskIdentification`, `disclosePerson`, `acceptPerson`, `tickerResponsName`, `majorPersonMobile`, `isChanged`, `changedCause`, `isCancelled`, `cancelledCause`, `mobileDeviceCode`, `workTicketAtt`, `safeDiscloseAtt`, `countersignImg`, `gasAnalysis`, `commitmentLetter`, `fireLocation`, `fireLevel`, `firePerson`, `fireStyle`, `deleted`, `createDate`, `createBy`, `updateDate`, `updateBy`, `ticket_level` " +
                                         "from ythg_ods.dwd_" + tableName + " where deleted = '0' and `id` = '" + fileInfo.getId() + "'";
-                                log.info("<=====================sql语句==============================>");
-                                log.info(sql);
+                                //log.info("<=====================sql语句==============================>");
+                                //log.info(sql);
                                 List<SecSpecialJobTicketMaintenanceDto> secSpecialJobTicketMaintenanceDtos = siLuDorisTemplate.query(sql, new BeanPropertyRowMapper<>(SecSpecialJobTicketMaintenanceDto.class));
                                 if (!secSpecialJobTicketMaintenanceDtos.isEmpty()) {
                                     SecSpecialJobTicketMaintenanceDto secSpecialJobTicketMaintenanceDto = secSpecialJobTicketMaintenanceDtos.get(0);
@@ -1399,7 +1399,7 @@ public class SiLuJobTicketService {
             //log.info("jsonBody：" + jsonBody);
 
             String response = HttpClientUtil.sendPostRequest(url, headers, jsonBody);
-            log.info(response);
+            //log.info(response);
         } catch (Exception e) {
             log.error("更新失败:", e);
         }

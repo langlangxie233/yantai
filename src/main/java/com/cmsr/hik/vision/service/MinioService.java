@@ -70,7 +70,7 @@ public class MinioService {
                 .build();
         List<String> filenameList = new ArrayList<>();
 
-        log.info("<MinIO> accessing bucket: {}, folder: {}", bucket, folderName);
+        //log.info("<MinIO> accessing bucket: {}, folder: {}", bucket, folderName);
         Iterable<Result<Item>> objects = client.listObjects(listObjectsArgs);
 
         for (Result<Item> itemResult : objects) {
@@ -95,7 +95,7 @@ public class MinioService {
                     if (encodedString != null) {
                         String filename = filepath.substring(folderName.length());
                         fileMap.put(filename, encodedString);
-                        log.info("<MinIO> File: {} encoded success.", filepath);
+                        //log.info("<MinIO> File: {} encoded success.", filepath);
                     }
                 }
         );
@@ -110,7 +110,7 @@ public class MinioService {
                 .bucket(bucket)
                 .build();
         Map<String, String> fileMap = Maps.newHashMap();
-        log.info("<MinIO> accessing bucket: {}", bucket);
+        //log.info("<MinIO> accessing bucket: {}", bucket);
         Iterable<Result<Item>> objects = client.listObjects(listObjectsArgs);
 
         for (Result<Item> itemResult : objects) {
@@ -127,7 +127,7 @@ public class MinioService {
             }
 
         }
-        log.info("fileSize: {}", fileMap.size());
+        //log.info("fileSize: {}", fileMap.size());
         return fileMap;
     }
 

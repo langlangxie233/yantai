@@ -343,4 +343,77 @@ public class SiLuController {
     }
     //endregion
 
+
+    //风险分析test
+    //region
+    /**
+     * 上报安全风险分析单元数据
+     *
+     * @return 更新结果
+     */
+    @GetMapping(value = "/silu/sec/security/risk/unit/test", produces = MediaType.APPLICATION_JSON_VALUE)
+    public String updateSecurityRiskUnitTest(@RequestParam String companyCode) {
+        return siLuService.updateSecurityRiskUnitTest(companyCode);
+    }
+
+    /**
+     * 上报安全风险事件数据
+     *
+     * @return 更新结果
+     */
+    @GetMapping(value = "/silu/sec/security/risk/events/test", produces = MediaType.APPLICATION_JSON_VALUE)
+    public String updateSecurityRiskEventsTest(@RequestParam String companyCode) {
+        return siLuService.updateSecurityRiskEventsTest(companyCode);
+    }
+
+    /**
+     * 上报安全风险管控措施数据
+     *
+     * @return 更新结果
+     */
+    @GetMapping(value = "/silu/sec/security/risk/control/measures/test", produces = MediaType.APPLICATION_JSON_VALUE)
+    public String updateSecurityRiskControlMeasuresTest(@RequestParam String companyCode) {
+        return siLuService.updateSecurityRiskControlMeasuresTest(companyCode);
+    }
+
+    /**
+     * 上报隐患排查任务数据
+     *
+     * @return 更新结果
+     */
+    @GetMapping(value = "/silu/sec/hidden/check/mission/test", produces = MediaType.APPLICATION_JSON_VALUE)
+    public String updateHiddenCheckMissionTest(@RequestParam String companyCode) {
+        return siLuService.updateHiddenCheckMissionTest(companyCode);
+    }
+
+    /**
+     * 上报隐患排查记录数据
+     *
+     * @return 更新结果
+     */
+    @GetMapping(value = "/silu/sec/hidden/check/record/test", produces = MediaType.APPLICATION_JSON_VALUE)
+    public String updateHiddenCheckRecordTest(@RequestParam String companyCode) {
+        return siLuService.updateHiddenCheckRecordTest(companyCode);
+    }
+
+    /**
+     * 上报隐患信息数据
+     *
+     * @return 更新结果
+     */
+    @GetMapping(value = "/silu/sec/hidden/danger/info/test", produces = MediaType.APPLICATION_JSON_VALUE)
+    public String updateHiddenDangerInfoTest(@RequestParam String companyCode) {
+        return siLuService.updateHiddenDangerInfoTest(companyCode);
+    }
+
+    /**
+     * 上报停用/检修记录
+     *
+     * @return 更新结果
+     */
+    @GetMapping(value = "/silu/sec/deactivated/maintenance/record/test", produces = MediaType.APPLICATION_JSON_VALUE)
+    public String updateDeactivatedMaintenanceRecordTest(@RequestParam String companyCode) {
+        return siLuService.updateDeactivatedMaintenanceRecordTest(companyCode);
+    }
+    //endregion
 }
