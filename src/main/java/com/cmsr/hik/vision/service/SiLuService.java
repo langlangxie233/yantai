@@ -68,7 +68,7 @@ public class SiLuService {
         int pageNo = 0;
         int pageSize = 50;
         if (!"1".equals(firstFlag)) {
-            querySql = querySql + "WHERE updateDate > '" + DateTimeUtil.getHoursBefore(2) + "' ";
+            querySql = querySql + "WHERE date_format(`updateDate`,'%Y-%m-%d %H-%i-%s') > '" + DateTimeUtil.getHoursBefore(2) + "' ";
         } else {
             log.warn("首次更新数据库中······");
         }
@@ -143,7 +143,7 @@ public class SiLuService {
         } else {
             log.warn("首次更新数据库中······");
         }
-        querySql = querySql + "order by `events`.`updateDate` desc limit ";
+        querySql = querySql + "order by date_format(`events`.`updateDate`,'%Y-%m-%d %H-%i-%s') desc limit ";
         while (whileFlag) {
             String sql = querySql + pageNo * pageSize + ", " + pageSize;
             ////log.info("<=====================sql语句==============================>");
@@ -213,7 +213,7 @@ public class SiLuService {
         int pageNo = 0;
         int pageSize = 50;
         if (!"1".equals(firstFlag)) {
-            querySql = querySql + "where `control_measure`.`updateDate` > '" + DateTimeUtil.getHoursBefore(2) + "' ";
+            querySql = querySql + "where date_format(`control_measure`.`updateDate`,'%Y-%m-%d %H-%i-%s') > '" + DateTimeUtil.getHoursBefore(2) + "' ";
         } else {
             log.warn("首次更新数据库中······");
         }
@@ -287,7 +287,7 @@ public class SiLuService {
         int pageNo = 0;
         int pageSize = 50;
         if (!"1".equals(firstFlag)) {
-            querySql = querySql + "where `check_mission`.`updateDate` > '" + DateTimeUtil.getHoursBefore(2) + "' ";
+            querySql = querySql + "where date_format(`check_mission`.`updateDate`,'%Y-%m-%d %H-%i-%s') > '" + DateTimeUtil.getHoursBefore(2) + "' ";
         } else {
             log.warn("首次更新数据库中······");
         }
@@ -361,7 +361,7 @@ public class SiLuService {
         int pageNo = 0;
         int pageSize = 50;
         if (!"1".equals(firstFlag)) {
-            querySql = querySql + "where `check_record`.`checkTime` > '" + DateTimeUtil.getHoursBefore(2) + "' ";
+            querySql = querySql + "where date_format(`check_record`.`checkTime`,'%Y-%m-%d %H-%i-%s') > '" + DateTimeUtil.getHoursBefore(2) + "' ";
         } else {
             log.warn("首次更新数据库中······");
         }
@@ -435,7 +435,7 @@ public class SiLuService {
         int pageNo = 0;
         int pageSize = 50;
         if (!"1".equals(firstFlag)) {
-            querySql = querySql + "where `danger_info`.`updateDate` > '" + DateTimeUtil.getHoursBefore(2) + "' ";
+            querySql = querySql + "where date_format(`danger_info`.`updateDate`,'%Y-%m-%d %H-%i-%s') > '" + DateTimeUtil.getHoursBefore(2) + "' ";
         } else {
             log.warn("首次更新数据库中······");
         }
@@ -500,14 +500,14 @@ public class SiLuService {
         ResponseObject responseObject = new ResponseObject();
         responseObject.setData(responseData);
         String querySql = "select `maintenance_record`.`id`, `maintenance_record`.`companyCode`, `maintenance_record`.`hazardCode`, `maintenance_record`.`riskUnitId`, `maintenance_record`.`stopStartTime`, `maintenance_record`.`stopEndTime`, `maintenance_record`.`stopReason`, `maintenance_record`.`deleted`, `maintenance_record`.`createDate`, `maintenance_record`.`createBy`, `maintenance_record`.`updateDate`, `maintenance_record`.`updateBy` " +
-                "from ythg_ods.dwd_sec_deactivated_maintenance_record maintenance_record ";
+                "from ythg_ods.dwd_sec_deactivated_maintenance_record as maintenance_record ";
         //String queryLatestDateTimeSql = "select createDate from ythg_ods.dwd_sec_deactivated_maintenance_record order by createDate desc limit 1";
         String path = "/sec_deactivated_maintenance_record";
 
         int pageNo = 0;
         int pageSize = 20;
         if (!"1".equals(firstFlag)) {
-            querySql = querySql + "where `maintenance_record`.`updateDate` > '" + DateTimeUtil.getHoursBefore(2) + "' ";
+            querySql = querySql + "where date_format(`maintenance_record`.`updateDate`,'%Y-%m-%d %H-%i-%s') > '" + DateTimeUtil.getHoursBefore(2) + "' ";
         } else {
             log.warn("首次更新数据库中······");
         }
