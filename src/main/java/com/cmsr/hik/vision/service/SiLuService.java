@@ -66,7 +66,7 @@ public class SiLuService {
         //String queryLatestDateTimeSql = "select createDate from ythg_ods.dwd_sec_security_risk_unit order by createDate desc limit 1";
         String path = "/sec_security_risk_unit";
         int pageNo = 0;
-        int pageSize = 20;
+        int pageSize = 50;
         if (!"1".equals(firstFlag)) {
             querySql = querySql + "WHERE updateDate > '" + DateTimeUtil.getHoursBefore(2) + "' ";
         } else {
@@ -100,10 +100,9 @@ public class SiLuService {
                         String response = HttpClientUtil.sendPostRequest(url, headers, jsonBody);
                         responseObject = JSON.to(ResponseObject.class, response);
                         ////log.info(response);
-                        /*if ("500".equals(responseObject.getData().getCode())) {
-                            //log.info(response);
-                            whileFlag = false;
-                        }*/
+                        if ("500".equals(responseObject.getData().getCode())) {
+                            log.info(response);
+                        }
                     } catch (Exception e) {
                         log.info("请求错误：" + e);
                         whileFlag = false;
@@ -138,7 +137,7 @@ public class SiLuService {
         String path = "/sec_security_risk_events";
 
         int pageNo = 0;
-        int pageSize = 20;
+        int pageSize = 50;
         if (!"1".equals(firstFlag)) {
             querySql = querySql + "WHERE `events`.`updateDate` > '" + DateTimeUtil.getHoursBefore(2) + "' ";
         } else {
@@ -172,12 +171,12 @@ public class SiLuService {
 
                         String response = HttpClientUtil.sendPostRequest(url, headers, jsonBody);
                         responseObject = JSON.to(ResponseObject.class, response);
-                        ////log.info(response);
-                        /*if ("500".equals(responseObject.getData().getCode())) {
-                            //log.info(response);
-                            list.forEach(l -> log.info(l.getRiskUnitId()));
+                        //log.info(response);
+                        if ("500".equals(responseObject.getData().getCode())) {
+                            log.info(response);
+                            //list.forEach(l -> log.info(l.getRiskUnitId()));
                             //whileFlag = false;
-                        }*/
+                        }
                     } catch (Exception e) {
                         log.info("请求错误：" + e);
                         whileFlag = false;
@@ -212,7 +211,7 @@ public class SiLuService {
         String path = "/sec_security_risk_control_measures";
 
         int pageNo = 0;
-        int pageSize = 20;
+        int pageSize = 50;
         if (!"1".equals(firstFlag)) {
             querySql = querySql + "where `control_measure`.`updateDate` > '" + DateTimeUtil.getHoursBefore(2) + "' ";
         } else {
@@ -247,10 +246,11 @@ public class SiLuService {
                         String response = HttpClientUtil.sendPostRequest(url, headers, jsonBody);
                         responseObject = JSON.to(ResponseObject.class, response);
                         //log.info(response);
-                        /*if ("500".equals(responseObject.getData().getCode())) {
-                            //log.info(response);
-                            whileFlag = false;
-                        }*/
+                        if ("500".equals(responseObject.getData().getCode())) {
+                            log.info(response);
+                            //list.forEach(l -> log.info(l.getRiskUnitId()));
+                            //whileFlag = false;
+                        }
                     } catch (Exception e) {
                         log.info("请求错误：" + e);
                         whileFlag = false;
@@ -285,7 +285,7 @@ public class SiLuService {
         String path = "/sec_hidden_check_mission";
 
         int pageNo = 0;
-        int pageSize = 20;
+        int pageSize = 50;
         if (!"1".equals(firstFlag)) {
             querySql = querySql + "where `check_mission`.`updateDate` > '" + DateTimeUtil.getHoursBefore(2) + "' ";
         } else {
@@ -320,11 +320,11 @@ public class SiLuService {
                         String response = HttpClientUtil.sendPostRequest(url, headers, jsonBody);
                         responseObject = JSON.to(ResponseObject.class, response);
                         //log.info(response);
-                        //log.info(response);
-                        /*if ("500".equals(responseObject.getData().getCode())) {
-                            //log.info(response);
-                            whileFlag = false;
-                        }*/
+                        if ("500".equals(responseObject.getData().getCode())) {
+                            log.info(response);
+                            //list.forEach(l -> log.info(l.getRiskUnitId()));
+                            //whileFlag = false;
+                        }
                     } catch (Exception e) {
                         log.info("请求错误：" + e);
                         whileFlag = false;
@@ -359,7 +359,7 @@ public class SiLuService {
         String path = "/sec_hidden_check_record";
 
         int pageNo = 0;
-        int pageSize = 20;
+        int pageSize = 50;
         if (!"1".equals(firstFlag)) {
             querySql = querySql + "where `check_record`.`checkTime` > '" + DateTimeUtil.getHoursBefore(2) + "' ";
         } else {
@@ -394,10 +394,11 @@ public class SiLuService {
                         String response = HttpClientUtil.sendPostRequest(url, headers, jsonBody);
                         responseObject = JSON.to(ResponseObject.class, response);
                         //log.info(response);
-                        /*if ("500".equals(responseObject.getData().getCode())) {
-                            //log.info(response);
-                            whileFlag = false;
-                        }*/
+                        if ("500".equals(responseObject.getData().getCode())) {
+                            log.info(response);
+                            //list.forEach(l -> log.info(l.getRiskUnitId()));
+                            //whileFlag = false;
+                        }
                     } catch (Exception e) {
                         log.info("请求错误：" + e);
                         whileFlag = false;
@@ -432,7 +433,7 @@ public class SiLuService {
         String path = "/sec_hidden_danger_info";
 
         int pageNo = 0;
-        int pageSize = 20;
+        int pageSize = 50;
         if (!"1".equals(firstFlag)) {
             querySql = querySql + "where `danger_info`.`updateDate` > '" + DateTimeUtil.getHoursBefore(2) + "' ";
         } else {
@@ -465,6 +466,11 @@ public class SiLuService {
                         //log.info("jsonBody：" + jsonBody);
                         String response = HttpClientUtil.sendPostRequest(url, headers, jsonBody);
                         responseObject = JSON.to(ResponseObject.class, response);
+                        if ("500".equals(responseObject.getData().getCode())) {
+                            log.info(response);
+                            //list.forEach(l -> log.info(l.getRiskUnitId()));
+                            //whileFlag = false;
+                        }
                     } catch (Exception e) {
                         log.info("请求错误：" + e);
                         whileFlag = false;
@@ -534,10 +540,11 @@ public class SiLuService {
                         String response = HttpClientUtil.sendPostRequest(url, headers, jsonBody);
                         responseObject = JSON.to(ResponseObject.class, response);
                         //log.info(response);
-                        /*if ("500".equals(responseObject.getData().getCode())) {
-                            //log.info(response);
-                            whileFlag = false;
-                        }*/
+                        if ("500".equals(responseObject.getData().getCode())) {
+                            log.info(response);
+                            //list.forEach(l -> log.info(l.getRiskUnitId()));
+                            //whileFlag = false;
+                        }
                     } catch (Exception e) {
                         log.info("请求错误：" + e);
                         whileFlag = false;
@@ -1071,11 +1078,11 @@ public class SiLuService {
                         //log.info("jsonBody：" + jsonBody);
                         String response = HttpClientUtil.sendPostRequest(url, headers, jsonBody);
                         responseObject = JSON.to(ResponseObject.class, response);
-                        log.info(response);
-                        /*if ("500".equals(responseObject.getData().getCode())) {
-                        log.info(response);
-                            whileFlag = false;
-                        }*/
+                        if ("500".equals(responseObject.getData().getCode())) {
+                            log.info(response);
+                            //list.forEach(l -> log.info(l.getRiskUnitId()));
+                            //whileFlag = false;
+                        }
                     } catch (Exception e) {
                         log.info("请求错误：" + e);
                         whileFlag = false;
@@ -1105,8 +1112,7 @@ public class SiLuService {
         ResponseObject responseObject = new ResponseObject();
         responseObject.setData(responseData);
         String querySql = "SELECT events.`id`, events.`companyCode`, events.`riskUnitId`, events.`riskEventName`, events.`deleted`, events.`createDate`, events.`createBy`, events.`updateDate`, events.`updateBy` \n" +
-                "FROM ythg_ods.dwd_sec_security_risk_events AS events \n" +
-                "INNER JOIN ythg_ods.dwd_sec_security_risk_unit AS unit on events.riskUnitId = unit.`id` ";
+                "FROM ythg_ods.dwd_sec_security_risk_events AS events ";
         //String queryLatestDateTimeSql = "select createDate from ythg_ods.dwd_sec_security_risk_events order by createDate desc limit 1";
         String path = "/sec_security_risk_events";
 
@@ -1140,12 +1146,11 @@ public class SiLuService {
 
                         String response = HttpClientUtil.sendPostRequest(url, headers, jsonBody);
                         responseObject = JSON.to(ResponseObject.class, response);
-                        log.info(response);
-                        /*if ("500".equals(responseObject.getData().getCode())) {
-                            //log.info(response);
-                            list.forEach(l -> log.info(l.getRiskUnitId()));
+                        if ("500".equals(responseObject.getData().getCode())) {
+                            log.info(response);
+                            //list.forEach(l -> log.info(l.getRiskUnitId()));
                             //whileFlag = false;
-                        }*/
+                        }
                     } catch (Exception e) {
                         log.info("请求错误：" + e);
                         whileFlag = false;
@@ -1175,9 +1180,7 @@ public class SiLuService {
         ResponseObject responseObject = new ResponseObject();
         responseObject.setData(responseData);
         String querySql = "SELECT control_measure.`id`,control_measure.`companyCode`,control_measure.`riskEventId`,control_measure.`dataSrc`,control_measure.`riskMeasureDesc`,control_measure.`classify1`,control_measure.`classify2`,control_measure.`classify3`,control_measure.`troubleshootContent`,control_measure.`deleted`,control_measure.`createDate`,control_measure.`createBy`,control_measure.`updateDate`,control_measure.`updateBy` \n" +
-                "FROM ythg_ods.dwd_sec_security_risk_control_measures AS control_measure \n" +
-                "INNER JOIN ythg_ods.dwd_sec_security_risk_events events on control_measure.riskEventId = events.`id`\n" +
-                "INNER JOIN ythg_ods.dwd_sec_security_risk_unit AS unit on events.riskUnitId = unit.`id` ";
+                "FROM ythg_ods.dwd_sec_security_risk_control_measures AS control_measure ";
         //String queryLatestDateTimeSql = "select createDate from ythg_ods.dwd_sec_security_risk_control_measures order by createDate desc limit 1";
         String path = "/sec_security_risk_control_measures";
 
@@ -1211,11 +1214,11 @@ public class SiLuService {
 
                         String response = HttpClientUtil.sendPostRequest(url, headers, jsonBody);
                         responseObject = JSON.to(ResponseObject.class, response);
-                        log.info(response);
-                        /*if ("500".equals(responseObject.getData().getCode())) {
-                            //log.info(response);
-                            whileFlag = false;
-                        }*/
+                        if ("500".equals(responseObject.getData().getCode())) {
+                            log.info(response);
+                            //list.forEach(l -> log.info(l.getRiskUnitId()));
+                            //whileFlag = false;
+                        }
                     } catch (Exception e) {
                         log.info("请求错误：" + e);
                         whileFlag = false;
@@ -1245,16 +1248,13 @@ public class SiLuService {
         ResponseObject responseObject = new ResponseObject();
         responseObject.setData(responseData);
         String querySql = "SELECT check_mission.`id`,check_mission.`companyCode`,check_mission.`riskMeasureId`,check_mission.`troubleshootContent`,check_mission.`checkCycle`,check_mission.`checkCycleUnit`,check_mission.`taskStartTime`,check_mission.`workStartTime`,check_mission.`workEndTime`,check_mission.`workDayType`,check_mission.`workType`,check_mission.`taskNum`,check_mission.`deleted`,check_mission.`createDate`,check_mission.`createBy`,check_mission.`updateDate`,check_mission.`updateBy` \n" +
-                "from ythg_ods.dwd_sec_hidden_check_mission AS check_mission\n" +
-                "INNER JOIN ythg_ods.dwd_sec_security_risk_control_measures AS control_measure on check_mission.riskMeasureId = control_measure.`id` \n" +
-                "INNER JOIN ythg_ods.dwd_sec_security_risk_events events on control_measure.riskEventId = events.`id`\n" +
-                "INNER JOIN ythg_ods.dwd_sec_security_risk_unit AS unit on events.riskUnitId = unit.`id` WHERE check_mission.`checkCycle` > 0 ";
+                "from ythg_ods.dwd_sec_hidden_check_mission AS check_mission ";
         //String queryLatestDateTimeSql = "select createDate from ythg_ods.dwd_sec_hidden_check_mission order by createDate desc limit 1";
         String path = "/sec_hidden_check_mission";
 
         int pageNo = 0;
         int pageSize = 20;
-        querySql = querySql + "and `check_mission`.companyCode = '" + companyCode + "' order by `check_mission`.`updateDate` desc limit ";
+        querySql = querySql + "WHERE `check_mission`.companyCode = '" + companyCode + "' order by `check_mission`.`updateDate` desc limit ";
         while (whileFlag) {
             String sql = querySql + pageNo * pageSize + ", " + pageSize;
             //log.info("<=====================sql语句==============================>");
@@ -1282,12 +1282,11 @@ public class SiLuService {
 
                         String response = HttpClientUtil.sendPostRequest(url, headers, jsonBody);
                         responseObject = JSON.to(ResponseObject.class, response);
-                        //log.info(response);
-                        log.info(response);
-                        /*if ("500".equals(responseObject.getData().getCode())) {
-                            //log.info(response);
-                            whileFlag = false;
-                        }*/
+                        if ("500".equals(responseObject.getData().getCode())) {
+                            log.info(response);
+                            //list.forEach(l -> log.info(l.getRiskUnitId()));
+                            //whileFlag = false;
+                        }
                     } catch (Exception e) {
                         log.info("请求错误：" + e);
                         whileFlag = false;
@@ -1317,17 +1316,13 @@ public class SiLuService {
         ResponseObject responseObject = new ResponseObject();
         responseObject.setData(responseData);
         String querySql = "SELECT check_record.`id`, check_record.`companyCode`, check_record.`checkTaskId`, check_record.`checkTime`, check_record.`mobileMe`, check_record.`isDefend`, check_record.`checkStatus`, check_record.`deleted`, check_record.`createDate`, check_record.`createBy`, check_record.`createByMobile`, check_record.`updateDate`, check_record.`updateBy`, check_record.`updateByMobile` \n" +
-                "FROM ythg_ods.dwd_sec_hidden_check_record AS check_record\n" +
-                "INNER JOIN ythg_ods.dwd_sec_hidden_check_mission AS check_mission ON check_record.checkTaskId = check_mission.`id` \n" +
-                "INNER JOIN ythg_ods.dwd_sec_security_risk_control_measures AS control_measure ON check_mission.riskMeasureId = control_measure.`id` \n" +
-                "INNER JOIN ythg_ods.dwd_sec_security_risk_events events ON control_measure.riskEventId = events.`id`\n" +
-                "INNER JOIN ythg_ods.dwd_sec_security_risk_unit AS unit ON events.riskUnitId = unit.`id` WHERE ((check_mission.workType<>'0' and  check_record.isDefend='1') or check_mission.workType='0') ";
+                "FROM ythg_ods.dwd_sec_hidden_check_record AS check_record ";
         //String queryLatestDateTimeSql = "select createDate from ythg_ods.dwd_sec_hidden_check_record order by createDate desc limit 1";
         String path = "/sec_hidden_check_record";
 
         int pageNo = 0;
         int pageSize = 20;
-        querySql = querySql + "and `check_record`.companyCode = '" + companyCode + "' order by `check_record`.`checkTime` desc limit ";
+        querySql = querySql + "where `check_record`.companyCode = '" + companyCode + "' order by `check_record`.`checkTime` desc limit ";
         while (whileFlag) {
             String sql = querySql + pageNo * pageSize + ", " + pageSize;
             //log.info("<=====================sql语句==============================>");
@@ -1355,11 +1350,11 @@ public class SiLuService {
 
                         String response = HttpClientUtil.sendPostRequest(url, headers, jsonBody);
                         responseObject = JSON.to(ResponseObject.class, response);
-                        log.info(response);
-                        /*if ("500".equals(responseObject.getData().getCode())) {
-                            //log.info(response);
-                            whileFlag = false;
-                        }*/
+                        if ("500".equals(responseObject.getData().getCode())) {
+                            log.info(response);
+                            //list.forEach(l -> log.info(l.getRiskUnitId()));
+                            //whileFlag = false;
+                        }
                     } catch (Exception e) {
                         log.info("请求错误：" + e);
                         whileFlag = false;
@@ -1389,12 +1384,7 @@ public class SiLuService {
         ResponseObject responseObject = new ResponseObject();
         responseObject.setData(responseData);
         String querySql = "SELECT danger_info.`id`, danger_info.`companyCode`, danger_info.`hazardCode`, danger_info.`riskMeasureId`, danger_info.`checkRecordId`, danger_info.`dangerName`, danger_info.`dangerLevel`, danger_info.`registTime`, danger_info.`registrant`, danger_info.`dangersSrc`, danger_info.`enforcementId`, danger_info.`dangerManageType`, danger_info.`hazardDangerType`, danger_info.`hazardCategory`, danger_info.`dangerDesc`, danger_info.`dangerReason`, danger_info.`controlMeasures`, danger_info.`cost`, danger_info.`liablePerson`, danger_info.`dangerManageDeadline`, danger_info.`checkAcceptPerson`, danger_info.`checkAcceptTime`, danger_info.`checkAcceptComment`, danger_info.`dangerState`, danger_info.`dangerImg`, danger_info.`dangerAcceptImg`, danger_info.`deleted`, danger_info.`createDate`, danger_info.`createBy`, danger_info.`updateDate`, danger_info.`updateBy` \n" +
-                "FROM ythg_ods.dwd_sec_hidden_danger_info AS danger_info\n" +
-                "INNER JOIN ythg_ods.dwd_sec_hidden_check_record AS check_record ON danger_info.checkRecordId = check_record.`id`\n" +
-                "INNER JOIN ythg_ods.dwd_sec_hidden_check_mission AS check_mission ON check_record.checkTaskId = check_mission.`id` \n" +
-                "INNER JOIN ythg_ods.dwd_sec_security_risk_control_measures AS control_measure ON check_mission.riskMeasureId = control_measure.`id` \n" +
-                "INNER JOIN ythg_ods.dwd_sec_security_risk_events events ON control_measure.riskEventId = events.`id`\n" +
-                "INNER JOIN ythg_ods.dwd_sec_security_risk_unit AS unit ON events.riskUnitId = unit.`id` ";
+                "FROM ythg_ods.dwd_sec_hidden_danger_info AS danger_info ";
         //String queryLatestDateTimeSql = "select createDate from ythg_ods.dwd_sec_hidden_danger_info order by createDate desc limit 1";
         String path = "/sec_hidden_danger_info";
 
@@ -1428,6 +1418,11 @@ public class SiLuService {
                         String response = HttpClientUtil.sendPostRequest(url, headers, jsonBody);
                         log.info("response：" + response);
                         responseObject = JSON.to(ResponseObject.class, response);
+                        if ("500".equals(responseObject.getData().getCode())) {
+                            log.info(response);
+                            //list.forEach(l -> log.info(l.getRiskUnitId()));
+                            //whileFlag = false;
+                        }
                     } catch (Exception e) {
                         log.info("请求错误：" + e);
                         whileFlag = false;
@@ -1457,9 +1452,7 @@ public class SiLuService {
         ResponseObject responseObject = new ResponseObject();
         responseObject.setData(responseData);
         String querySql = "select `maintenance_record`.`id`, `maintenance_record`.`companyCode`, `maintenance_record`.`hazardCode`, `maintenance_record`.`riskUnitId`, `maintenance_record`.`stopStartTime`, `maintenance_record`.`stopEndTime`, `maintenance_record`.`stopReason`, `maintenance_record`.`deleted`, `maintenance_record`.`createDate`, `maintenance_record`.`createBy`, `maintenance_record`.`updateDate`, `maintenance_record`.`updateBy` " +
-                "from ythg_ods.dwd_sec_deactivated_maintenance_record maintenance_record " +
-                "inner join ythg_ods.dwd_sec_security_risk_unit unit " +
-                "on maintenance_record.riskUnitId = unit.`id` ";
+                "from ythg_ods.dwd_sec_deactivated_maintenance_record maintenance_record ";
         //String queryLatestDateTimeSql = "select createDate from ythg_ods.dwd_sec_deactivated_maintenance_record order by createDate desc limit 1";
         String path = "/sec_deactivated_maintenance_record";
 
@@ -1493,11 +1486,11 @@ public class SiLuService {
 
                         String response = HttpClientUtil.sendPostRequest(url, headers, jsonBody);
                         responseObject = JSON.to(ResponseObject.class, response);
-                        log.info(response);
-                        /*if ("500".equals(responseObject.getData().getCode())) {
-                            //log.info(response);
-                            whileFlag = false;
-                        }*/
+                        if ("500".equals(responseObject.getData().getCode())) {
+                            log.info(response);
+                            //list.forEach(l -> log.info(l.getRiskUnitId()));
+                            //whileFlag = false;
+                        }
                     } catch (Exception e) {
                         log.info("请求错误：" + e);
                         whileFlag = false;
