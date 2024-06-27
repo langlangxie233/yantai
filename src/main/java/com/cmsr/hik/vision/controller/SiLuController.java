@@ -395,7 +395,15 @@ public class SiLuController {
     public String updateHiddenCheckRecordTest(@RequestParam String companyCode) {
         return siLuService.updateHiddenCheckRecordTest(companyCode);
     }
-
+    /**
+     * 上报隐患排查记录数据
+     *
+     * @return 更新结果
+     */
+    @GetMapping(value = "/silu/sec/hidden/check/record/by/time", produces = MediaType.APPLICATION_JSON_VALUE)
+    public String updateHiddenCheckRecordByTime(@RequestParam String time) {
+        return siLuService.updateHiddenCheckRecordByTime(time);
+    }
     /**
      * 上报隐患信息数据
      *

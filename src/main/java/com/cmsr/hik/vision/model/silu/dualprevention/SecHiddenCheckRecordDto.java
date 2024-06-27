@@ -1,6 +1,5 @@
 package com.cmsr.hik.vision.model.silu.dualprevention;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -30,7 +29,6 @@ public class SecHiddenCheckRecordDto {
     /**
      * 时间格式yyyyMMddHHmmss
      */
-    @JsonFormat(pattern = "yyyyMMddHHmmss")
     private LocalDateTime checkTime;
     /**
      * 风险分析对象所属部门负责人姓名
@@ -54,7 +52,6 @@ public class SecHiddenCheckRecordDto {
     /**
      * 创建时间
      */
-    @JsonFormat(pattern = "yyyyMMddHHmmss")
     private LocalDateTime createDate;
     /**
      * 创建人
@@ -63,7 +60,6 @@ public class SecHiddenCheckRecordDto {
     /**
      * 更新时间（新创建的数据更新时间和创建时间相同）
      */
-    @JsonFormat(pattern = "yyyyMMddHHmmss")
     private LocalDateTime updateDate;
     /**
      * 更新人
