@@ -68,6 +68,7 @@ public class SiLuService {
         int pageNo = 0;
         int pageSize = 50;
         int totalCount = 0;
+        int errorTotalCount = 0;
         if (!"1".equals(firstFlag)) {
             querySql = querySql + "WHERE date_format(`updateDate`,'%Y-%m-%d %H-%i-%s') > '" + DateTimeUtil.getHoursBefore(2) + "' ";
         } else {
@@ -103,9 +104,11 @@ public class SiLuService {
                         responseObject = JSON.to(ResponseObject.class, response);
                         log.info(response);
                         log.info("本次传输数据总数：{}", totalCount);
-                        /*if ("500".equals(responseObject.getData().getCode())) {
-                            log.info(response);
-                        }*/
+                        if ("500".equals(responseObject.getData().getCode())) {
+                            //log.info(response);
+                            errorTotalCount = errorTotalCount + 1;
+                        }
+                        log.info("本次传输error数据总数：{}", errorTotalCount);
                     } catch (Exception e) {
                         log.info("请求错误：" + e);
                         whileFlag = false;
@@ -141,6 +144,7 @@ public class SiLuService {
         int pageNo = 0;
         int pageSize = 50;
         int totalCount = 0;
+        int errorTotalCount = 0;
         if (!"1".equals(firstFlag)) {
             querySql = querySql + "WHERE `events`.`updateDate` > '" + DateTimeUtil.getHoursBefore(2) + "' ";
         } else {
@@ -177,9 +181,11 @@ public class SiLuService {
                         responseObject = JSON.to(ResponseObject.class, response);
                         log.info(response);
                         log.info("本次传输数据总数：{}", totalCount);
-                        /*if ("500".equals(responseObject.getData().getCode())) {
-                            log.info(response);
-                        }*/
+                        if ("500".equals(responseObject.getData().getCode())) {
+                            //log.info(response);
+                            errorTotalCount = errorTotalCount + 1;
+                        }
+                        log.info("本次传输error数据总数：{}", errorTotalCount);
                     } catch (Exception e) {
                         log.info("请求错误：" + e);
                         whileFlag = false;
@@ -216,6 +222,7 @@ public class SiLuService {
         int pageNo = 0;
         int pageSize = 50;
         int totalCount = 0;
+        int errorTotalCount = 0;
         if (!"1".equals(firstFlag)) {
             querySql = querySql + "where date_format(`control_measure`.`updateDate`,'%Y-%m-%d %H-%i-%s') > '" + DateTimeUtil.getHoursBefore(2) + "' ";
         } else {
@@ -252,9 +259,11 @@ public class SiLuService {
                         responseObject = JSON.to(ResponseObject.class, response);
                         log.info(response);
                         log.info("本次传输数据总数：{}", totalCount);
-                        /*if ("500".equals(responseObject.getData().getCode())) {
-                            log.info(response);
-                        }*/
+                        if ("500".equals(responseObject.getData().getCode())) {
+                            //log.info(response);
+                            errorTotalCount = errorTotalCount + 1;
+                        }
+                        log.info("本次传输error数据总数：{}", errorTotalCount);
                     } catch (Exception e) {
                         log.info("请求错误：" + e);
                         whileFlag = false;
@@ -290,6 +299,7 @@ public class SiLuService {
         int pageNo = 0;
         int pageSize = 50;
         int totalCount = 0;
+        int errorTotalCount = 0;
         if (!"1".equals(firstFlag)) {
             querySql = querySql + "where date_format(`check_mission`.`updateDate`,'%Y-%m-%d %H-%i-%s') > '" + DateTimeUtil.getHoursBefore(2) + "' ";
         } else {
@@ -326,9 +336,11 @@ public class SiLuService {
                         responseObject = JSON.to(ResponseObject.class, response);
                         log.info(response);
                         log.info("本次传输数据总数：{}", totalCount);
-                        /*if ("500".equals(responseObject.getData().getCode())) {
-                            log.info(response);
-                        }*/
+                        if ("500".equals(responseObject.getData().getCode())) {
+                            //log.info(response);
+                            errorTotalCount = errorTotalCount + 1;
+                        }
+                        log.info("本次传输error数据总数：{}", errorTotalCount);
                     } catch (Exception e) {
                         log.info("请求错误：" + e);
                         whileFlag = false;
@@ -364,6 +376,7 @@ public class SiLuService {
         int pageNo = 0;
         int pageSize = 50;
         int totalCount = 0;
+        int errorTotalCount = 0;
         if (!"1".equals(firstFlag)) {
             querySql = querySql + "where date_format(`check_record`.`checkTime`,'%Y-%m-%d %H-%i-%s') > '" + DateTimeUtil.getHoursBefore(2) + "' ";
         } else {
@@ -398,10 +411,13 @@ public class SiLuService {
 
                         String response = HttpClientUtil.sendPostRequest(url, headers, jsonBody);
                         responseObject = JSON.to(ResponseObject.class, response);
-                        //log.info(response);
+                        log.info(response);
+                        log.info("本次传输数据总数：{}", totalCount);
                         if ("500".equals(responseObject.getData().getCode())) {
-                            log.info(response);
+                            //log.info(response);
+                            errorTotalCount = errorTotalCount + 1;
                         }
+                        log.info("本次传输error数据总数：{}", errorTotalCount);
                     } catch (Exception e) {
                         log.info("请求错误：" + e);
                         whileFlag = false;
@@ -437,6 +453,7 @@ public class SiLuService {
         int pageNo = 0;
         int pageSize = 50;
         int totalCount = 0;
+        int errorTotalCount = 0;
         if (!"1".equals(firstFlag)) {
             querySql = querySql + "where date_format(`danger_info`.`updateDate`,'%Y-%m-%d %H-%i-%s') > '" + DateTimeUtil.getHoursBefore(2) + "' ";
         } else {
@@ -471,9 +488,12 @@ public class SiLuService {
                         String response = HttpClientUtil.sendPostRequest(url, headers, jsonBody);
                         responseObject = JSON.to(ResponseObject.class, response);
                         log.info(response);
-                        /*if ("500".equals(responseObject.getData().getCode())) {
-                            log.info(response);
-                        }*/
+                        log.info("本次传输数据总数：{}", totalCount);
+                        if ("500".equals(responseObject.getData().getCode())) {
+                            //log.info(response);
+                            errorTotalCount = errorTotalCount + 1;
+                        }
+                        log.info("本次传输error数据总数：{}", errorTotalCount);
                     } catch (Exception e) {
                         log.info("请求错误：" + e);
                         whileFlag = false;
@@ -507,7 +527,9 @@ public class SiLuService {
         //String queryLatestDateTimeSql = "select createDate from ythg_ods.dwd_sec_deactivated_maintenance_record order by createDate asc limit 1";
         String path = "/sec_deactivated_maintenance_record";
         int pageNo = 0;
-        int pageSize = 20;
+        int pageSize = 50;
+        int totalCount = 0;
+        int errorTotalCount = 0;
         if (!"1".equals(firstFlag)) {
             querySql = querySql + "where date_format(`maintenance_record`.`updateDate`,'%Y-%m-%d %H-%i-%s') > '" + DateTimeUtil.getHoursBefore(2) + "' ";
         } else {
@@ -525,6 +547,7 @@ public class SiLuService {
                     //log.info("list.size:" + list.size());
                     //list.forEach(l -> log.info(l.getId()));
                     //log.info("list:" + JSON.toJSONString(list));
+                    totalCount = totalCount + list.size();
                     //组装请求
                     params.put("datas", AESUtils.encrypt(JSON.toJSONString(list)));
                     //调用API发送数据
@@ -542,9 +565,12 @@ public class SiLuService {
                         String response = HttpClientUtil.sendPostRequest(url, headers, jsonBody);
                         responseObject = JSON.to(ResponseObject.class, response);
                         log.info(response);
-                        /*if ("500".equals(responseObject.getData().getCode())) {
-                            log.info(response);
-                        }*/
+                        log.info("本次传输数据总数：{}", totalCount);
+                        if ("500".equals(responseObject.getData().getCode())) {
+                            //log.info(response);
+                            errorTotalCount = errorTotalCount + 1;
+                        }
+                        log.info("本次传输error数据总数：{}", errorTotalCount);
                     } catch (Exception e) {
                         log.info("请求错误：" + e);
                         whileFlag = false;
@@ -1052,6 +1078,7 @@ public class SiLuService {
         int pageNo = 0;
         int pageSize = 50;
         int totalCount = 0;
+        int errorTotalCount = 0;
         querySql = querySql + "WHERE companyCode = '" + companyCode + "' order by `updateDate` asc limit ";
         while (whileFlag) {
             String sql = querySql + pageNo * pageSize + ", " + pageSize;
@@ -1082,10 +1109,11 @@ public class SiLuService {
                         responseObject = JSON.to(ResponseObject.class, response);
                         log.info(response);
                         log.info("本次传输数据总数：{}", totalCount);
-
-                        /*if ("500".equals(responseObject.getData().getCode())) {
-                            log.info(response);
-                        }*/
+                        if ("500".equals(responseObject.getData().getCode())) {
+                            //log.info(response);
+                            errorTotalCount = errorTotalCount + 1;
+                        }
+                        log.info("本次传输error数据总数：{}", errorTotalCount);
                     } catch (Exception e) {
                         log.info("请求错误：" + e);
                         whileFlag = false;
@@ -1121,6 +1149,7 @@ public class SiLuService {
         int pageNo = 0;
         int pageSize = 50;
         int totalCount = 0;
+        int errorTotalCount = 0;
         querySql = querySql + "WHERE `events`.companyCode = '" + companyCode + "' order by `events`.`updateDate` asc limit ";
         while (whileFlag) {
             String sql = querySql + pageNo * pageSize + ", " + pageSize;
@@ -1152,9 +1181,11 @@ public class SiLuService {
                         responseObject = JSON.to(ResponseObject.class, response);
                         log.info(response);
                         log.info("本次传输数据总数：{}", totalCount);
-                        /*if ("500".equals(responseObject.getData().getCode())) {
-                            log.info(response);
-                        }*/
+                        if ("500".equals(responseObject.getData().getCode())) {
+                            //log.info(response);
+                            errorTotalCount = errorTotalCount + 1;
+                        }
+                        log.info("本次传输error数据总数：{}", errorTotalCount);
                     } catch (Exception e) {
                         log.info("请求错误：" + e);
                         whileFlag = false;
@@ -1190,6 +1221,7 @@ public class SiLuService {
         int pageNo = 0;
         int pageSize = 50;
         int totalCount = 0;
+        int errorTotalCount = 0;
         querySql = querySql + "WHERE `control_measure`.companyCode = '" + companyCode + "' order by `control_measure`.`updateDate` asc limit ";
         while (whileFlag) {
             String sql = querySql + pageNo * pageSize + ", " + pageSize;
@@ -1220,10 +1252,12 @@ public class SiLuService {
                         String response = HttpClientUtil.sendPostRequest(url, headers, jsonBody);
                         responseObject = JSON.to(ResponseObject.class, response);
                         log.info(response);
-                        /*if ("500".equals(responseObject.getData().getCode())) {
-                        log.info(response);
                         log.info("本次传输数据总数：{}", totalCount);
-                        }*/
+                        if ("500".equals(responseObject.getData().getCode())) {
+                            //log.info(response);
+                            errorTotalCount = errorTotalCount + 1;
+                        }
+                        log.info("本次传输error数据总数：{}", errorTotalCount);
                     } catch (Exception e) {
                         log.info("请求错误：" + e);
                         whileFlag = false;
@@ -1259,6 +1293,7 @@ public class SiLuService {
         int pageNo = 0;
         int pageSize = 50;
         int totalCount = 0;
+        int errorTotalCount = 0;
         querySql = querySql + "WHERE `check_mission`.companyCode = '" + companyCode + "' order by `check_mission`.`updateDate` asc limit ";
         while (whileFlag) {
             String sql = querySql + pageNo * pageSize + ", " + pageSize;
@@ -1289,9 +1324,12 @@ public class SiLuService {
                         String response = HttpClientUtil.sendPostRequest(url, headers, jsonBody);
                         responseObject = JSON.to(ResponseObject.class, response);
                         log.info(response);
-                        /*if ("500".equals(responseObject.getData().getCode())) {
-                            log.info(response);
-                        }*/
+                        log.info("本次传输数据总数：{}", totalCount);
+                        if ("500".equals(responseObject.getData().getCode())) {
+                            //log.info(response);
+                            errorTotalCount = errorTotalCount + 1;
+                        }
+                        log.info("本次传输error数据总数：{}", errorTotalCount);
                     } catch (Exception e) {
                         log.info("请求错误：" + e);
                         whileFlag = false;
@@ -1327,6 +1365,7 @@ public class SiLuService {
         int pageNo = 0;
         int pageSize = 50;
         int totalCount = 0;
+        int errorTotalCount = 0;
         querySql = querySql + "where `check_record`.companyCode = '" + companyCode + "' order by `check_record`.`checkTime` asc limit ";
         while (whileFlag) {
             String sql = querySql + pageNo * pageSize + ", " + pageSize;
@@ -1358,9 +1397,11 @@ public class SiLuService {
                         responseObject = JSON.to(ResponseObject.class, response);
                         log.info(response);
                         log.info("本次传输数据总数：{}", totalCount);
-                        /*if ("500".equals(responseObject.getData().getCode())) {
-                            log.info(response);
-                        }*/
+                        if ("500".equals(responseObject.getData().getCode())) {
+                            //log.info(response);
+                            errorTotalCount = errorTotalCount + 1;
+                        }
+                        log.info("本次传输error数据总数：{}", errorTotalCount);
                     } catch (Exception e) {
                         log.info("请求错误：" + e);
                         whileFlag = false;
@@ -1396,6 +1437,7 @@ public class SiLuService {
         int pageNo = 0;
         int pageSize = 50;
         int totalCount = 0;
+        int errorTotalCount = 0;
         querySql = querySql + "where date_format(`check_record`.checkTime,'%Y-%m-%d %H-%i-%s') < '" + time + "' order by `check_record`.`checkTime` asc limit ";
         while (whileFlag) {
             String sql = querySql + pageNo * pageSize + ", " + pageSize;
@@ -1427,9 +1469,11 @@ public class SiLuService {
                         responseObject = JSON.to(ResponseObject.class, response);
                         log.info(response);
                         log.info("本次传输数据总数：{}", totalCount);
-                        /*if ("500".equals(responseObject.getData().getCode())) {
-                            log.info(response);
-                        }*/
+                        if ("500".equals(responseObject.getData().getCode())) {
+                            //log.info(response);
+                            errorTotalCount = errorTotalCount + 1;
+                        }
+                        log.info("本次传输error数据总数：{}", errorTotalCount);
                     } catch (Exception e) {
                         log.info("请求错误：" + e);
                         whileFlag = false;
@@ -1465,6 +1509,7 @@ public class SiLuService {
         int pageNo = 0;
         int pageSize = 50;
         int totalCount = 0;
+        int errorTotalCount = 0;
         querySql = querySql + "WHERE `danger_info`.companyCode = '" + companyCode + "' order by `danger_info`.`updateDate` asc limit ";
         while (whileFlag) {
             String sql = querySql + pageNo * pageSize + ", " + pageSize;
@@ -1496,9 +1541,11 @@ public class SiLuService {
                         responseObject = JSON.to(ResponseObject.class, response);
                         log.info(response);
                         log.info("本次传输数据总数：{}", totalCount);
-                        /*if ("500".equals(responseObject.getData().getCode())) {
-                            log.info(response);
-                        }*/
+                        if ("500".equals(responseObject.getData().getCode())) {
+                            //log.info(response);
+                            errorTotalCount = errorTotalCount + 1;
+                        }
+                        log.info("本次传输error数据总数：{}", errorTotalCount);
                     } catch (Exception e) {
                         log.info("请求错误：" + e);
                         whileFlag = false;
@@ -1534,6 +1581,7 @@ public class SiLuService {
         int pageNo = 0;
         int pageSize = 50;
         int totalCount = 0;
+        int errorTotalCount = 0;
         querySql = querySql + "WHERE `maintenance_record`.companyCode = '" + companyCode + "' order by `maintenance_record`.`updateDate` asc limit ";
         while (whileFlag) {
             String sql = querySql + pageNo * pageSize + ", " + pageSize;
@@ -1565,9 +1613,11 @@ public class SiLuService {
                         responseObject = JSON.to(ResponseObject.class, response);
                         log.info(response);
                         log.info("本次传输数据总数：{}", totalCount);
-                        /*if ("500".equals(responseObject.getData().getCode())) {
-                            log.info(response);
-                        }*/
+                        if ("500".equals(responseObject.getData().getCode())) {
+                            //log.info(response);
+                            errorTotalCount = errorTotalCount + 1;
+                        }
+                        log.info("本次传输error数据总数：{}", errorTotalCount);
                     } catch (Exception e) {
                         log.info("请求错误：" + e);
                         whileFlag = false;
