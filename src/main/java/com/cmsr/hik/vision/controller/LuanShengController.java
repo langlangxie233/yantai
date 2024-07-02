@@ -26,7 +26,7 @@ public class LuanShengController {
      *
      * @return 更新结果
      */
-    @PostMapping(value = "/luansheng/alarm/reception", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/view/emergency/alarm/reception", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResultObj adAlarmReception(@RequestBody AlarmReceptionDto dto) {
         return luanShengService.adAlarmReception(dto);
     }
@@ -36,7 +36,7 @@ public class LuanShengController {
      *
      * @return 更新结果
      */
-    @PostMapping(value = "/luansheng/emergency/drill", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/view/emergency/emergency/drill", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResultObj addEmergencyDrill(@RequestBody EmergencyDrillDto dto) {
         return luanShengService.addEmergencyDrill(dto);
     }

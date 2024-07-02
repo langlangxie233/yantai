@@ -6,6 +6,11 @@ import lombok.Setter;
 
 import java.time.LocalDateTime;
 
+/**
+ *
+ * @author 上研院 xiexianlang
+ * @date 2024/7/2 10:55
+ */
 @Setter
 @Getter
 public class EmergencyDrillDto {
@@ -15,7 +20,7 @@ public class EmergencyDrillDto {
     private String exerciseName;
     private String exerciseType;
     private String exercisePurpose;
-    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime drillEndTime;
     private String number;
     private String address;

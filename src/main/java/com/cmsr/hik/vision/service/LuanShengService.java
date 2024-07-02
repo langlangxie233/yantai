@@ -52,7 +52,7 @@ public class LuanShengService {
                     ")";
             anJianDorisTemplate.update(sql);
         } catch (Exception e) {
-            resultObj.setCode(500);
+            resultObj.setCode(400);
             resultObj.setMsg("数据录入失败");
             log.error("数据录入失败", e);
         }
@@ -83,7 +83,7 @@ public class LuanShengService {
                     ")";
             anJianDorisTemplate.update(sql);
         } catch (Exception e) {
-            resultObj.setCode(500);
+            resultObj.setCode(400);
             resultObj.setMsg("数据录入失败");
             log.error("数据录入失败", e);
         }
