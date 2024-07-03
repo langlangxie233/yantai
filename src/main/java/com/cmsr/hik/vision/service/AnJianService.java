@@ -79,6 +79,7 @@ public class AnJianService {
                 //log.info("header：" + headers.toString());
                 //log.info("更新违规列表jsonBody：" + jsonBody);
                 String response = HttpClientUtil.sendPostRequest(url, headers, jsonBody);
+                log.info("违规列表response：" + response);
                 JSONObject res = JSONObject.parseObject(response);
                 Integer pages = res.getJSONObject("data").getJSONObject("data").getInteger("pages");
                 List<ViolationInfo> records = JSONArray.parseArray(res.getJSONObject("data").getJSONObject("data").get("records").toString(), ViolationInfo.class);
@@ -93,7 +94,7 @@ public class AnJianService {
                     });
                     //入库
                     if (!inserts.isEmpty()) {
-                        //log.info("inserts:" + inserts.size());
+                        log.info("inserts:" + inserts.size());
                         //log.info("inserts:" + inserts.get(0).toString());
                         String sql="insert into anjian.violation_info " +
                                 "(`id`,`metadata`,`superUserId`,`message`,`userName`,`handleUserId`,`recordFps`,`picPath`,`cameraId`,`violationName`,`addressName`,`recognitionName`,`recordPath`,`cameraName`,`status`,`updatedAt`,`createdAt`,`recordDuration`) VALUES " +
@@ -129,7 +130,7 @@ public class AnJianService {
                         inserts.clear();
                     }
                     if (!updates.isEmpty()) {
-                        //log.info("updates:" + updates.size());
+                        log.info("updates:" + updates.size());
                         String sql="update anjian.violation_info " +
                                 "set `metadata`=?,`superUserId`=?,`message`=?,`userName`=?,`handleUserId`=?,`recordFps`=?,`picPath`=?,`cameraId`=?,`violationName`=?,`addressName`=?,`recognitionName`=?,`recordPath`=?,`cameraName`=?,`status`=?,`updatedAt`=?,`createdAt`=?,`recordDuration`=? " +
                                 "where `id`=?";
