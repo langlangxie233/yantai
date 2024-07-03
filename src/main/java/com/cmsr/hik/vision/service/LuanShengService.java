@@ -36,7 +36,7 @@ public class LuanShengService {
         //入库
         try {
             dto.setId(UUID.randomUUID().toString());
-            String sql="insert into emergency.emg_emergency (`id`,`accident_name`,`alarm_time`,`accident_type`,`latitude`,`longitude`,`enterprise_name`,`reported_name`,`accident_description`,`judgment_process_record`,`del_flag`) VALUES " +
+            String sql="insert into ythg_ods.ods_silu_emergency_emg_emergency (`id`,`accident_name`,`alarm_time`,`accident_type`,`latitude`,`longitude`,`enterprise_name`,`reported_name`,`accident_description`,`judgment_process_record`,`deleted`) VALUES " +
                     "(" +
                     "'" + dto.getId() + "', "  +
                     "'" + dto.getAccidentName() + "', "  +
@@ -66,7 +66,7 @@ public class LuanShengService {
         //入库
         try {
             dto.setId(UUID.randomUUID().toString());
-            String sql="insert into emergency.emg_exercise_record (`id`,`plan_code`,`exercise_name`,`exercise_type`,`exercise_purpose`,`drill_end_time`,`number`,`address`,`exercise_process`,`exercise_summary`,`eval_reason`,`del_flag`) VALUES " +
+            String sql="insert into emergency.emg_exercise_record (`id`,`plan_code`,`execrise_name`,`exercise_type`,`execrise_purpose`,`drill_end_time`,`number`,`address`,`execrise_process`,`execrise_summary`,`eval_reason`,`del_flag`) VALUES " +
                     "(" +
                     "'" + dto.getId() + "', "  +
                     "'" + dto.getPlanCode() + "', "  +
