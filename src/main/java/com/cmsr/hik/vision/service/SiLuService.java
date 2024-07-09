@@ -66,7 +66,7 @@ public class SiLuService {
         //String queryLatestDateTimeSql = "select createDate from ythg_ods.dwd_sec_security_risk_unit order by createDate asc limit 1";
         String path = "/sec_security_risk_unit";
         int pageNo = 0;
-        int pageSize = 50;
+        int pageSize = 20;
         int totalCount = 0;
         int errorTotalCount = 0;
         if (!"1".equals(firstFlag)) {
@@ -142,7 +142,7 @@ public class SiLuService {
         //String queryLatestDateTimeSql = "select createDate from ythg_ods.dwd_sec_security_risk_events order by createDate asc limit 1";
         String path = "/sec_security_risk_events";
         int pageNo = 0;
-        int pageSize = 50;
+        int pageSize = 20;
         int totalCount = 0;
         int errorTotalCount = 0;
         if (!"1".equals(firstFlag)) {
@@ -220,7 +220,7 @@ public class SiLuService {
         String path = "/sec_security_risk_control_measures";
 
         int pageNo = 0;
-        int pageSize = 50;
+        int pageSize = 20;
         int totalCount = 0;
         int errorTotalCount = 0;
         if (!"1".equals(firstFlag)) {
@@ -297,7 +297,7 @@ public class SiLuService {
         //String queryLatestDateTimeSql = "select createDate from ythg_ods.dwd_sec_hidden_check_mission order by createDate asc limit 1";
         String path = "/sec_hidden_check_mission";
         int pageNo = 0;
-        int pageSize = 50;
+        int pageSize = 20;
         int totalCount = 0;
         int errorTotalCount = 0;
         if (!"1".equals(firstFlag)) {
@@ -374,7 +374,7 @@ public class SiLuService {
         //String queryLatestDateTimeSql = "select createDate from ythg_ods.dwd_sec_hidden_check_record order by createDate asc limit 1";
         String path = "/sec_hidden_check_record";
         int pageNo = 0;
-        int pageSize = 50;
+        int pageSize = 20;
         int totalCount = 0;
         int errorTotalCount = 0;
         if (!"1".equals(firstFlag)) {
@@ -451,7 +451,7 @@ public class SiLuService {
         //String queryLatestDateTimeSql = "select createDate from ythg_ods.dwd_sec_hidden_danger_info order by createDate asc limit 1";
         String path = "/sec_hidden_danger_info";
         int pageNo = 0;
-        int pageSize = 50;
+        int pageSize = 20;
         int totalCount = 0;
         int errorTotalCount = 0;
         if (!"1".equals(firstFlag)) {
@@ -527,7 +527,7 @@ public class SiLuService {
         //String queryLatestDateTimeSql = "select createDate from ythg_ods.dwd_sec_deactivated_maintenance_record order by createDate asc limit 1";
         String path = "/sec_deactivated_maintenance_record";
         int pageNo = 0;
-        int pageSize = 50;
+        int pageSize = 20;
         int totalCount = 0;
         int errorTotalCount = 0;
         if (!"1".equals(firstFlag)) {
@@ -1076,7 +1076,7 @@ public class SiLuService {
         //String queryLatestDateTimeSql = "select createDate from ythg_ods.dwd_sec_security_risk_unit order by createDate asc limit 1";
         String path = "/sec_security_risk_unit";
         int pageNo = 0;
-        int pageSize = 50;
+        int pageSize = 20;
         int totalCount = 0;
         int errorTotalCount = 0;
         querySql = querySql + "WHERE companyCode = '" + companyCode + "' order by `updateDate` asc limit ";
@@ -1147,7 +1147,7 @@ public class SiLuService {
         //String queryLatestDateTimeSql = "select createDate from ythg_ods.dwd_sec_security_risk_events order by createDate asc limit 1";
         String path = "/sec_security_risk_events";
         int pageNo = 0;
-        int pageSize = 50;
+        int pageSize = 20;
         int totalCount = 0;
         int errorTotalCount = 0;
         querySql = querySql + "WHERE `events`.companyCode = '" + companyCode + "' order by `events`.`updateDate` asc limit ";
@@ -1219,7 +1219,7 @@ public class SiLuService {
         //String queryLatestDateTimeSql = "select createDate from ythg_ods.dwd_sec_security_risk_control_measures order by createDate asc limit 1";
         String path = "/sec_security_risk_control_measures";
         int pageNo = 0;
-        int pageSize = 50;
+        int pageSize = 20;
         int totalCount = 0;
         int errorTotalCount = 0;
         querySql = querySql + "WHERE `control_measure`.companyCode = '" + companyCode + "' order by `control_measure`.`updateDate` asc limit ";
@@ -1291,7 +1291,7 @@ public class SiLuService {
         //String queryLatestDateTimeSql = "select createDate from ythg_ods.dwd_sec_hidden_check_mission order by createDate asc limit 1";
         String path = "/sec_hidden_check_mission";
         int pageNo = 0;
-        int pageSize = 50;
+        int pageSize = 20;
         int totalCount = 0;
         int errorTotalCount = 0;
         querySql = querySql + "WHERE `check_mission`.companyCode = '" + companyCode + "' order by `check_mission`.`updateDate` asc limit ";
@@ -1363,7 +1363,7 @@ public class SiLuService {
         //String queryLatestDateTimeSql = "select createDate from ythg_ods.dwd_sec_hidden_check_record order by createDate asc limit 1";
         String path = "/sec_hidden_check_record";
         int pageNo = 0;
-        int pageSize = 50;
+        int pageSize = 20;
         int totalCount = 0;
         int errorTotalCount = 0;
         querySql = querySql + "where `check_record`.companyCode = '" + companyCode + "' order by `check_record`.`checkTime` asc limit ";
@@ -1435,7 +1435,7 @@ public class SiLuService {
         //String queryLatestDateTimeSql = "select createDate from ythg_ods.dwd_sec_hidden_check_record order by createDate asc limit 1";
         String path = "/sec_hidden_check_record";
         int pageNo = 0;
-        int pageSize = 50;
+        int pageSize = 20;
         int totalCount = 0;
         int errorTotalCount = 0;
         querySql = querySql + "where date_format(`check_record`.checkTime,'%Y-%m-%d %H-%i-%s') < '" + time + "' order by `check_record`.`checkTime` asc limit ";
@@ -1507,7 +1507,7 @@ public class SiLuService {
         //String queryLatestDateTimeSql = "select createDate from ythg_ods.dwd_sec_hidden_danger_info order by createDate asc limit 1";
         String path = "/sec_hidden_danger_info";
         int pageNo = 0;
-        int pageSize = 50;
+        int pageSize = 20;
         int totalCount = 0;
         int errorTotalCount = 0;
         querySql = querySql + "WHERE `danger_info`.companyCode = '" + companyCode + "' order by `danger_info`.`updateDate` asc limit ";
@@ -1579,7 +1579,7 @@ public class SiLuService {
         //String queryLatestDateTimeSql = "select createDate from ythg_ods.dwd_sec_deactivated_maintenance_record order by createDate asc limit 1";
         String path = "/sec_deactivated_maintenance_record";
         int pageNo = 0;
-        int pageSize = 50;
+        int pageSize = 20;
         int totalCount = 0;
         int errorTotalCount = 0;
         querySql = querySql + "WHERE `maintenance_record`.companyCode = '" + companyCode + "' order by `maintenance_record`.`updateDate` asc limit ";

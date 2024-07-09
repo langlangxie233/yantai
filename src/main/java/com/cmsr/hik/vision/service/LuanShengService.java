@@ -36,7 +36,7 @@ public class LuanShengService {
         //入库
         try {
             dto.setId(UUID.randomUUID().toString());
-            String sql="insert into ythg_ods.ods_silu_emergency_emg_emergency (`id`,`accident_name`,`alarm_time`,`accident_type`,`latitude`,`longitude`,`enterprise_name`,`reported_name`,`accident_description`,`judgment_process_record`,`deleted`) VALUES " +
+            String sql="insert into ythg_ods.ods_silu_emergency_emg_emergency (`id`,`accident_name`,`alarm_time`,`accident_type`,`latitude`,`longitude`,`enterprise_name`,`reported_name`,`responder`,`accident_description`,`judgment_process_record`,`deleted`) VALUES " +
                     "(" +
                     "'" + dto.getId() + "', "  +
                     "'" + dto.getAccidentName() + "', "  +
@@ -46,6 +46,7 @@ public class LuanShengService {
                     "'" + dto.getLongitude() + "', "  +
                     "'" + dto.getEnterpriseName() + "', "  +
                     "'" + dto.getReportedName() + "', "  +
+                    "'" + dto.getResponder() + "', "  +
                     "'" + dto.getAccidentDescription() + "', "  +
                     "'" + dto.getJudgmentProcessRecord() + "', "  +
                     "'" + dto.getDelFlag() + "'" +

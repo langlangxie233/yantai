@@ -22,8 +22,9 @@ public class AlarmReceptionDto {
     private String accidentType;
     private String latitude;
     private String longitude;
-    private String enterpriseName ;
+    private String enterpriseName;
     private String reportedName;
+    private String responder;
     private String accidentDescription;
     private String judgmentProcessRecord;
     private String delFlag = "0";

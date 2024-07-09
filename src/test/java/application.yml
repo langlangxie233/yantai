@@ -6,10 +6,13 @@ hik:
   app-secret: 9g0qZVnKf2OQQZyrExv5
 
 anjian:
-  url: http://172.168.1.93:30881/wink
-  mobile-phone: 13611111111
-  key: wink
-  secret: winK@2024video
+  url: http://172.168.1.93:38885
+  mobile-phone: 15102116415
+  key: anjianssotoken
+  secret: wdae878678dw23a
+  tenant-id: wdae878678dw23a
+  customer-id: anjianssotoken
+  project: wink
 
 silu:
   url: http://172.168.1.64:6689/api/sync/data

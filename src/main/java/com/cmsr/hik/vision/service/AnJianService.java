@@ -64,13 +64,14 @@ public class AnJianService {
         //调用API发送数据
         while (whileFlag) {
             try {
-                String path = "/video/v1.0.0/violation";
+                String path = "/v1.0.0/violation";
                 Map<String, String> headers = new HashMap<>();
-                String token = getToken();
+                //String token = getToken();
                 //log.info("token:" + token);
                 headers.put("Content-Type", "application/json");
-                headers.put("User-Agent", "google");
-                headers.put("authorization", token);
+                headers.put("tenant_id", httpConfig.getTenantId());
+                headers.put("customer_id", httpConfig.getCustomerId());
+                headers.put("project", httpConfig.getProject());
                 params.put("current", String.valueOf(pageNo));
                 params.put("size", String.valueOf(pageSize));
                 String jsonBody = toJsonBody();
@@ -79,10 +80,10 @@ public class AnJianService {
                 //log.info("header：" + headers.toString());
                 //log.info("更新违规列表jsonBody：" + jsonBody);
                 String response = HttpClientUtil.sendPostRequest(url, headers, jsonBody);
-                log.info("违规列表response：" + response);
+                //log.info("违规列表response：" + response);
                 JSONObject res = JSONObject.parseObject(response);
-                Integer pages = res.getJSONObject("data").getJSONObject("data").getInteger("pages");
-                List<ViolationInfo> records = JSONArray.parseArray(res.getJSONObject("data").getJSONObject("data").get("records").toString(), ViolationInfo.class);
+                Integer pages = res.getJSONObject("data").getInteger("pages");
+                List<ViolationInfo> records = JSONArray.parseArray(res.getJSONObject("data").get("records").toString(), ViolationInfo.class);
                 if (!records.isEmpty()) {
                     records.forEach(l -> {
                         String repeatSql = "select `id` from anjian.violation_info where `id` = '" + l.getId() + "'";
@@ -200,13 +201,14 @@ public class AnJianService {
         //调用API发送数据
         while (whileFlag) {
             try {
-                String path = "/video/v1.0.0/violation";
+                String path = "/v1.0.0/violation";
                 Map<String, String> headers = new HashMap<>();
-                String token = getToken();
+                //String token = getToken();
                 //log.info("token:" + token);
                 headers.put("Content-Type", "application/json");
-                headers.put("User-Agent", "google");
-                headers.put("authorization", token);
+                headers.put("tenant_id", httpConfig.getTenantId());
+                headers.put("customer_id", httpConfig.getCustomerId());
+                headers.put("project", httpConfig.getProject());
                 params.put("current", String.valueOf(pageNo));
                 params.put("size", String.valueOf(pageSize));
                 params.put("status", "1,2");
@@ -217,8 +219,8 @@ public class AnJianService {
                 //log.info("更新违规状态列表jsonBody：" + jsonBody.replace("\"1,2\"", "[1,2]"));
                 String response = HttpClientUtil.sendPostRequest(url, headers, jsonBody.replace("\"1,2\"", "[1,2]"));
                 JSONObject res = JSONObject.parseObject(response);
-                Integer pages = res.getJSONObject("data").getJSONObject("data").getInteger("pages");
-                List<ViolationInfo> records = JSONArray.parseArray(res.getJSONObject("data").getJSONObject("data").get("records").toString(), ViolationInfo.class);
+                Integer pages = res.getJSONObject("data").getInteger("pages");
+                List<ViolationInfo> records = JSONArray.parseArray(res.getJSONObject("data").get("records").toString(), ViolationInfo.class);
                 if (!records.isEmpty()) {
                     records.forEach(l -> {
                         String repeatSql = "select `id` from anjian.violation_info where `id` = '" + l.getId() + "'";
@@ -298,13 +300,14 @@ public class AnJianService {
         //调用API发送数据
         while (whileFlag) {
             try {
-                String path = "/video/v1.0.0/camera/page";
+                String path = "/v1.0.0/camera/page";
                 Map<String, String> headers = new HashMap<>();
-                String token = getToken();
+                //String token = getToken();
                 //log.info("token:" + token);
                 headers.put("Content-Type", "application/json");
-                headers.put("User-Agent", "google");
-                headers.put("authorization", token);
+                headers.put("tenant_id", httpConfig.getTenantId());
+                headers.put("customer_id", httpConfig.getCustomerId());
+                headers.put("project", httpConfig.getProject());
                 params.put("current", String.valueOf(pageNo));
                 params.put("size", String.valueOf(pageSize));
                 //headers.put("Accept", "application/json");
@@ -316,8 +319,8 @@ public class AnJianService {
                 //log.info("jsonBody：" + jsonBody);
                 String response = HttpClientUtil.sendPostRequest(url, headers, jsonBody);
                 JSONObject res = JSONObject.parseObject(response);
-                Integer pages = res.getJSONObject("data").getJSONObject("data").getInteger("pages");
-                List<CameraVo> records = JSONArray.parseArray(res.getJSONObject("data").getJSONObject("data").get("records").toString(), CameraVo.class);
+                Integer pages = res.getJSONObject("data").getInteger("pages");
+                List<CameraVo> records = JSONArray.parseArray(res.getJSONObject("data").get("records").toString(), CameraVo.class);
                 if (!records.isEmpty()) {
                     records.forEach(l -> {
                         String repeatSql = "select `id` from anjian.camera_info where `id` = '" + l.getId() + "'";

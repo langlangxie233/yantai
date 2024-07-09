@@ -8,6 +8,11 @@ hik:
 silu:
   url: http://172.168.1.64:6689/api/sync/data
 
+anjian:
+  url: http://172.168.1.93:30881/wink
+  mobile-phone: 15102116415
+  key: admin
+  secret: China2022!
 
 datasource:
   doris:

@@ -15,4 +15,10 @@ public class AnJianHttpConfig {
     private String key;
     @Value("${anjian.secret}")
     private String secret;
+    @Value("${anjian.tenant-id}")
+    private String tenantId;
+    @Value("${anjian.customer-id}")
+    private String customerId;
+    @Value("${anjian.project}")
+    private String project;
 }
