@@ -186,6 +186,143 @@ public class AnJianService {
     }
 
     /**
+     * 更新违规列表-全量
+     *
+     * @return 更新结果
+     */
+    public String updateQueryViolationListAll() {
+        //初始化
+        boolean whileFlag = true;
+        params.clear();
+        int pageNo = 1;
+        int pageSize = 50;
+        List<ViolationInfo> inserts = new ArrayList<>();
+        List<ViolationInfo> updates = new ArrayList<>();
+        //调用API发送数据
+        while (whileFlag) {
+            try {
+                String path = "/v1.0.0/violation";
+                Map<String, String> headers = new HashMap<>();
+                //String token = getToken();
+                //log.info("token:" + token);
+                headers.put("Content-Type", "application/json");
+                headers.put("tenant_id", httpConfig.getTenantId());
+                headers.put("customer_id", httpConfig.getCustomerId());
+                headers.put("project", httpConfig.getProject());
+                params.put("current", String.valueOf(pageNo));
+                params.put("size", String.valueOf(pageSize));
+                String jsonBody = toJsonBody();
+                String url = httpConfig.getUrl() + path;
+                log.info("url：" + url);
+                //log.info("header：" + headers.toString());
+                //log.info("更新违规列表jsonBody：" + jsonBody);
+                String response = HttpClientUtil.sendPostRequest(url, headers, jsonBody);
+                //log.info("违规列表response：" + response);
+                JSONObject res = JSONObject.parseObject(response);
+                Integer pages = res.getJSONObject("data").getInteger("pages");
+                List<ViolationInfo> records = JSONArray.parseArray(res.getJSONObject("data").get("records").toString(), ViolationInfo.class);
+                if (!records.isEmpty()) {
+                    records.forEach(l -> {
+                        String repeatSql = "select `id` from anjian.violation_info where `id` = '" + l.getId() + "'";
+                        if (0 == anJianDorisTemplate.queryForList(repeatSql).size()) {
+                            inserts.add(l);
+                        } else {
+                            updates.add(l);
+                        }
+                    });
+                    //入库
+                    if (!inserts.isEmpty()) {
+                        log.info("inserts:" + inserts.size());
+                        //log.info("inserts:" + inserts.get(0).toString());
+                        String sql="insert into anjian.violation_info " +
+                                "(`id`,`metadata`,`superUserId`,`message`,`userName`,`handleUserId`,`recordFps`,`picPath`,`cameraId`,`violationName`,`addressName`,`recognitionName`,`recordPath`,`cameraName`,`status`,`updatedAt`,`createdAt`,`recordDuration`) VALUES " +
+                                "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                        anJianDorisTemplate.batchUpdate(sql, new BatchPreparedStatementSetter() {
+                            @Override
+                            public void setValues(PreparedStatement ps, int i) throws SQLException {
+                                ps.setObject(1, inserts.get(i).getId());
+                                ps.setObject(2, inserts.get(i).getMetadata());
+                                ps.setObject(3, inserts.get(i).getSuperUserId());
+                                ps.setObject(4, inserts.get(i).getMessage());
+                                ps.setObject(5, inserts.get(i).getUserName());
+                                ps.setObject(6, inserts.get(i).getHandleUserId());
+                                ps.setObject(7, inserts.get(i).getRecordFps());
+                                ps.setObject(8, inserts.get(i).getPicPath());
+                                ps.setObject(9, inserts.get(i).getCameraId());
+                                ps.setObject(10, inserts.get(i).getViolationName());
+                                ps.setObject(11, inserts.get(i).getAddressName());
+                                ps.setObject(12, inserts.get(i).getRecognitionName());
+                                ps.setObject(13, inserts.get(i).getRecordPath());
+                                ps.setObject(14, inserts.get(i).getCameraName());
+                                ps.setObject(15, inserts.get(i).getStatus());
+                                ps.setObject(16, inserts.get(i).getUpdatedAt());
+                                ps.setObject(17, inserts.get(i).getCreatedAt());
+                                ps.setObject(18, inserts.get(i).getRecordDuration());
+                            }
+                            @Override
+                            public int getBatchSize() {
+                                //返回要插入的行数
+                                return inserts.size();
+                            }
+                        });
+                        inserts.clear();
+                    }
+                    if (!updates.isEmpty()) {
+                        log.info("updates:" + updates.size());
+                        String sql="update anjian.violation_info " +
+                                "set `metadata`=?,`superUserId`=?,`message`=?,`userName`=?,`handleUserId`=?,`recordFps`=?,`picPath`=?,`cameraId`=?,`violationName`=?,`addressName`=?,`recognitionName`=?,`recordPath`=?,`cameraName`=?,`status`=?,`updatedAt`=?,`createdAt`=?,`recordDuration`=? " +
+                                "where `id`=?";
+                        anJianDorisTemplate.batchUpdate(sql, new BatchPreparedStatementSetter() {
+                            @Override
+                            public void setValues(PreparedStatement ps, int i) throws SQLException {
+                                ps.setObject(1, updates.get(i).getMetadata());
+                                ps.setObject(2, updates.get(i).getSuperUserId());
+                                ps.setObject(3, updates.get(i).getMessage());
+                                ps.setObject(4, updates.get(i).getUserName());
+                                ps.setObject(5, updates.get(i).getHandleUserId());
+                                ps.setObject(6, updates.get(i).getRecordFps());
+                                ps.setObject(7, updates.get(i).getPicPath());
+                                ps.setObject(8, updates.get(i).getCameraId());
+                                ps.setObject(9, updates.get(i).getViolationName());
+                                ps.setObject(10, updates.get(i).getAddressName());
+                                ps.setObject(11, updates.get(i).getRecognitionName());
+                                ps.setObject(12, updates.get(i).getRecordPath());
+                                ps.setObject(13, updates.get(i).getCameraName());
+                                ps.setObject(14, updates.get(i).getStatus());
+                                ps.setObject(15, updates.get(i).getUpdatedAt());
+                                ps.setObject(16, updates.get(i).getCreatedAt());
+                                ps.setObject(17, updates.get(i).getRecordDuration());
+                                ps.setObject(18, updates.get(i).getId());
+                            }
+                            @Override
+                            public int getBatchSize() {
+                                //返回要插入的行数
+                                return updates.size();
+                            }
+                        });
+                        updates.clear();
+                    }
+
+                    if (pageNo < pages) {
+                        pageNo++;
+                        headers.clear();
+                        params.put("current", String.valueOf(pageNo));
+                    } else {
+                        whileFlag = false;
+                    }
+                } else {
+                    log.info("暂无更新数据");
+                    return "暂无更新数据";
+                }
+            } catch (Exception e) {
+                log.info("请求错误：" + e);
+                whileFlag = false;
+            }
+        }
+        return null;
+    }
+
+    /**
      * 更新违规状态列表
      *
      * @return 更新结果

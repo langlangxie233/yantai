@@ -32,6 +32,16 @@ public class AnJianController {
      *
      * @return 更新结果
      */
+    @GetMapping(value = "/video/violation/all", produces = MediaType.APPLICATION_JSON_VALUE)
+    public String updateQueryViolationListAll() {
+        return anJianService.updateQueryViolationListAll();
+    }
+
+    /**
+     * 查询违规列表
+     *
+     * @return 更新结果
+     */
     @GetMapping(value = "/video/violation/status", produces = MediaType.APPLICATION_JSON_VALUE)
     public String updateQueryViolationStatusList() {
         return anJianService.updateQueryViolationStatusList();
