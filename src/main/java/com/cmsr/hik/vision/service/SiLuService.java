@@ -455,7 +455,7 @@ public class SiLuService {
         int totalCount = 0;
         int errorTotalCount = 0;
         if (!"1".equals(firstFlag)) {
-            querySql = querySql + "where date_format(`danger_info`.`updateDate`,'%Y-%m-%d %H-%i-%s') > '" + DateTimeUtil.getHoursBefore(2) + "' ";
+            querySql = querySql + "where date_format(`danger_info`.`in_doris_time`,'%Y-%m-%d %H-%i-%s') > '" + DateTimeUtil.getHoursBefore(10) + "' ";
         } else {
             log.warn("首次更新数据库中······");
         }
