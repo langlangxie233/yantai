@@ -70,7 +70,7 @@ public class SiLuService {
         int totalCount = 0;
         int errorTotalCount = 0;
         if (!"1".equals(firstFlag)) {
-            querySql = querySql + "WHERE date_format(`updateDate`,'%Y-%m-%d %H-%i-%s') > '" + DateTimeUtil.getHoursBefore(2) + "' ";
+            querySql = querySql + "WHERE date_format(`in_doris_time`,'%Y-%m-%d %H-%i-%s') > '" + DateTimeUtil.getHoursBefore(10) + "' ";
         } else {
             log.warn("首次更新数据库中······");
         }
@@ -146,7 +146,7 @@ public class SiLuService {
         int totalCount = 0;
         int errorTotalCount = 0;
         if (!"1".equals(firstFlag)) {
-            querySql = querySql + "WHERE `events`.`updateDate` > '" + DateTimeUtil.getHoursBefore(2) + "' ";
+            querySql = querySql + "WHERE `events`.`in_doris_time`,'%Y-%m-%d %H-%i-%s') > '" + DateTimeUtil.getHoursBefore(10) + "' ";
         } else {
             log.warn("首次更新数据库中······");
         }
@@ -224,7 +224,7 @@ public class SiLuService {
         int totalCount = 0;
         int errorTotalCount = 0;
         if (!"1".equals(firstFlag)) {
-            querySql = querySql + "where date_format(`control_measure`.`updateDate`,'%Y-%m-%d %H-%i-%s') > '" + DateTimeUtil.getHoursBefore(2) + "' ";
+            querySql = querySql + "where date_format(`control_measure`.`in_doris_time`,'%Y-%m-%d %H-%i-%s') > '" + DateTimeUtil.getHoursBefore(10) + "' ";
         } else {
             log.warn("首次更新数据库中······");
         }
@@ -301,7 +301,7 @@ public class SiLuService {
         int totalCount = 0;
         int errorTotalCount = 0;
         if (!"1".equals(firstFlag)) {
-            querySql = querySql + "where date_format(`check_mission`.`updateDate`,'%Y-%m-%d %H-%i-%s') > '" + DateTimeUtil.getHoursBefore(2) + "' ";
+            querySql = querySql + "where date_format(`check_mission`.`in_doris_time`,'%Y-%m-%d %H-%i-%s') > '" + DateTimeUtil.getHoursBefore(10) + "' ";
         } else {
             log.warn("首次更新数据库中······");
         }
@@ -378,7 +378,7 @@ public class SiLuService {
         int totalCount = 0;
         int errorTotalCount = 0;
         if (!"1".equals(firstFlag)) {
-            querySql = querySql + "where date_format(`check_record`.`checkTime`,'%Y-%m-%d %H-%i-%s') > '" + DateTimeUtil.getHoursBefore(2) + "' ";
+            querySql = querySql + "where date_format(`check_record`.`in_doris_time`,'%Y-%m-%d %H-%i-%s') > '" + DateTimeUtil.getHoursBefore(10) + "' ";
         } else {
             log.warn("首次更新数据库中······");
         }
@@ -531,7 +531,7 @@ public class SiLuService {
         int totalCount = 0;
         int errorTotalCount = 0;
         if (!"1".equals(firstFlag)) {
-            querySql = querySql + "where date_format(`maintenance_record`.`updateDate`,'%Y-%m-%d %H-%i-%s') > '" + DateTimeUtil.getHoursBefore(2) + "' ";
+            querySql = querySql + "where date_format(`maintenance_record`.`in_doris_time`,'%Y-%m-%d %H-%i-%s') > '" + DateTimeUtil.getHoursBefore(10) + "' ";
         } else {
             log.warn("首次更新数据库中······");
         }
