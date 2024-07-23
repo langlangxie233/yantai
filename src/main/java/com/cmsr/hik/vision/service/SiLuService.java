@@ -70,11 +70,11 @@ public class SiLuService {
         int totalCount = 0;
         int errorTotalCount = 0;
         if (!"1".equals(firstFlag)) {
-            querySql = querySql + "WHERE date_format(`in_doris_time`,'%Y-%m-%d %H-%i-%s') > '" + DateTimeUtil.getHoursBefore(10) + "' ";
+            querySql = querySql + "WHERE `in_doris_time` > '" + DateTimeUtil.getHoursBefore(10) + "' ";
         } else {
             log.warn("首次更新数据库中······");
         }
-        querySql = querySql + "order by `updateDate` asc limit ";
+        querySql = querySql + "order by `updateDate`, `id` asc limit ";
         while (whileFlag) {
             String sql = querySql + pageNo * pageSize + ", " + pageSize;
             ////log.info("<=====================sql语句==============================>");
@@ -82,7 +82,7 @@ public class SiLuService {
             try{
                 List<SecSecurityRiskUnitDto> list = siLuDorisTemplate.query(sql, new BeanPropertyRowMapper<>(SecSecurityRiskUnitDto.class));
                 if (!list.isEmpty()) {
-                    //log.info("<====================数据库查到的数据===========================>");
+                    log.info("<====================数据库查到的数据===========================>");
                     //log.info("list.size:" + list.size());
                     //list.forEach(l -> log.info(l.getId()));
                     //log.info("list:" + JSON.toJSONString(list));
@@ -105,7 +105,8 @@ public class SiLuService {
                         log.info(response);
                         log.info("本次传输数据总数：{}", totalCount);
                         if ("500".equals(responseObject.getData().getCode())) {
-                            //log.info(response);
+                            log.info(response);
+                            log.info("list:" + JSON.toJSONString(list));
                             errorTotalCount = errorTotalCount + 1;
                         }
                         log.info("本次传输error数据总数：{}", errorTotalCount);
@@ -146,11 +147,11 @@ public class SiLuService {
         int totalCount = 0;
         int errorTotalCount = 0;
         if (!"1".equals(firstFlag)) {
-            querySql = querySql + "WHERE `events`.`in_doris_time`,'%Y-%m-%d %H-%i-%s') > '" + DateTimeUtil.getHoursBefore(10) + "' ";
+            querySql = querySql + "WHERE `events`.`in_doris_time` > '" + DateTimeUtil.getHoursBefore(10) + "' ";
         } else {
             log.warn("首次更新数据库中······");
         }
-        querySql = querySql + "order by date_format(`events`.`updateDate`,'%Y-%m-%d %H-%i-%s') asc limit ";
+        querySql = querySql + "order by `events`.`updateDate`, `events`.`id` asc limit ";
         while (whileFlag) {
             String sql = querySql + pageNo * pageSize + ", " + pageSize;
             ////log.info("<=====================sql语句==============================>");
@@ -158,7 +159,7 @@ public class SiLuService {
             try{
                 List<SecSecurityRiskEventsDto> list = siLuDorisTemplate.query(sql, new BeanPropertyRowMapper<>(SecSecurityRiskEventsDto.class));
                 if (!list.isEmpty()) {
-                    //log.info("<====================数据库查到的数据===========================>");
+                    log.info("<====================数据库查到的数据===========================>");
                     //log.info("list.size:" + list.size());
                     //list.forEach(l -> log.info(l.getId()));
                     //log.info("list:" + JSON.toJSONString(list));
@@ -182,7 +183,8 @@ public class SiLuService {
                         log.info(response);
                         log.info("本次传输数据总数：{}", totalCount);
                         if ("500".equals(responseObject.getData().getCode())) {
-                            //log.info(response);
+                            log.info(response);
+                            log.info("list:" + JSON.toJSONString(list));
                             errorTotalCount = errorTotalCount + 1;
                         }
                         log.info("本次传输error数据总数：{}", errorTotalCount);
@@ -224,11 +226,11 @@ public class SiLuService {
         int totalCount = 0;
         int errorTotalCount = 0;
         if (!"1".equals(firstFlag)) {
-            querySql = querySql + "where date_format(`control_measure`.`in_doris_time`,'%Y-%m-%d %H-%i-%s') > '" + DateTimeUtil.getHoursBefore(10) + "' ";
+            querySql = querySql + "where `control_measure`.`in_doris_time` > '" + DateTimeUtil.getHoursBefore(10) + "' ";
         } else {
             log.warn("首次更新数据库中······");
         }
-        querySql = querySql + "order by `control_measure`.`updateDate` asc limit ";
+        querySql = querySql + "order by `control_measure`.`updateDate`, `control_measure`.`id` asc limit ";
         while (whileFlag) {
             String sql = querySql + pageNo * pageSize + ", " + pageSize;
             //log.info("<=====================sql语句==============================>");
@@ -236,7 +238,7 @@ public class SiLuService {
             try{
                 List<SecSecurityRiskControlMeasuresDto> list = siLuDorisTemplate.query(sql, new BeanPropertyRowMapper<>(SecSecurityRiskControlMeasuresDto.class));
                 if (!list.isEmpty()) {
-                    //log.info("<====================数据库查到的数据===========================>");
+                    log.info("<====================数据库查到的数据===========================>");
                     //log.info("list.size:" + list.size());
                     //list.forEach(l -> log.info(l.getId()));
                     //log.info("list:" + JSON.toJSONString(list));
@@ -260,7 +262,8 @@ public class SiLuService {
                         log.info(response);
                         log.info("本次传输数据总数：{}", totalCount);
                         if ("500".equals(responseObject.getData().getCode())) {
-                            //log.info(response);
+                            log.info(response);
+                            log.info("list:" + JSON.toJSONString(list));
                             errorTotalCount = errorTotalCount + 1;
                         }
                         log.info("本次传输error数据总数：{}", errorTotalCount);
@@ -301,11 +304,11 @@ public class SiLuService {
         int totalCount = 0;
         int errorTotalCount = 0;
         if (!"1".equals(firstFlag)) {
-            querySql = querySql + "where date_format(`check_mission`.`in_doris_time`,'%Y-%m-%d %H-%i-%s') > '" + DateTimeUtil.getHoursBefore(10) + "' ";
+            querySql = querySql + "where `check_mission`.`in_doris_time` > '" + DateTimeUtil.getHoursBefore(10) + "' ";
         } else {
             log.warn("首次更新数据库中······");
         }
-        querySql = querySql + "order by `check_mission`.`updateDate` asc limit ";
+        querySql = querySql + "order by `check_mission`.`updateDate`, `check_mission`.`id` asc limit ";
         while (whileFlag) {
             String sql = querySql + pageNo * pageSize + ", " + pageSize;
             //log.info("<=====================sql语句==============================>");
@@ -313,7 +316,7 @@ public class SiLuService {
             try{
                 List<SecHiddenCheckMissionDto> list = siLuDorisTemplate.query(sql, new BeanPropertyRowMapper<>(SecHiddenCheckMissionDto.class));
                 if (!list.isEmpty()) {
-                    //log.info("<====================数据库查到的数据===========================>");
+                    log.info("<====================数据库查到的数据===========================>");
                     //log.info("list.size:" + list.size());
                     //list.forEach(l -> log.info(l.getId()));
                     //log.info("list:" + JSON.toJSONString(list));
@@ -337,7 +340,8 @@ public class SiLuService {
                         log.info(response);
                         log.info("本次传输数据总数：{}", totalCount);
                         if ("500".equals(responseObject.getData().getCode())) {
-                            //log.info(response);
+                            log.info(response);
+                            log.info("list:" + JSON.toJSONString(list));
                             errorTotalCount = errorTotalCount + 1;
                         }
                         log.info("本次传输error数据总数：{}", errorTotalCount);
@@ -378,11 +382,11 @@ public class SiLuService {
         int totalCount = 0;
         int errorTotalCount = 0;
         if (!"1".equals(firstFlag)) {
-            querySql = querySql + "where date_format(`check_record`.`in_doris_time`,'%Y-%m-%d %H-%i-%s') > '" + DateTimeUtil.getHoursBefore(10) + "' ";
+            querySql = querySql + "where `check_record`.`in_doris_time` > '" + DateTimeUtil.getHoursBefore(10) + "' ";
         } else {
             log.warn("首次更新数据库中······");
         }
-        querySql = querySql + "order by `check_record`.`checkTime` asc limit ";
+        querySql = querySql + "order by `check_record`.`checkTime`, `check_record`.`id` asc limit ";
         while (whileFlag) {
             String sql = querySql + pageNo * pageSize + ", " + pageSize;
             //log.info("<=====================sql语句==============================>");
@@ -390,7 +394,7 @@ public class SiLuService {
             try{
                 List<SecHiddenCheckRecordDto> list = siLuDorisTemplate.query(sql, new BeanPropertyRowMapper<>(SecHiddenCheckRecordDto.class));
                 if (!list.isEmpty()) {
-                    //log.info("<====================数据库查到的数据===========================>");
+                    log.info("<====================数据库查到的数据===========================>");
                     //log.info("list.size:" + list.size());
                     //list.forEach(l -> log.info(l.getId()));
                     //log.info("list:" + JSON.toJSONString(list));
@@ -414,7 +418,8 @@ public class SiLuService {
                         log.info(response);
                         log.info("本次传输数据总数：{}", totalCount);
                         if ("500".equals(responseObject.getData().getCode())) {
-                            //log.info(response);
+                            log.info(response);
+                            log.info("list:" + JSON.toJSONString(list));
                             errorTotalCount = errorTotalCount + 1;
                         }
                         log.info("本次传输error数据总数：{}", errorTotalCount);
@@ -455,11 +460,11 @@ public class SiLuService {
         int totalCount = 0;
         int errorTotalCount = 0;
         if (!"1".equals(firstFlag)) {
-            querySql = querySql + "where date_format(`danger_info`.`in_doris_time`,'%Y-%m-%d %H-%i-%s') > '" + DateTimeUtil.getHoursBefore(10) + "' ";
+            querySql = querySql + "where `danger_info`.`in_doris_time` > '" + DateTimeUtil.getHoursBefore(10) + "' ";
         } else {
             log.warn("首次更新数据库中······");
         }
-        querySql = querySql + "order by `danger_info`.`updateDate` asc limit ";
+        querySql = querySql + "order by `danger_info`.`updateDate`, `danger_info`.`id` asc limit ";
         while (whileFlag) {
             String sql = querySql + pageNo * pageSize + ", " + pageSize;
             //log.info("<=====================sql语句==============================>");
@@ -467,7 +472,7 @@ public class SiLuService {
             try{
                 List<SecHiddenDangerInfoDto> list = siLuDorisTemplate.query(sql, new BeanPropertyRowMapper<>(SecHiddenDangerInfoDto.class));
                 if (!list.isEmpty()) {
-                    //log.info("<====================数据库查到的数据===========================>");
+                    log.info("<====================数据库查到的数据===========================>");
                     //log.info("list.size:" + list.size());
                     //list.forEach(l -> log.info(l.getId()));
                     //log.info("list:" + JSON.toJSONString(list));
@@ -490,7 +495,8 @@ public class SiLuService {
                         log.info(response);
                         log.info("本次传输数据总数：{}", totalCount);
                         if ("500".equals(responseObject.getData().getCode())) {
-                            //log.info(response);
+                            log.info(response);
+                            log.info("list:" + JSON.toJSONString(list));
                             errorTotalCount = errorTotalCount + 1;
                         }
                         log.info("本次传输error数据总数：{}", errorTotalCount);
@@ -531,11 +537,11 @@ public class SiLuService {
         int totalCount = 0;
         int errorTotalCount = 0;
         if (!"1".equals(firstFlag)) {
-            querySql = querySql + "where date_format(`maintenance_record`.`in_doris_time`,'%Y-%m-%d %H-%i-%s') > '" + DateTimeUtil.getHoursBefore(10) + "' ";
+            querySql = querySql + "where `maintenance_record`.`in_doris_time` > '" + DateTimeUtil.getHoursBefore(10) + "' ";
         } else {
             log.warn("首次更新数据库中······");
         }
-        querySql = querySql + "order by `maintenance_record`.`updateDate` asc limit ";
+        querySql = querySql + "order by `maintenance_record`.`updateDate`, `maintenance_record`.`id` asc limit ";
         while (whileFlag) {
             String sql = querySql + pageNo * pageSize + ", " + pageSize;
             //log.info("<=====================sql语句==============================>");
@@ -543,7 +549,7 @@ public class SiLuService {
             try{
                 List<SecDeactivatedMaintenanceRecordDto> list = siLuDorisTemplate.query(sql, new BeanPropertyRowMapper<>(SecDeactivatedMaintenanceRecordDto.class));
                 if (!list.isEmpty()) {
-                    //log.info("<====================数据库查到的数据===========================>");
+                    log.info("<====================数据库查到的数据===========================>");
                     //log.info("list.size:" + list.size());
                     //list.forEach(l -> log.info(l.getId()));
                     //log.info("list:" + JSON.toJSONString(list));
@@ -567,7 +573,8 @@ public class SiLuService {
                         log.info(response);
                         log.info("本次传输数据总数：{}", totalCount);
                         if ("500".equals(responseObject.getData().getCode())) {
-                            //log.info(response);
+                            log.info(response);
+                            log.info("list:" + JSON.toJSONString(list));
                             errorTotalCount = errorTotalCount + 1;
                         }
                         log.info("本次传输error数据总数：{}", errorTotalCount);
