@@ -10,8 +10,8 @@ anjian:
   mobile-phone: 15102116415
   key: anjianssotoken
   secret: wdae878678dw23a
-  tenant-id: wdae878678dw23a
-  customer-id: anjianssotoken
+  tenant-id: 1552225639241613312
+  customer-id: 1552226507382849536
   project: wink
 
 silu:

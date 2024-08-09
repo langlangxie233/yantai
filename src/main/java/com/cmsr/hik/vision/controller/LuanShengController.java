@@ -1,7 +1,6 @@
 package com.cmsr.hik.vision.controller;
 
-import com.cmsr.hik.vision.model.luansheng.AlarmReceptionDto;
-import com.cmsr.hik.vision.model.luansheng.EmergencyDrillDto;
+import com.cmsr.hik.vision.model.luansheng.*;
 import com.cmsr.hik.vision.service.LuanShengService;
 import com.cmsr.hik.vision.vo.ResultObj;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,5 +40,53 @@ public class LuanShengController {
         return luanShengService.addEmergencyDrill(dto);
     }
 
+    /**
+     * 应急——>任务指派接口
+     *
+     * @return 更新结果
+     */
+    @PostMapping(value = "/view/emergency/task/assignment", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResultObj addTaskAssignment(@RequestBody EmergencyTaskAssignmentDto dto) {
+        return luanShengService.addTaskAssignment(dto);
+    }
 
+    /**
+     * 应急——>应急终止页面接口
+     *
+     * @return 更新结果
+     */
+    @PostMapping(value = "/view/emergency/termination", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResultObj addTermination(@RequestBody EmergencyTerminationDto dto) {
+        return luanShengService.addTermination(dto);
+    }
+
+    /**
+     * 应急——>总结评估录入接口
+     *
+     * @return 更新结果
+     */
+    @PostMapping(value = "/view/emergency/summary/evaluation", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResultObj addSummaryEvaluation(@RequestBody EmergencySummaryEvaluationDto dto) {
+        return luanShengService.addSummaryEvaluation(dto);
+    }
+
+    /**
+     * 应急——>演练计划上报接口
+     *
+     * @return 更新结果
+     */
+    @PostMapping(value = "/view/emergency/exercise/plan", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResultObj addExercisePlan(@RequestBody ExercisePlanDto dto) {
+        return luanShengService.addExercisePlan(dto);
+    }
+
+    /**
+     * 应急——>更新关注状态
+     *
+     * @return 更新结果
+     */
+    @PostMapping(value = "/view/emergency/plan/organization/update", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResultObj updatePlanOrganization(@RequestBody EmergencyPlanOrganizationUpdateDto dto) {
+        return luanShengService.updatePlanOrganization(dto);
+    }
 }

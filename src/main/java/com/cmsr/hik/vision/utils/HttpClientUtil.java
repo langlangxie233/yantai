@@ -3,6 +3,7 @@ package com.cmsr.hik.vision.utils;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClients;
@@ -31,6 +32,28 @@ public class HttpClientUtil {
         httpPost.setEntity(entity);
 
         HttpResponse response = httpClient.execute(httpPost);
+        HttpEntity responseEntity = response.getEntity();
+        String responseString = null;
+        if (responseEntity != null) {
+            responseString = EntityUtils.toString(responseEntity, StandardCharsets.UTF_8);
+            //System.out.println("<==========================Response==============================>" + responseString);
+        }
+        return responseString;
+    }
+
+    public static String sendGetRequest(String url, Map<String, String> headers) throws Exception {
+        HttpClient httpClient = HttpClients.createDefault();
+
+        HttpGet httpGet = new HttpGet(url); // 替换为你的URL
+
+        // 设置headers
+        if (headers != null && !headers.isEmpty()) {
+            for (Map.Entry<String, String> entry : headers.entrySet()) {
+                httpGet.addHeader(entry.getKey(), entry.getValue());
+            }
+        }
+
+        HttpResponse response = httpClient.execute(httpGet);
         HttpEntity responseEntity = response.getEntity();
         String responseString = null;
         if (responseEntity != null) {

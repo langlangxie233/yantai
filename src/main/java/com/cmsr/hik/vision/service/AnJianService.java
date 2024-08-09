@@ -77,13 +77,21 @@ public class AnJianService {
                 String jsonBody = toJsonBody();
                 String url = httpConfig.getUrl() + path;
                 log.info("url：" + url);
-                //log.info("header：" + headers.toString());
-                //log.info("更新违规列表jsonBody：" + jsonBody);
+                log.info("header：" + headers.toString());
+                log.info("更新违规列表jsonBody：" + jsonBody);
                 String response = HttpClientUtil.sendPostRequest(url, headers, jsonBody);
-                //log.info("违规列表response：" + response);
+                log.info("违规列表response：" + response);
                 JSONObject res = JSONObject.parseObject(response);
-                Integer pages = res.getJSONObject("data").getInteger("pages");
-                List<ViolationInfo> records = JSONArray.parseArray(res.getJSONObject("data").get("records").toString(), ViolationInfo.class);
+                int pages = 0;
+                List<ViolationInfo> records = new ArrayList<>();
+                if (null != res) {
+                    if (null != res.getJSONObject("data") && null != res.getJSONObject("data").getInteger("pages")) {
+                        pages = res.getJSONObject("data").getInteger("pages");
+                    }
+                    if (null != res.getJSONObject("data") && null != res.getJSONObject("data").get("records")) {
+                        records = JSONArray.parseArray(res.getJSONObject("data").get("records").toString(), ViolationInfo.class);
+                    }
+                }
                 if (!records.isEmpty()) {
                     records.forEach(l -> {
                         String repeatSql = "select `id` from anjian.violation_info where `id` = '" + l.getId() + "'";
@@ -219,8 +227,16 @@ public class AnJianService {
                 String response = HttpClientUtil.sendPostRequest(url, headers, jsonBody);
                 //log.info("违规列表response：" + response);
                 JSONObject res = JSONObject.parseObject(response);
-                Integer pages = res.getJSONObject("data").getInteger("pages");
-                List<ViolationInfo> records = JSONArray.parseArray(res.getJSONObject("data").get("records").toString(), ViolationInfo.class);
+                int pages = 0;
+                List<ViolationInfo> records = new ArrayList<>();
+                if (null != res) {
+                    if (null != res.getJSONObject("data") && null != res.getJSONObject("data").getInteger("pages")) {
+                        pages = res.getJSONObject("data").getInteger("pages");
+                    }
+                    if (null != res.getJSONObject("data") && null != res.getJSONObject("data").get("records")) {
+                        records = JSONArray.parseArray(res.getJSONObject("data").get("records").toString(), ViolationInfo.class);
+                    }
+                }
                 if (!records.isEmpty()) {
                     records.forEach(l -> {
                         String repeatSql = "select `id` from anjian.violation_info where `id` = '" + l.getId() + "'";
@@ -348,16 +364,26 @@ public class AnJianService {
                 headers.put("project", httpConfig.getProject());
                 params.put("current", String.valueOf(pageNo));
                 params.put("size", String.valueOf(pageSize));
-                params.put("status", "1,2");
+                //params.put("status", "1,2");
                 String jsonBody = toJsonBody();
                 String url = httpConfig.getUrl() + path;
                 log.info("url：" + url);
-                //log.info("header：" + headers.toString());
+                log.info("<========================response===============================>\n" + headers);
+                //log.info("<========================header===============================>\n" + jsonBody.replace("\"1,2\"", "[1,2]"));
                 //log.info("更新违规状态列表jsonBody：" + jsonBody.replace("\"1,2\"", "[1,2]"));
-                String response = HttpClientUtil.sendPostRequest(url, headers, jsonBody.replace("\"1,2\"", "[1,2]"));
+                String response = HttpClientUtil.sendPostRequest(url, headers, jsonBody);
+                log.info("<========================response===============================>\n" + response);
                 JSONObject res = JSONObject.parseObject(response);
-                Integer pages = res.getJSONObject("data").getInteger("pages");
-                List<ViolationInfo> records = JSONArray.parseArray(res.getJSONObject("data").get("records").toString(), ViolationInfo.class);
+                int pages = 0;
+                List<ViolationInfo> records = new ArrayList<>();
+                if (null != res) {
+                    if (null != res.getJSONObject("data") && null != res.getJSONObject("data").getInteger("pages")) {
+                        pages = res.getJSONObject("data").getInteger("pages");
+                    }
+                    if (null != res.getJSONObject("data") && null != res.getJSONObject("data").get("records")) {
+                        records = JSONArray.parseArray(res.getJSONObject("data").get("records").toString(), ViolationInfo.class);
+                    }
+                }
                 if (!records.isEmpty()) {
                     records.forEach(l -> {
                         String repeatSql = "select `id` from anjian.violation_info where `id` = '" + l.getId() + "'";
@@ -452,12 +478,21 @@ public class AnJianService {
                 String jsonBody = toJsonBody();
                 String url = httpConfig.getUrl() + path;
                 log.info("url：" + url);
-                //log.info("header：" + headers.toString());
-                //log.info("jsonBody：" + jsonBody);
+                log.info("header：" + headers.toString());
+                log.info("jsonBody：" + jsonBody);
                 String response = HttpClientUtil.sendPostRequest(url, headers, jsonBody);
+                log.info(response);
                 JSONObject res = JSONObject.parseObject(response);
-                Integer pages = res.getJSONObject("data").getInteger("pages");
-                List<CameraVo> records = JSONArray.parseArray(res.getJSONObject("data").get("records").toString(), CameraVo.class);
+                int pages = 0;
+                List<CameraVo> records = new ArrayList<>();
+                if (null != res) {
+                    if (null != res.getJSONObject("data") && null != res.getJSONObject("data").getInteger("pages")) {
+                        pages = res.getJSONObject("data").getInteger("pages");
+                    }
+                    if (null != res.getJSONObject("data") && null != res.getJSONObject("data").get("records")) {
+                        records = JSONArray.parseArray(res.getJSONObject("data").get("records").toString(), CameraVo.class);
+                    }
+                }
                 if (!records.isEmpty()) {
                     records.forEach(l -> {
                         String repeatSql = "select `id` from anjian.camera_info where `id` = '" + l.getId() + "'";
