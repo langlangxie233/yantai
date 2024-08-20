@@ -19,6 +19,7 @@ public class EmergencyTaskAssignmentDto {
     private String id;
     private String planId;
     private String taskDefinition;
+    private String incidentId;
     private List<AssignmentPersonDto> personDto;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime assignTime;

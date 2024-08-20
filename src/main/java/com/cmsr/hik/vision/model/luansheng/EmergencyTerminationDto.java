@@ -18,6 +18,7 @@ public class EmergencyTerminationDto {
 
     private String id;
     private String planId;
+    private String incidentId;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime endTime;
     private String describe;

@@ -108,10 +108,11 @@ public class LuanShengService {
         try {
             if (!dto.getPersonDto().isEmpty()) {
                 dto.getPersonDto().forEach(p -> {
-                    String sql="insert into ythg_ods.ods_luansheng_task_assign (`id`,`plan_id`,`task_definition`," +
+                    String sql="insert into ythg_ods.ods_luansheng_task_assign (`id`,`plan_id`,`incident_id`,`task_definition`," +
                             "`assign_personnel_id`,`assign_personnel_phone`,`assign_time`,`del_flag`) VALUES ('" +
                             UUID.randomUUID().toString() + "', '" +
                             dto.getPlanId() + "', '" +
+                            dto.getIncidentId() + "', '" +
                             dto.getTaskDefinition() + "', '" +
                             p.getAssignPersonnelId() + "', '" +
                             p.getAssignPersonnelPhone() + "', '" +
@@ -139,9 +140,10 @@ public class LuanShengService {
         resultObj.setMsg("数据录入成功");
         //入库
         try {
-            String sql="insert into ythg_ods.ods_luansheng_emergencies_stop (`id`,`plan_id`,`end_time`,`describe`,`del_flag`) VALUES ('" +
+            String sql="insert into ythg_ods.ods_luansheng_emergencies_stop (`id`,`plan_id`,`incident_id`,`end_time`,`describe`,`del_flag`) VALUES ('" +
                     UUID.randomUUID().toString() + "', '" +
                     dto.getPlanId() + "', '" +
+                    dto.getIncidentId() + "', '" +
                     dto.getEndTime() + "', '" +
                     dto.getDescribe() + "', '" +
                     dto.getDelFlag() + "')";
