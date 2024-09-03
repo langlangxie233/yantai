@@ -255,4 +255,23 @@ public class LuanShengService {
         }
         return resultObj;
     }
+
+    public ResultObj accidentUpdate(AccidentUpdateDto dto) {
+        ResultObj resultObj = new ResultObj();
+        resultObj.setCode(200);
+        resultObj.setMsg("数据录入成功");
+        //入库
+        try {
+            dto.setId(UUID.randomUUID().toString());
+            String sql="update ythg_ods.ods_silu_emergency_emg_emergency set `emergency_plan_id` = '" +
+                    dto.getEmergencyPlanId() +
+                    "' where `id` = '" + dto.getId() + "'";
+            anJianDorisTemplate.update(sql);
+        } catch (Exception e) {
+            resultObj.setCode(400);
+            resultObj.setMsg("数据录入失败");
+            log.error("数据录入失败", e);
+        }
+        return resultObj;
+    }
 }

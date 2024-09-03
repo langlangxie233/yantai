@@ -31,6 +31,16 @@ public class LuanShengController {
     }
 
     /**
+     * 人工接警——>应急突发事件表
+     *
+     * @return 更新结果
+     */
+    @PostMapping(value = "/view/emergency/accident/plan/update", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResultObj accidentUpdate(@RequestBody AccidentUpdateDto dto) {
+        return luanShengService.accidentUpdate(dto);
+    }
+
+    /**
      * 应急演练——>应急演练记录表
      *
      * @return 更新结果
