@@ -42,9 +42,6 @@ public class SiLuService {
     @Qualifier("siLuDorisTemplate")
     private JdbcTemplate siLuDorisTemplate;
 
-    @Autowired
-    private MinioService minioService;
-
     private Map<String, String> params = new HashMap<>();
 
     /**
