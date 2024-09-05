@@ -1,10 +1,13 @@
 package com.cmsr.hik.vision.utils;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DateTimeUtil {
 
@@ -62,4 +65,15 @@ public class DateTimeUtil {
         return hoursBefore.withNano(0).toString().replace("T", " ");
     }
 
+    public static List<String> getDayListAfter(String daysBefore) {
+        List<String> dates = new ArrayList<>();
+        LocalDate currentDate =LocalDate.now();
+        //System.out.println("从指定年份到当前日期的所有日期:");
+        LocalDate date = LocalDate.parse(daysBefore);
+        while(date.isBefore(currentDate) || date.isEqual(currentDate)){
+            dates.add(date.toString() + "/");
+            date = date.plusDays(1);
+        }
+        return dates;
+    }
 }

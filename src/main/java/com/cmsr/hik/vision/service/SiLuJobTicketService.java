@@ -9,6 +9,7 @@ import com.cmsr.hik.vision.model.silu.specialassignments.*;
 import com.cmsr.hik.vision.utils.AESUtils;
 import com.cmsr.hik.vision.utils.DateTimeUtil;
 import com.cmsr.hik.vision.utils.HttpClientUtil;
+import com.google.common.collect.Maps;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -1145,16 +1147,44 @@ public class SiLuJobTicketService {
     }
 
     public String updateSecSpecialTicketFile(String firstFlag) {
-        List<String> ticketFileNames;
-        List<SecSpecialJobTicketFileInfo> ticketInfo = new ArrayList<>();
-        Map<String, String> tickets = new HashMap<>();
+        List<String> folderNames;
+        AtomicInteger num = new AtomicInteger();
         if ("1".equals(firstFlag)) {
             log.info("首次同步作业票附件中......");
-            tickets = minioService.getAllObjects();
+            //获取指定日期到今天的日期列表
+            folderNames = DateTimeUtil.getDayListAfter(DateTimeUtil.getDaysBefore(90).substring(0, 10));
         } else {
-            tickets.putAll(minioService.getObjects(DateTimeUtil.getYesterdayBeginTime().substring(0, 10) + "/"));
-            tickets.putAll(minioService.getObjects(LocalDateTime.now().toString().substring(0, 10) + "/"));
+            folderNames = DateTimeUtil.getDayListAfter(DateTimeUtil.getDaysBefore(1).substring(0, 10));
         }
+        if (!folderNames.isEmpty()) {
+            log.info("folderNames:" + folderNames.size());
+            folderNames.forEach(folderName -> {
+                //获取date日期的所有文件名
+                List<String> fileNameList = minioService.getObjectsByFolderName(folderName);
+                if (null != fileNameList && !fileNameList.isEmpty()) {
+                    log.info("fileNameList:" + fileNameList.size());
+                    fileNameList.forEach(fileName -> {
+                        Map<String, String> fileMap = Maps.newHashMap();
+                        String encodedString = minioService.getFileBase64(fileName);
+                        if (encodedString != null) {
+                            String filename = fileName.substring(folderName.length());
+                            fileMap.put(filename, encodedString);
+                            log.info("<MinIO> File: {} encoded success.", fileName);
+                            sendFile(fileMap);
+                            num.getAndIncrement();
+                        }
+                    });
+                    //根据文件名获取文件
+                    //上传文件到思路
+                }
+            });
+        }
+        return "更新作业票：" + num;
+    }
+
+    private void sendFile(Map<String, String> tickets) {
+        List<String> ticketFileNames;
+        List<SecSpecialJobTicketFileInfo> ticketInfo = new ArrayList<>();
         if (!tickets.isEmpty()) {
             ticketFileNames = new ArrayList<>(tickets.keySet());
             ticketFileNames.forEach(name -> {
@@ -1377,9 +1407,7 @@ public class SiLuJobTicketService {
                     }
                 }
             });
-            return "更新作业票成功：" + latestFileInfo.size();
         }
-        return "更新作业票：0";
     }
 
     private void sendGetRequest(String path, String datas) {

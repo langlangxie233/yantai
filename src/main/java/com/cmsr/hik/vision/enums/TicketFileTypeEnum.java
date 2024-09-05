@@ -23,7 +23,7 @@ public enum TicketFileTypeEnum {
     /**
      * 盲板抽堵
      */
-    TICKET_TYPE_03("03", "sec_special_job_ticket_ blindplate"),
+    TICKET_TYPE_03("03", "sec_special_job_ticket_blindplate"),
 
     /**
      * 高处

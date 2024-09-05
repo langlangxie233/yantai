@@ -102,6 +102,36 @@ public class MinioService {
         return fileMap;
     }
 
+    public List<String> getObjectsByFolderName(String folderName) {
+        buildClient();
+        if (!folderExists(folderName)) {
+            return null;
+        }
+        ListObjectsArgs listObjectsArgs = ListObjectsArgs.builder()
+                .bucket(bucket)
+                .prefix(folderName)
+                .build();
+        List<String> filenameList = new ArrayList<>();
+
+        log.info("<MinIO> accessing bucket: {}, folder: {}", bucket, folderName);
+        Iterable<Result<Item>> objects = client.listObjects(listObjectsArgs);
+
+        for (Result<Item> itemResult : objects) {
+            try {
+                Item item = itemResult.get();
+                if (!item.isDir()) {
+                    filenameList.add(item.objectName());
+                }
+            } catch (Exception e) {
+                log.error("<MinIO> Cannot access file in folder: {}", folderName);
+                return filenameList;
+            } finally {
+                destroyClient();
+            }
+        }
+        return filenameList;
+    }
+
 
     public Map<String, String> getAllObjects() {
         buildClient();
